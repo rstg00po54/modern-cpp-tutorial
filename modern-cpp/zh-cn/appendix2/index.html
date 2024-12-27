@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>致谢 现代 C++ 教程: 高速上手 C++ 11/14/17/20 - Modern C++ Tutorial: C++ 11/14/17/20 On the Fly</title>
+    <title>附录 2：现代 C++ 的最佳实践 现代 C++ 教程: 高速上手 C++ 11/14/17/20 - Modern C++ Tutorial: C++ 11/14/17/20 On the Fly</title>
     <meta charset="utf-8">
     <meta name="description" content="Modern C++ Tutorial | C++ 11/14/17/20 On the Fly | 现代 C++ 教程 | 高速上手 C++11/14/17/20">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -30,7 +30,7 @@
 
     <!-- this needs to be loaded before guide's inline scripts -->
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
-    <script>window.PAGE_TYPE = "about"</script>
+    <script>window.PAGE_TYPE = "book-zh-cn"</script>
     <script async src="//changkun.de/urlstat/client.js"></script>
   <meta name="generator" content="Hexo 7.3.0"></head>
   <body class="docs">
@@ -153,21 +153,61 @@
     <div class="list">
       <h2>
         
-          关于
+          正文
         
       </h2>
       <ul class="menu-root">
   
     <li>
-      <a href="/modern-cpp/about/donate.html" class="sidebar-link">资助</a>
+      <a href="/modern-cpp/zh-cn/00-preface/index.html" class="sidebar-link">序言</a>
     </li>
   
     <li>
-      <a href="/modern-cpp/about/copyright.html" class="sidebar-link">版权声明</a>
+      <a href="/modern-cpp/zh-cn/01-intro/index.html" class="sidebar-link">第 1 章 迈向现代 C++</a>
     </li>
   
     <li>
-      <a href="/modern-cpp/about/ack.html" class="sidebar-link current">致谢</a>
+      <a href="/modern-cpp/zh-cn/02-usability/index.html" class="sidebar-link">第 2 章 语言可用性的强化</a>
+    </li>
+  
+    <li>
+      <a href="/modern-cpp/zh-cn/03-runtime/index.html" class="sidebar-link">第 3 章 语言运行期的强化</a>
+    </li>
+  
+    <li>
+      <a href="/modern-cpp/zh-cn/04-containers/index.html" class="sidebar-link">第 4 章 容器</a>
+    </li>
+  
+    <li>
+      <a href="/modern-cpp/zh-cn/05-pointers/index.html" class="sidebar-link">第 5 章 智能指针与内存管理</a>
+    </li>
+  
+    <li>
+      <a href="/modern-cpp/zh-cn/06-regex/index.html" class="sidebar-link">第 6 章 正则表达式</a>
+    </li>
+  
+    <li>
+      <a href="/modern-cpp/zh-cn/07-thread/index.html" class="sidebar-link">第 7 章 并行与并发</a>
+    </li>
+  
+    <li>
+      <a href="/modern-cpp/zh-cn/08-filesystem/index.html" class="sidebar-link">第 8 章 文件系统</a>
+    </li>
+  
+    <li>
+      <a href="/modern-cpp/zh-cn/09-others/index.html" class="sidebar-link">第 9 章 其他杂项</a>
+    </li>
+  
+    <li>
+      <a href="/modern-cpp/zh-cn/10-cpp20/index.html" class="sidebar-link">第 10 章 展望：C++20 简介</a>
+    </li>
+  
+    <li>
+      <a href="/modern-cpp/zh-cn/appendix1/index.html" class="sidebar-link">附录 1：进一步阅读的学习材料</a>
+    </li>
+  
+    <li>
+      <a href="/modern-cpp/zh-cn/appendix2/index.html" class="sidebar-link current">附录 2：现代 C++ 的最佳实践</a>
     </li>
   
 </ul>
@@ -177,27 +217,18 @@
 </div>
 
 
-<div class="content about with-sidebar ack-guide">
-  <h2 id="Acknowledgements"><a href="#Acknowledgements" class="headerlink" title="Acknowledgements"></a>Acknowledgements</h2><p>This book was originally written in Chinese by <a target="_blank" rel="noopener" href="https://changkun.de/">Changkun Ou</a>.</p>
-<p>The author has limited time and language skills. If readers find any mistakes in the book or any language improvements, please feel free to open an <a target="_blank" rel="noopener" href="https://github.com/changkun/modern-cpp-tutorial/issues">Issue</a> or start a <a target="_blank" rel="noopener" href="https://github.com/changkun/modern-cpp-tutorial/pulls">Pull request</a>. For detailed guidelines and checklist, please refer to <a href="CONTRIBUTING.md">How to contribute</a>.</p>
-<p>The author is grateful to all contributors, including but not limited to <a target="_blank" rel="noopener" href="https://github.com/changkun/modern-cpp-tutorial/graphs/contributors">Contributors</a>.</p>
-<p>This project is also supported by:</p>
-<p>
-  <a target="_blank" rel="noopener" href="https://www.digitalocean.com/?refcode=834a3bbc951b&utm_campaign=Referral_Invite&utm_medium=Referral_Program&utm_source=CopyPaste">
-    <img src="https://opensource.nyc3.cdn.digitaloceanspaces.com/attribution/assets/SVG/DO_Logo_horizontal_blue.svg" width="201px">
-  </a>
-</p>
+<div class="content book-zh-cn with-sidebar index-guide">
+  <h1 id="附录-2：现代-C-的最佳实践"><a href="#附录-2：现代-C-的最佳实践" class="headerlink" title="附录 2：现代 C++ 的最佳实践"></a>附录 2：现代 C++ 的最佳实践</h1><p>这篇附录我们来简单谈一谈现代 C++ 的最佳实践。总的来说，笔者关于 C++ 的最佳实践相关的思考主要吸收自<a target="_blank" rel="noopener" href="https://www.amazon.cn/dp/B016OFO492/ref=sr_1_3?ie=UTF8&qid=1525613457&sr=8-3&keywords=Effective+C++">《Effective Modern C++》</a>和 <a target="_blank" rel="noopener" href="http://zh-google-styleguide.readthedocs.io/en/latest/google-cpp-styleguide/contents/">《C++ 风格指南》</a>。在这篇附录里将简单讨论、并使用实际例子来阐明的方法，介绍一些笔者<strong>个人的</strong>、<strong>不是随处可见的</strong>、<strong>非常识性</strong>的最佳实践，并如何保证代码的整体质量。</p>
+<h2 id="常用工具"><a href="#常用工具" class="headerlink" title="常用工具"></a>常用工具</h2><p>TODO:</p>
+<h2 id="代码风格"><a href="#代码风格" class="headerlink" title="代码风格"></a>代码风格</h2><p>TODO:</p>
+<h2 id="整体性能"><a href="#整体性能" class="headerlink" title="整体性能"></a>整体性能</h2><p>TODO:</p>
+<h2 id="代码安全"><a href="#代码安全" class="headerlink" title="代码安全"></a>代码安全</h2><p>TODO:</p>
+<h2 id="可维护性"><a href="#可维护性" class="headerlink" title="可维护性"></a>可维护性</h2><p>TODO:</p>
+<h2 id="可移植性"><a href="#可移植性" class="headerlink" title="可移植性"></a>可移植性</h2><p>TODO:</p>
 
-<h2 id="致谢"><a href="#致谢" class="headerlink" title="致谢"></a>致谢</h2><p>笔者时间和水平有限，如果读者发现书中内容的错误，欢迎提 <a target="_blank" rel="noopener" href="https://github.com/changkun/modern-cpp-tutorial/issues">Issue</a>，或者直接提 <a target="_blank" rel="noopener" href="https://github.com/changkun/modern-cpp-tutorial/pulls">Pull request</a>。详细贡献指南请参考<a href="CONTRIBUTING.md">如何参与贡献</a>，由衷感谢每一位指出本书中出现错误的读者，包括但不限于 <a target="_blank" rel="noopener" href="https://github.com/changkun/modern-cpp-tutorial/graphs/contributors">Contributors</a>。</p>
-<p>本项目还由以下产品提供赞助支持：</p>
-<p>
-  <a target="_blank" rel="noopener" href="https://www.digitalocean.com/?refcode=834a3bbc951b&utm_campaign=Referral_Invite&utm_medium=Referral_Program&utm_source=CopyPaste">
-    <img src="https://opensource.nyc3.cdn.digitaloceanspaces.com/attribution/assets/SVG/DO_Logo_horizontal_blue.svg" width="201px">
-  </a>
-</p>
   <div class="guide-links">
     
-      <span>← <a href="/modern-cpp/about/copyright.html">版权声明</a></span>
+      <span>← <a href="/modern-cpp/zh-cn/appendix1/index.html">附录 1：进一步阅读的学习材料</a></span>
     
     
   </div>
