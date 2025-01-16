@@ -1,0 +1,697 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>h.264并行解码算法分析 现代 C++ 教程: 高速上手 C++ 11/14/17/20 - Modern C++ Tutorial: C++ 11/14/17/20 On the Fly</title>
+    <meta charset="utf-8">
+    <meta name="description" content="Modern C++ Tutorial | C++ 11/14/17/20 On the Fly | 现代 C++ 教程 | 高速上手 C++11/14/17/20">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="shortcut icon" type="image/x-icon" href="/modern-cpp/assets/cover-2nd.png">
+    <meta name="msapplication-TileColor" content="#7e2d36">
+    <meta name="theme-color" content="#7e2d36">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-80889616-2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-80889616-2');
+    </script>
+
+    <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600|Roboto Mono' rel='stylesheet' type='text/css'>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- main page styles -->
+    
+<link rel="stylesheet" href="/modern-cpp/css/page.css">
+
+
+    <!-- this needs to be loaded before guide's inline scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script>window.PAGE_TYPE = "book-zh-cn"</script>
+    <script async src="//changkun.de/urlstat/client.js"></script>
+  <meta name="generator" content="Hexo 7.3.0"></head>
+  <body class="docs">
+	<!-- body开始 -->
+
+		<!-- mobile-bar 2-->
+      <div id="mobile-bar" data-bg-text="现代 C++ 教程" >
+        <a class="menu-button"></a>
+        <a class="logo" href="/modern-cpp/"></a>
+      </div>
+
+	<!-- include header -->
+    <div id="header">
+  <a id="logo" href="/">
+      <img src="/modern-cpp/assets/cover-2nd-logo.png">
+      <span>教程：高速上手</span>
+  </a>
+  <ul id="nav">
+      <li class="nav-dropdown-container resource">
+  <a class="nav-link">资源</a><span class="arrow"></span>
+  <ul class="nav-dropdown">
+    <li><ul>
+      <li><a class="nav-link" href="/modern-cpp/zh-cn/00-preface/" >正文</a></li>
+      <!-- TODO -->
+      <!-- <li><a class="nav-link" href="/modern-cpp/code/1/" >代码</a></li>
+      <li><a class="nav-link" href="/modern-cpp/exercises/1/" >习题</a></li>
+      <li><a class="nav-link" href="/modern-cpp/answers/1/" >答案</a></li> -->
+    </ul></li>
+  </ul>
+</li>
+
+<li class="nav-dropdown-container about">
+  <a class="nav-link">关于</a><span class="arrow"></span>
+  <ul class="nav-dropdown">
+      <li><ul>
+      <li><a class="nav-link" href="/modern-cpp/about/donate.html" >资助</a></li>
+      <li><a class="nav-link" href="/modern-cpp/about/copyright.html" >版权声明</a></li>
+      <li><a class="nav-link" href="/modern-cpp/about/ack.html" >致谢</a></li>
+      </ul></li>
+  </ul>
+</li>
+
+
+<li class="nav-dropdown-container about">
+  <a class="nav-link" target="_blank" rel="noopener" href="https://github.com/rstg00po54/modern-cpp-tutorial">GitHub</a>
+</li>
+
+
+  </ul>
+</div>
+
+    
+      <div id="main" class="fix-sidebar">
+		<!-- body 111 -->
+        
+
+
+
+  <div class="sidebar">
+  <div class="sidebar-inner">
+    <ul class="main-menu">
+        <li class="nav-dropdown-container resource">
+  <a class="nav-link">资源</a><span class="arrow"></span>
+  <ul class="nav-dropdown">
+    <li><ul>
+      <li><a class="nav-link" href="/modern-cpp/zh-cn/00-preface/" >正文</a></li>
+      <!-- TODO -->
+      <!-- <li><a class="nav-link" href="/modern-cpp/code/1/" >代码</a></li>
+      <li><a class="nav-link" href="/modern-cpp/exercises/1/" >习题</a></li>
+      <li><a class="nav-link" href="/modern-cpp/answers/1/" >答案</a></li> -->
+    </ul></li>
+  </ul>
+</li>
+
+<li class="nav-dropdown-container about">
+  <a class="nav-link">关于</a><span class="arrow"></span>
+  <ul class="nav-dropdown">
+      <li><ul>
+      <li><a class="nav-link" href="/modern-cpp/about/donate.html" >资助</a></li>
+      <li><a class="nav-link" href="/modern-cpp/about/copyright.html" >版权声明</a></li>
+      <li><a class="nav-link" href="/modern-cpp/about/ack.html" >致谢</a></li>
+      </ul></li>
+  </ul>
+</li>
+
+
+<li class="nav-dropdown-container about">
+  <a class="nav-link" target="_blank" rel="noopener" href="https://github.com/rstg00po54/modern-cpp-tutorial">GitHub</a>
+</li>
+
+
+    </ul>
+    <div class="list">
+      <h2>
+		
+          正文
+
+      </h2>
+      <ul class="menu-root">
+	  <!-- 引入外部的 JS 文件 -->
+  <!-- <script src="/modern-cpp/js/menu.js"></script> -->
+
+
+	<!-- 传递数据到 JavaScript -->
+	
+	
+	
+
+	
+		<li>
+		  <a href="/H264-BKY/2014-02-15-h.264%E7%9A%84poc%E8%AE%A1%E7%AE%97.html" class="sidebar-link">
+			h.264的POC计算
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2014-02-27-%E6%8C%87%E6%95%B0%E5%93%A5%E4%BC%A6%E5%B8%83%E7%BC%96%E7%A0%81.html" class="sidebar-link">
+			指数哥伦布编码
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2014-03-15-h.264%E5%8A%A0%E6%9D%83%E9%A2%84%E6%B5%8B.html" class="sidebar-link">
+			h.264加权预测
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2014-03-11-h.264%E7%A0%81%E7%8E%87%E6%8E%A7%E5%88%B6.html" class="sidebar-link">
+			h.264码率控制
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2014-04-23-h.264%E7%9B%B4%E6%8E%A5%E9%A2%84%E6%B5%8B.html" class="sidebar-link">
+			h.264直接预测
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2014-03-17-h.264-fmo.html" class="sidebar-link">
+			h.264 FMO
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2014-05-11-h.264%E5%8F%82%E8%80%83%E5%9B%BE%E5%83%8F%E5%88%97%E8%A1%A8%E3%80%81%E8%A7%A3%E7%A0%81%E5%9B%BE%E5%83%8F%E7%BC%93%E5%AD%98.html" class="sidebar-link">
+			h.264参考图像列表、解码图像缓存
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2014-06-06-h.264-mvp%E6%B1%82%E8%A7%A3%E8%BF%87%E7%A8%8B.html" class="sidebar-link">
+			h.264 mvp求解过程
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2014-06-16-umhexagons%E6%90%9C%E7%B4%A2%E8%BF%87%E7%A8%8B.html" class="sidebar-link">
+			UMHexagonS搜索过程
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2014-07-20-h.264%E5%85%A8%E6%90%9C%E7%B4%A2%E4%BB%A5%E5%8F%8A%E5%BF%AB%E9%80%9F%E5%85%A8%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95.html" class="sidebar-link">
+			h.264全搜索以及快速全搜索算法
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2014-06-18-h.264-%E7%8E%87%E5%A4%B1%E7%9C%9F%E4%BC%98%E5%8C%96.html" class="sidebar-link">
+			h.264 率失真优化
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2014-10-17-epzs%E6%90%9C%E7%B4%A2%E8%BF%87%E7%A8%8B.html" class="sidebar-link">
+			EPZS搜索过程
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2014-12-07-intra-chroma-prediction.html" class="sidebar-link">
+			Intra Chroma Prediction
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2014-12-28-intra-luma-prediction.html" class="sidebar-link">
+			Intra Luma Prediction
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2015-01-13-h.264-transfor.html" class="sidebar-link">
+			H.264 Transform
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2015-02-02-h.264-quantization.html" class="sidebar-link">
+			H.264 Quantization
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2015-04-06-quantization-method.html" class="sidebar-link">
+			Quantization Method
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2015-04-26-h.264-mode-decision.html" class="sidebar-link">
+			h.264 Mode Decision
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2015-05-17-h.264-bi-predictive-motion-searc.html" class="sidebar-link">
+			h.264 Bi-Predictive Motion Search
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2016-02-24-h.264%E8%AF%AD%E6%B3%95%E7%BB%93%E6%9E%84%E5%88%86%E6%9E%90.html" class="sidebar-link">
+			h.264语法结构分析
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2016-02-29-h.264%E5%AE%8F%E5%9D%97%E4%B8%8E%E5%AD%90%E5%AE%8F%E5%9D%97%E7%B1%BB%E5%9E%8B.html" class="sidebar-link">
+			h.264宏块与子宏块类型
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2016-03-05-h.264-scanning-process-for-transform-coefficients.html" class="sidebar-link">
+			h.264 scanning process for transform coefficients
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2016-03-08-cavlc.html" class="sidebar-link">
+			CAVLC
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2016-03-22-cabac.html" class="sidebar-link">
+			CABAC
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2016-03-25-%E7%AE%97%E6%9C%AF%E7%BC%96%E7%A0%81jm%E5%AE%9E%E7%8E%B0.html" class="sidebar-link">
+			算术编码JM实现
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2016-04-27-h.264%E5%B9%B6%E8%A1%8C%E8%A7%A3%E7%A0%81%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90.html" class="sidebar-link current">
+			h.264并行解码算法分析
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2016-05-17-h.264-%E5%8E%BB%E5%9D%97%E6%BB%A4%E6%B3%A2.html" class="sidebar-link">
+			h.264 去块滤波
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2016-08-11-h.264%E5%B9%B6%E8%A1%8C%E8%A7%A3%E7%A0%81%E7%AE%97%E6%B3%952d-wave%E5%AE%9E%E7%8E%B0(%E5%9F%BA%E4%BA%8E%E5%A4%9A%E6%A0%B8%E9%9D%9E%E5%85%B1%E4%BA%AB%E5%86%85%E5%AD%98%E7%B3%BB%E7%BB%9F).html" class="sidebar-link">
+			h.264并行解码算法2D-Wave实现（基于多核非共享内存系统）
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2016-09-18-h.264%E5%B9%B6%E8%A1%8C%E8%A7%A3%E7%A0%81%E7%AE%97%E6%B3%952d-wave%E5%AE%9E%E7%8E%B0(%E5%9F%BA%E4%BA%8E%E5%A4%9A%E6%A0%B8%E5%85%B1%E4%BA%AB%E5%86%85%E5%AD%98%E7%B3%BB%E7%BB%9F).html" class="sidebar-link">
+			h.264并行解码算法2D-Wave实现（基于多核共享内存系统）
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2016-09-30-h.264%E5%B9%B6%E8%A1%8C%E8%A7%A3%E7%A0%81%E7%AE%97%E6%B3%953d-wave%E5%AE%9E%E7%8E%B0(%E5%9F%BA%E4%BA%8E%E5%A4%9A%E6%A0%B8%E5%85%B1%E4%BA%AB%E5%86%85%E5%AD%98%E7%B3%BB%E7%BB%9F).html" class="sidebar-link">
+			h.264并行解码算法3D-Wave实现（基于多核共享内存系统）
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2017-04-04-h.264%E5%B9%B6%E8%A1%8C%E7%86%B5%E8%A7%A3%E7%A0%81.html" class="sidebar-link">
+			h.264并行熵解码
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2017-06-15-cabac%E6%80%BB%E7%BB%93%E4%B8%8E%E8%A1%A5%E5%85%85%E8%AE%A8%E8%AE%BA.html" class="sidebar-link">
+			CABAC总结与补充讨论
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2019-01-04-%5Bffmpeg%5D-h264%E5%B9%B6%E8%A1%8C%E8%A7%A3%E7%A0%81.html" class="sidebar-link">
+			ffmpeg h264并行解码
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2019-01-24-%5Bffmpeg%5D-h.264%E8%A7%A3%E7%A0%81%E6%89%80%E7%94%A8%E7%9A%84%E4%B8%BB%E8%A6%81%E7%BC%93%E5%86%B2%E5%8C%BA%E4%BB%8B%E7%BB%8D.html" class="sidebar-link">
+			ffmpeg h.264解码所用的主要缓冲区介绍
+		  </a>
+		</li>
+
+
+</ul>
+
+	  
+    </div>
+  </div>
+</div>
+
+<link rel="stylesheet" href="../icon/iconfont.css">
+<style>
+
+/* body {
+            background: #e4e9f5;
+        } */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            list-style: none;
+            text-decoration: none;
+        }
+
+        section {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font: 900 100px '';
+            color: #ffa21759;
+            background: rgb(34, 37, 39);
+        }
+
+        .shell {
+            position: fixed;
+            width: 60px;
+			left: 0;
+            height: 100%;
+            background: #000000;
+            z-index: 9999;
+            transition: width 0.5s;
+            /* padding-left: 10px; */
+            overflow: hidden;
+        }
+/* 悬停改变宽度 */
+        .shell:hover {
+            width: 300px;
+        }
+
+        .imageBox {
+            position: relative;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+
+        .imageBox img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .shell ul {
+            position: relative;
+            height: 100vh;
+        }
+
+        .shell ul li {
+            position: relative;
+            padding: 5px;
+        }
+
+        .active {
+            background: #e4e9f5;
+            border-top-left-radius: 50px;
+            border-bottom-left-radius: 50px;
+        }
+
+        .active::before {
+            content: "";
+            position: absolute;
+            top: -30px;
+            right: 0;
+            width: 30px;
+            height: 30px;
+            border-bottom-right-radius: 25px;
+            box-shadow: 5px 5px 0 5px #e4e9f5;
+            background: transparent;
+        }
+
+        .active::after {
+            content: "";
+            position: absolute;
+            bottom: -30px;
+            right: 0;
+            width: 30px;
+            height: 30px;
+            border-top-right-radius: 25px;
+            box-shadow: 5px -5px 0 5px #e4e9f5;
+            background: transparent;
+        }
+
+        #shelllogo {
+            margin: 40px 0 100px 0;
+        }
+
+        .shell ul li a {
+            position: relative;
+            display: flex;
+            white-space: nowrap;
+        }
+
+        .icon {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-width: 40px;
+            /* padding-left: 10px; */
+            height: 70px;
+            color: #333;
+            transition: 0.5s;
+            color: rgb(255, 255, 255);
+        }
+
+        .icon i {
+            font-size: 30px;
+            z-index: 999;
+        }
+
+        .text {
+            position: relative;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            font-size: 20px;
+            color: #ffad32c1;
+            padding-left: 15px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: 0.5s;
+        }
+
+        .shell ul li:hover a .icon,
+        .shell ul li:hover a .text {
+            color: #ffa117;
+        }
+
+        .active a .icon::before {
+            content: "";
+            position: absolute;
+            inset: 5px;
+            width: 60px;
+            background: #000000;
+            /* 圆形 */
+            border-radius: 50%;
+            transition: 0.5s;
+            border: 7px solid #ffa117;
+            box-sizing: border-box;
+        }
+</style>
+
+
+<div class="shell">
+	<ul class="nav">
+		<li class="active" id="shelllogo">
+			<a href="#">
+				<div class="icon">
+					<div class="imageBox">
+						<img src="../icon/cat.jpg" alt="">
+					</div>
+				</div>
+				<div class="text">前端小窝</div>
+			</a>
+		</li>
+		<li>
+			<a href="#home">
+				<div class="icon">
+					<i class="iconfont icon-cangku"></i>
+				</div>
+				<div class="text">Home</div>
+			</a>
+		</li>
+		<li>
+			<a href="#theme">
+				<div class="icon">
+					<!-- 调色板 -->
+					<i class="iconfont icon-tiaoseban"></i>
+				</div>
+				<div class="text">Theme</div>
+			</a>
+		</li>
+		<li>
+			<a href="#wallet">
+				<div class="icon">
+					<!-- 钱包 -->
+					<i class="iconfont icon-qianbao"></i>
+				</div>
+				<div class="text">Wallet</div>
+			</a>
+		</li>
+		<li>
+			<a href="#picture">
+				<div class="icon">
+					<!-- 图片 -->
+					<i class="iconfont icon-tupian"></i>
+				</div>
+				<div class="text">picture</div>
+			</a>
+		</li>
+		<li>
+			<a href="#code">
+				<div class="icon">
+					<!-- 二维码 -->
+					<i class="iconfont icon-erweima"></i>
+				</div>
+				<div class="text">QR code</div>
+			</a>
+		</li>
+		<li>
+			<a href="#authentication">
+				<div class="icon">
+					<!-- 盾牌保险认证 -->
+					<i class="iconfont icon-dunpaibaoxianrenzheng"></i>
+				</div>
+				<div class="text">auth</div>
+			</a>
+		</li>
+		<li>
+			<a href="#me">
+				<div class="icon">
+					<div class="imageBox">
+						<img src="./cat.jpg" alt="">
+					</div>
+				</div>
+				<div class="text">ME</div>
+			</a>
+		</li>
+	</ul>
+</div>
+
+<div class="content book-zh-cn with-sidebar 2016-04-27-h.264并行解码算法分析-guide">
+  <p>并行算法类型可以分为两类</p>
+<ul>
+<li>Function-level Decomposition，按照功能模块进行并行</li>
+<li>Data-level Decomposition，按照数据划分进行并行</li>
+</ul>
+<h1 id="Function-level-Decomposition"><a href="#Function-level-Decomposition" class="headerlink" title="Function-level Decomposition"></a>Function-level Decomposition</h1><p>在h.264解码时进行功能划分，例如对于四核系统，各个核心分别执行下列任务</p>
+<ol>
+<li>熵解码frame<sub>n</sub></li>
+<li>逆量化、逆变换frame<sub>n-1</sub></li>
+<li>预测处理frame<sub>n-2</sub></li>
+<li>去块滤波frame<sub>n-3</sub><br><a target="_blank" rel="noopener" href="http://images2015.cnblogs.com/blog/421096/201604/421096-20160427191110627-1793355872.png"><img alt="" src="img/2016-04-27-h.264并行解码算法分析/421096-20160427191111798-1439117084.png"></a></li>
+</ol>
+<p>这种并行类型就是流水线类型，但这种类型在h.264解码中会出现以下问题</p>
+<ol>
+<li>各个功能部分耗费的时长不同，这依赖于实际的码流数据，处理数据的吞吐量取决于其中最耗时的部分。如果仅仅是吞吐量的问题还能采取缓冲的方式来进行流水线优化（一旦一个核心完成了一帧的任务后，对任务成果进行缓存，如果下一帧的上一步骤已经完成，便立刻开始下一帧处理），不过问题是在预测处理中，inter宏块部分需要进行运动补偿，也就是需要依赖到其他帧，这意味着需要等待它所依赖的帧完全解码完成后才能开始当前帧的处理，这就使得这种流水线类型的并行方法复杂多了。</li>
+<li>并行度的扩展是有限的，这种并行类型的并行度依赖于功能模块可以分成多少部分，例如上面的这个例子就分成四个功能部分，如此一来就只能分发给四个核心进行处理。<br>由于有上述的这些缺点，一般在h.264并行解码器实现中都不会采用这种实现方式。</li>
+</ol>
+<h1 id="Data-level-Decomposition"><a href="#Data-level-Decomposition" class="headerlink" title="Data-level Decomposition"></a>Data-level Decomposition</h1><p>按照数据划分，在每部分进行划分并且处理后，还需要进行合并。在h.264中有多个级别的数据划分，这里挑出其中三个重点分析</p>
+<h4 id="1-Frame-level-Parallelism"><a href="#1-Frame-level-Parallelism" class="headerlink" title="1. Frame-level Parallelism"></a>1. Frame-level Parallelism</h4><p>h.264分为I、P、B帧，其中I、p被用作参考帧，B帧常被用作非参考帧。而并行算法，对于完全不相关的数据才能并行处理，即对作为非参考帧的B帧才能平行处理。如果采用这种并行算法，需要有一个核来解析码流，判断帧的类型并且把帧分配给不同的核进行处理。<br>它的缺点如下：</p>
+<ol>
+<li>有限扩展。一般来说P帧间的B帧都会比较少，因此并行度不高。</li>
+<li>在h.264中，B帧是可以作为参考帧的，在这种情况下，这种Frame-level的并行算法就会无法进行了。有一个解决方法就是在编码时规定B帧不作为参考帧（实际上x264在开启了并行编码时就不把B帧作为参考帧），但是这种编码方式会导致码流增加，并且我们这里讨论的是解码器，解码器与编码器是完全分开的，如果作为通用的h.264解码器就应该完全支持标准中的特性。<br>出于上述原因，一般在并行解码器实现中都不会采用这种实现方式。</li>
+</ol>
+<h4 id="2-Slice-level-Parallelism"><a href="#2-Slice-level-Parallelism" class="headerlink" title="2. Slice-level Parallelism"></a>2. Slice-level Parallelism</h4><p>在h.264中，与其他高级视频编码标准一样，每一帧都能分成一个或者多个slice。<br>slice的目的是为了增强传输出错时的鲁棒性，一旦传输出现错误，没有出错的slice并不会受到影响，这样的话视频的显示质量的下降就会比较有限。一帧的各个slice间是相互独立的，也就是说在熵解码，预测等各种解码操作时，slice间并不相互依赖。有了数据上的独立，就能对他们进行并行编码了。<br>它的缺点如下：</p>
+<ol>
+<li>一帧中的slice数目有编码器决定，一般不会太多。网上的h.264视频大多数都是一帧只有一个slice，这就导致slice-level的并行算法失去效果了。</li>
+<li>尽管slice间是相互独立的，但是在去块滤波（deblocking，在编码时是可选的）时，是能超越slice边界的，并且去块滤波必须按照正常的视频序列顺序进行，这会降低slice-level并行算法的速度。</li>
+<li>使用多slice编码方式的主要缺点就是视频码率会增大。在前面第一点时已经提到，一般都是一帧只有一个slice，如果一帧中的slice数目增多，明显的影响就是slice边界增多，在进行宏块的intra，inter预测时是不能跨过slice边界的。另外，slice数目增多意味着会有更多的slice_header与起始码。下图展示了1080p分辨率下4个不同视频的slice数目与码流增加的关系。在4个slice时，码率增加不到5%，这在高码率的应用中，如蓝光播放中是可以接受的。但是更多的slice就会带来更大的码流，要记住，视频压缩的主要目的是压缩，而不是并行处理，而且多slice的情况下，如果不采用去块滤波会使得视频质量下降。</li>
+</ol>
+<img alt="" src="img/2016-04-27-h.264并行解码算法分析/421096-20160428021310720-180563768.jpg">
+由于上述的分析，一般在并行解码器实现中不会采用这种实现方式。
+
+
+<h4 id="3-Macroblock-level-Parallelism"><a href="#3-Macroblock-level-Parallelism" class="headerlink" title="3. Macroblock-level Parallelism"></a>3. Macroblock-level Parallelism</h4><p>首先，宏块（Macroblock&#x2F;MB）并不是完全独立的，为了能够进行并行解码，我们需要分析宏块之间的依赖关系，找出相互独立的宏块，以此来判断应该怎么并行。<br>其中可以分为两大类MB-level的并行算法</p>
+<ol>
+<li>2D-Wave</li>
+<li>3D-Wave</li>
+</ol>
+<h1 id="2D-Wave"><a href="#2D-Wave" class="headerlink" title="2D-Wave"></a>2D-Wave</h1><h5 id="2D-Wave算法原理"><a href="#2D-Wave算法原理" class="headerlink" title="2D-Wave算法原理"></a>2D-Wave算法原理</h5><p>2D-Wave就是把一帧内的宏块进行并行处理的算法。为了实行这种算法，我们必须考虑一帧内宏块间的依赖关系。<br>在h.264中，在宏块的intra预测、inter预测、deblocking等多个功能部分都会依赖到特定的相邻宏块，所依赖的宏块见下图<br><a target="_blank" rel="noopener" href="http://images2015.cnblogs.com/blog/421096/201604/421096-20160427191136767-1829343857.png"><img alt="" src="img/2016-04-27-h.264并行解码算法分析/421096-20160427191138064-558043273.png"></a><br>在单一线程中处理一帧时，对宏块处理的顺序是从左到右，从上到下。按照这种顺序，宏块的依赖在解码时，它依赖的宏块都是可用的。而并行算法要求并行处理的数据相互独立，那么相互独立的宏块出现在如下位置（knight-jump-diagonal）<br><a target="_blank" rel="noopener" href="http://images2015.cnblogs.com/blog/421096/201604/421096-20160427191139267-857942029.png"><img alt="" src="img/2016-04-27-h.264并行解码算法分析/421096-20160427191140548-1197653757.png"></a><br>在并行处理中，与一个宏块相互独立的最接近的宏块位于（右2，上1）的相对位置上，因此他们能够同时被处理。如下图，完整的是已被处理过的宏块，花格子的为正在被处理的宏块，空白的为未被处理的宏块。<br><a target="_blank" rel="noopener" href="http://images2015.cnblogs.com/blog/421096/201604/421096-20160427191201220-52809388.png"><img alt="" src="img/2016-04-27-h.264并行解码算法分析/421096-20160427191203845-1603978230.png"></a><br>这种算法被称为2D-Wave。<br>与frame-leve，slice-leve并行算法不同的是，2D-Wave有着良好的可扩展性，因为它最大的并行度，即可以同时处理的宏块数是依赖于帧的宽高<br>$ParMB_{max,2D} &#x3D; min\left( \left \lceil mb_width &#x2F; 2 , mb_height \right \rceil \right)$<br>如1080p的帧的宏块数目为（$120 \times 68 \ MBs$），它的最大并行度为$120&#x2F;2 &#x3D; 60$。</p>
+<h5 id="2D-Wave的缺点"><a href="#2D-Wave的缺点" class="headerlink" title="2D-Wave的缺点"></a>2D-Wave的缺点</h5><ol>
+<li>在一帧处理的开始与末尾，并行度较低，如果是有多核的情况，那么在开始与结尾处就会有很多核出于空闲状态。</li>
+<li>在熵编码为CABAC的情况，slice中每个宏块的熵解码都与它前一个宏块相关，也就是每个宏块都是相关的，那么，只能在熵解码完成后才能开始进行并行重建宏块。</li>
+</ol>
+<h5 id="2D-Wave的效率"><a href="#2D-Wave的效率" class="headerlink" title="2D-Wave的效率"></a>2D-Wave的效率</h5><p>我们前面讨论了2D-Wave中并行的方法，当前正在重建的宏块需要与相邻行正在进行重建的宏块相隔两个宏块，因此，并行解码可以得到以下DAG（Directed Acyclic Graph）。<br><a target="_blank" rel="noopener" href="http://images2015.cnblogs.com/blog/421096/201604/421096-20160427191204923-479389194.png"><img alt="" src="img/2016-04-27-h.264并行解码算法分析/421096-20160427191206845-615786425.png"></a><br>上图是一个5x5宏块帧的DAG，横向为时间，纵向为帧内的每一行，每个结点代表一个宏块的解码，在这里我们假设每个宏块的解码时间相同，并忽略通信和同步所占用的时间。<br>DAG的深度（depth），即从开始到末尾的结点数目，也就是解码一帧所需要的时间，记为$T_{\infty}$。DAG的总结点数，也就是采用非并行解码时解码一帧所需要的时间，记为$T_{s}$。通过这两个理想状态下的数据，我们可以得到采用2D-Wave并行算法进行解码时的最大速度提升。<br>$SpeedUp_{max,2D} &#x3D; \frac{T_s}{T_{\infty} }&#x3D; \frac{mb_width \times mb_height}{mb_width + 2\times(mb_height - 1)}$<br>其中在解码过程中最大的并行度为<br>$ParMB_{max,2D} &#x3D; min\left( \left \lceil mb_width &#x2F; 2 , mb_height \right \rceil \right)$<br>按照上面的结论，可以算出常见分辨率视频在采用2D-Wave并行算法后的各项参数如下</p>
+<p>并行度变化曲线如下<br><a target="_blank" rel="noopener" href="http://images2015.cnblogs.com/blog/421096/201604/421096-20160427191207580-85164833.png"><img alt="" src="img/2016-04-27-h.264并行解码算法分析/421096-20160427191208830-264837368.png"></a><br>横轴为时间，以宏块为单位，0为第（0，0）个宏块的解码结点；纵轴为并行度。可以看到对于一帧的处理，并行度先增高后降低，平均并行度约为最大并行度的一半。</p>
+<p>当然，上述分析都是基于“宏块解码时间相同”这一理想情况的。实际上，由于宏块类型不同等各种原因会使得宏块的解码时间不固定，这会需要同步机制来调整宏块的解码顺序，也就带来了相应的开销，因此无法达到理论上的最大速度提升。<br>为了分析2D-Wave在实际解码中的速度提升，我们可以在实际的解码器中进行模拟实验。如在ffmpeg解码器上，在解码一帧的时候，我们记录这一帧每一个宏块解码所需要的时间。结合这些时间数据与上述分析（宏块需要等待它依赖的宏块解码完成后才能开始解码），我们就能拼凑出实际解码一帧的DAG，因此可以得到2D-Wave在实际应用中的速度提升。<br>不同视频的速度提升见下表</p>
+<p>以上视频均为1080p，理论上的速度提升为32.1，实际上平均下降了33%。</p>
+<h1 id="3D-Wave"><a href="#3D-Wave" class="headerlink" title="3D-Wave"></a>3D-Wave</h1><p>2D-Wave已经可得到足够高的速度提升，但是如果在如100核的这种多核处理器环境下解码，2D-Wave就显得不够适用了。下面将讨论3D-Wave算法，这种算法就能很好地适用于多核，甚至超多核的解码环境。<br>3D-Wave算法基于一个现象：连续的帧之间通常不会存在超快速的运动，运动向量（MV）一般来说都会比较小。这就表明了在解码当前帧的某个宏块时，不需要等待前一帧完全解码完成，只要在当前宏块所依赖的参考宏块所在的区域重建完成后即可开始当前宏块的解码。当然，这种算法在同一帧上还是有与2D-Wave相同的约束条件，3D-Wave可以看作是2D-Wave的升级版。<br><a target="_blank" rel="noopener" href="http://images2015.cnblogs.com/blog/421096/201604/421096-20160427191222189-1015319978.png"><img alt="" src="img/2016-04-27-h.264并行解码算法分析/421096-20160427191224877-1258885900.png"></a></p>
+<p>3D-Wave算法分为两种实现方式</p>
+<h4 id="1-Static-3D-Wave"><a href="#1-Static-3D-Wave" class="headerlink" title="1. Static 3D-Wave"></a>1. Static 3D-Wave</h4><p>h.264标准中定义了MV的最大长度（参见附件表A-1，请注意区别于最大搜索范围）。当视频为1080p时，MV最大长度为512像素。Static 3D-Wave算法就是统一以这个MV的最大值来作为当前解码宏块的依赖，也就是说只有当参考帧中的这个MV所覆盖的区域内的所有宏块全部完成重建后，才能开始当前宏块的重建。<br>为了分析Static 3D-Wave算法，我们需要像分析2D-Wave时一样，假设每个宏块的解码时长都是一样的，并且假设该算法在解码时出现以下情形。</p>
+<ol>
+<li>B帧可以作为参考帧。这意味着任何帧都能作为参考帧。</li>
+<li>参考帧永远为视频序列的上一帧。这意味着只有等上一帧相关区域的宏块解码完毕后才能开始当前宏块解码，如此一来当前宏块开始解码的时间就会比参考帧不是上一帧的情况更加晚。</li>
+<li>只有第一帧为I帧，并且其他帧中不会出现intra宏块。这意味着除了第一帧之外，其他帧的宏块在解码是都有帧间依赖，也就是说需要等待它所依赖的参考帧上的相关宏块解码完成后才能开始当前宏块的解码。<br>上述情形对Static 3D-Wave算法而言是最坏的情况，基于这些假设，我们下面计算Static 3D-Wave的并行度。<br>在最大MV为16的情况下，如果当前解码的宏块为第二帧的宏块(0,0)，那么在第一帧中，最大MV所包含的宏块为(0,0)，(0,1)，(1,0)，(1,1)。不过由于需要进行子像素重建，重建插值会另外多用到两个宏块(1,2)，(2,1)。因此第二帧的宏块(0,0)所依赖的第一帧的宏块为(0,0)，(0,1)，(1,0)，(1,1)，(1,2)，(2,1)，根据这个结果，我们可以知道在解码完第一帧的(2,1)之后即可开始第二帧(0,0)的解码。<br><a target="_blank" rel="noopener" href="http://images2015.cnblogs.com/blog/421096/201604/421096-20160427191225908-80737724.png"><img alt="" src="img/2016-04-27-h.264并行解码算法分析/421096-20160427191227814-318083397.png"></a><br>最大MV为16的情况下第一帧的(0,0)与第二帧的(0,0)宏块解码时间相差6个单位。按照同样的分析方法，我们可以得到最大MV为32，64，128时，帧间延迟分别为9，15，27个单位。规律算式如下<br>$3 \times [n&#x2F;16]+3$<br>只要保证了这个帧间延迟，后续的宏块解码按照2D-Wave的方式进行解码即可得到最大的并行度。<br>依据上述分析，1080p在不同最大MV时的并行度如下所示<br><a target="_blank" rel="noopener" href="http://images2015.cnblogs.com/blog/421096/201604/421096-20160427191229939-1235521506.png"><img alt="" src="img/2016-04-27-h.264并行解码算法分析/421096-20160427191231142-807509113.png"></a></li>
+</ol>
+<h4 id="2-Dynamic-3D-Wave"><a href="#2-Dynamic-3D-Wave" class="headerlink" title="2. Dynamic 3D-Wave"></a>2. Dynamic 3D-Wave</h4><p>与Static 3D-Wave中采用最长MV不同，Dynamic 3D-Wave算法采用的是宏块中实际的MV，因此依赖的是实际MV对应的参考帧区域。如此一来我们就无法通过单纯的分析来得到该算法的并行度了。<br>Dynamic 3D-Wave的并行度分析需要基于实际码流，通过跟踪码流中每个宏块所在的位置以及每个宏块的MV就可以得到各宏块之间的依赖关系。在假设每个宏块解码时间相同的前提下，我们依据宏块间的这种依赖关系就能模拟出Dynamic 3D-Wave的并行度。<br>模拟方法如下：<br>在比如ffmpeg这类的解码器中进行解码时，为每个宏块进行赋值。第一帧的第一个宏块赋值为1，我们可以看做第一帧的宏块(0,0)的解码时间戳为1。在以后每解码一个宏块，我们都能基于上述的依赖分析得到被解码宏块的依赖宏块，而依赖宏块中最后解码的宏块的解码时间戳加1，就是当前宏块的解码时间戳。得到宏块的解码时间戳后，就能统计出在各个时间戳上同时解码宏块的数目，即并行度。<br>下面图显示了各个视频在解码过程中的并行度变化。<br><a target="_blank" rel="noopener" href="http://images2015.cnblogs.com/blog/421096/201604/421096-20160427191231814-572738258.png"><img alt="" src="img/2016-04-27-h.264并行解码算法分析/421096-20160427191233611-1602899602.png"></a><br>其中可以看出</p>
+<ul>
+<li>如Blue_sky，可以有高达7000的并行度，比Static 3D-Wave（Max MV&#x3D;16）的2000并行度高得多。</li>
+<li>并行度依赖于具体的视频情况。如Pedestrian_area中由于有快速运动的物体，这会导致出现较大的MV，从而降低并行度。</li>
+<li>由于测试视频都只有400帧，因此我们看到并行度呈山峰形状。如果视频足够长的话，就可以看到在高并行度处更为平缓的曲线。</li>
+</ul>
+<p>在Dynamic 3D-Wave算法的实际解码过程中，也会碰到诸如通信，同步等甚至比2D-Wave更多的各种制约，效率会因此下降。较为合理的假设是，这些制约会导致约为50%的效率下降，高于2D-Wave的33%。</p>
+<h1 id="Other-Data-level-Parallelism"><a href="#Other-Data-level-Parallelism" class="headerlink" title="Other Data-level Parallelism"></a>Other Data-level Parallelism</h1><h4 id="1-GOP-level-Parallelism"><a href="#1-GOP-level-Parallelism" class="headerlink" title="1. GOP-level Parallelism"></a>1. GOP-level Parallelism</h4><p>各个GOP（Group Of Picture）之间是相互独立的，因此能以GOP为并行处理的数据单元，但是这一级的并行也会受到以下的限制</p>
+<ol>
+<li>每个GOP需要维护自己的参考图像列表（这种情况在上述3D-Wave中也可能会出现），参考图像列表里面的内容都是无压缩的YUV图像，一旦并行度升高后，维护参考图像列表所需要的内存也是相当多的。</li>
+<li>GOP的组成方式是在编码前就由编码器定义的，因此会出现各种各样的GOP形式，甚至可能出现一整个视频序列只有一个GOP的情况，这很大程度限制了GOP算法的并行度</li>
+</ol>
+<h4 id="2-sub-block-level-Parallelism"><a href="#2-sub-block-level-Parallelism" class="headerlink" title="2. sub-block level Parallelism"></a>2. sub-block level Parallelism</h4><p>这种并行算法是在Macroblock-level 3D-Wave的基础上，把macroblock分成更小的sub-block，除此之外并没有什么不同。两者都是通过当前解码的MB&#x2F;sub-block的位置与MV找出其所依赖的区域，当所依赖的区域解码完成后就可以开始当前MB&#x2F;sub-block的解码。然而以解码sub-block作为一个解码任务来说实在太小了，在3.3G的Inter Sandybridge处理器上解码一个宏块平均只需要2μs，而且考虑到生成一个新的解码任务也需要耗费时间，sub-block level的并行算法就显得不是很有必要了。</p>
+<p>关于h.264并行解码算法的更详细分析请参考Ben Juurlink · Mauricio Alvarez-Mesa · Chi Ching Chi · Arnaldo Azevedo · Cor Meenderinck · Alex Ramirez:《Scalable Parallel Programming Applied to H.264&#x2F;AVC Decoding》</p>
+
+  <div class="guide-links">
+    
+    
+  </div>
+
+    <div class="footer">
+        <p>
+          <a target="_blank" rel="noopener" href="https://changkun.de">欧长坤</a> &copy; 2016-2025 版权所有，
+          采用<a rel="license noopener" target="_blank" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议许可</a>，代码使用 <a href="https://opensource.org/licenses/MIT" target="_blank">MIT</a> 协议开源。</a>
+        </p>
+        <p>
+            如果你认为本书对你起到了帮助，可以<a href="/modern-cpp/about/donate.html">资助作者</a>。
+        </p>
+      </div>
+
+
+
+</div>
+
+	</div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/smooth-scroll/10.2.1/js/smooth-scroll.min.js"></script>
+
+    <!-- main custom script for sidebars, version selects etc. -->
+    <script src="https://cdn.jsdelivr.net/npm/css.escape@1.5.1/css.escape.min.js"></script>
+    <script src="/modern-cpp/js/common.js"></script>
+
+    <!-- fastclick -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      FastClick.attach(document.body)
+    }, false)
+    </script>
+  </body>
+</html>

@@ -1,0 +1,768 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Intra Luma Prediction 现代 C++ 教程: 高速上手 C++ 11/14/17/20 - Modern C++ Tutorial: C++ 11/14/17/20 On the Fly</title>
+    <meta charset="utf-8">
+    <meta name="description" content="Modern C++ Tutorial | C++ 11/14/17/20 On the Fly | 现代 C++ 教程 | 高速上手 C++11/14/17/20">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="shortcut icon" type="image/x-icon" href="/modern-cpp/assets/cover-2nd.png">
+    <meta name="msapplication-TileColor" content="#7e2d36">
+    <meta name="theme-color" content="#7e2d36">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-80889616-2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-80889616-2');
+    </script>
+
+    <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600|Roboto Mono' rel='stylesheet' type='text/css'>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- main page styles -->
+    
+<link rel="stylesheet" href="/modern-cpp/css/page.css">
+
+
+    <!-- this needs to be loaded before guide's inline scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script>window.PAGE_TYPE = "book-zh-cn"</script>
+    <script async src="//changkun.de/urlstat/client.js"></script>
+  <meta name="generator" content="Hexo 7.3.0"></head>
+  <body class="docs">
+	<!-- body开始 -->
+
+		<!-- mobile-bar 2-->
+      <div id="mobile-bar" data-bg-text="现代 C++ 教程" >
+        <a class="menu-button"></a>
+        <a class="logo" href="/modern-cpp/"></a>
+      </div>
+
+	<!-- include header -->
+    <div id="header">
+  <a id="logo" href="/">
+      <img src="/modern-cpp/assets/cover-2nd-logo.png">
+      <span>教程：高速上手</span>
+  </a>
+  <ul id="nav">
+      <li class="nav-dropdown-container resource">
+  <a class="nav-link">资源</a><span class="arrow"></span>
+  <ul class="nav-dropdown">
+    <li><ul>
+      <li><a class="nav-link" href="/modern-cpp/zh-cn/00-preface/" >正文</a></li>
+      <!-- TODO -->
+      <!-- <li><a class="nav-link" href="/modern-cpp/code/1/" >代码</a></li>
+      <li><a class="nav-link" href="/modern-cpp/exercises/1/" >习题</a></li>
+      <li><a class="nav-link" href="/modern-cpp/answers/1/" >答案</a></li> -->
+    </ul></li>
+  </ul>
+</li>
+
+<li class="nav-dropdown-container about">
+  <a class="nav-link">关于</a><span class="arrow"></span>
+  <ul class="nav-dropdown">
+      <li><ul>
+      <li><a class="nav-link" href="/modern-cpp/about/donate.html" >资助</a></li>
+      <li><a class="nav-link" href="/modern-cpp/about/copyright.html" >版权声明</a></li>
+      <li><a class="nav-link" href="/modern-cpp/about/ack.html" >致谢</a></li>
+      </ul></li>
+  </ul>
+</li>
+
+
+<li class="nav-dropdown-container about">
+  <a class="nav-link" target="_blank" rel="noopener" href="https://github.com/rstg00po54/modern-cpp-tutorial">GitHub</a>
+</li>
+
+
+  </ul>
+</div>
+
+    
+      <div id="main" class="fix-sidebar">
+		<!-- body 111 -->
+        
+
+
+
+  <div class="sidebar">
+  <div class="sidebar-inner">
+    <ul class="main-menu">
+        <li class="nav-dropdown-container resource">
+  <a class="nav-link">资源</a><span class="arrow"></span>
+  <ul class="nav-dropdown">
+    <li><ul>
+      <li><a class="nav-link" href="/modern-cpp/zh-cn/00-preface/" >正文</a></li>
+      <!-- TODO -->
+      <!-- <li><a class="nav-link" href="/modern-cpp/code/1/" >代码</a></li>
+      <li><a class="nav-link" href="/modern-cpp/exercises/1/" >习题</a></li>
+      <li><a class="nav-link" href="/modern-cpp/answers/1/" >答案</a></li> -->
+    </ul></li>
+  </ul>
+</li>
+
+<li class="nav-dropdown-container about">
+  <a class="nav-link">关于</a><span class="arrow"></span>
+  <ul class="nav-dropdown">
+      <li><ul>
+      <li><a class="nav-link" href="/modern-cpp/about/donate.html" >资助</a></li>
+      <li><a class="nav-link" href="/modern-cpp/about/copyright.html" >版权声明</a></li>
+      <li><a class="nav-link" href="/modern-cpp/about/ack.html" >致谢</a></li>
+      </ul></li>
+  </ul>
+</li>
+
+
+<li class="nav-dropdown-container about">
+  <a class="nav-link" target="_blank" rel="noopener" href="https://github.com/rstg00po54/modern-cpp-tutorial">GitHub</a>
+</li>
+
+
+    </ul>
+    <div class="list">
+      <h2>
+		
+          正文
+
+      </h2>
+      <ul class="menu-root">
+	  <!-- 引入外部的 JS 文件 -->
+  <!-- <script src="/modern-cpp/js/menu.js"></script> -->
+
+
+	<!-- 传递数据到 JavaScript -->
+	
+	
+	
+
+	
+		<li>
+		  <a href="/H264-BKY/2014-02-15-h.264%E7%9A%84poc%E8%AE%A1%E7%AE%97.html" class="sidebar-link">
+			h.264的POC计算
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2014-02-27-%E6%8C%87%E6%95%B0%E5%93%A5%E4%BC%A6%E5%B8%83%E7%BC%96%E7%A0%81.html" class="sidebar-link">
+			指数哥伦布编码
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2014-03-15-h.264%E5%8A%A0%E6%9D%83%E9%A2%84%E6%B5%8B.html" class="sidebar-link">
+			h.264加权预测
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2014-03-11-h.264%E7%A0%81%E7%8E%87%E6%8E%A7%E5%88%B6.html" class="sidebar-link">
+			h.264码率控制
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2014-04-23-h.264%E7%9B%B4%E6%8E%A5%E9%A2%84%E6%B5%8B.html" class="sidebar-link">
+			h.264直接预测
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2014-03-17-h.264-fmo.html" class="sidebar-link">
+			h.264 FMO
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2014-05-11-h.264%E5%8F%82%E8%80%83%E5%9B%BE%E5%83%8F%E5%88%97%E8%A1%A8%E3%80%81%E8%A7%A3%E7%A0%81%E5%9B%BE%E5%83%8F%E7%BC%93%E5%AD%98.html" class="sidebar-link">
+			h.264参考图像列表、解码图像缓存
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2014-06-06-h.264-mvp%E6%B1%82%E8%A7%A3%E8%BF%87%E7%A8%8B.html" class="sidebar-link">
+			h.264 mvp求解过程
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2014-06-16-umhexagons%E6%90%9C%E7%B4%A2%E8%BF%87%E7%A8%8B.html" class="sidebar-link">
+			UMHexagonS搜索过程
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2014-07-20-h.264%E5%85%A8%E6%90%9C%E7%B4%A2%E4%BB%A5%E5%8F%8A%E5%BF%AB%E9%80%9F%E5%85%A8%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95.html" class="sidebar-link">
+			h.264全搜索以及快速全搜索算法
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2014-06-18-h.264-%E7%8E%87%E5%A4%B1%E7%9C%9F%E4%BC%98%E5%8C%96.html" class="sidebar-link">
+			h.264 率失真优化
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2014-10-17-epzs%E6%90%9C%E7%B4%A2%E8%BF%87%E7%A8%8B.html" class="sidebar-link">
+			EPZS搜索过程
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2014-12-07-intra-chroma-prediction.html" class="sidebar-link">
+			Intra Chroma Prediction
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2014-12-28-intra-luma-prediction.html" class="sidebar-link current">
+			Intra Luma Prediction
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2015-01-13-h.264-transfor.html" class="sidebar-link">
+			H.264 Transform
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2015-02-02-h.264-quantization.html" class="sidebar-link">
+			H.264 Quantization
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2015-04-06-quantization-method.html" class="sidebar-link">
+			Quantization Method
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2015-04-26-h.264-mode-decision.html" class="sidebar-link">
+			h.264 Mode Decision
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2015-05-17-h.264-bi-predictive-motion-searc.html" class="sidebar-link">
+			h.264 Bi-Predictive Motion Search
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2016-02-24-h.264%E8%AF%AD%E6%B3%95%E7%BB%93%E6%9E%84%E5%88%86%E6%9E%90.html" class="sidebar-link">
+			h.264语法结构分析
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2016-02-29-h.264%E5%AE%8F%E5%9D%97%E4%B8%8E%E5%AD%90%E5%AE%8F%E5%9D%97%E7%B1%BB%E5%9E%8B.html" class="sidebar-link">
+			h.264宏块与子宏块类型
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2016-03-05-h.264-scanning-process-for-transform-coefficients.html" class="sidebar-link">
+			h.264 scanning process for transform coefficients
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2016-03-08-cavlc.html" class="sidebar-link">
+			CAVLC
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2016-03-22-cabac.html" class="sidebar-link">
+			CABAC
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2016-03-25-%E7%AE%97%E6%9C%AF%E7%BC%96%E7%A0%81jm%E5%AE%9E%E7%8E%B0.html" class="sidebar-link">
+			算术编码JM实现
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2016-04-27-h.264%E5%B9%B6%E8%A1%8C%E8%A7%A3%E7%A0%81%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90.html" class="sidebar-link">
+			h.264并行解码算法分析
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2016-05-17-h.264-%E5%8E%BB%E5%9D%97%E6%BB%A4%E6%B3%A2.html" class="sidebar-link">
+			h.264 去块滤波
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2016-08-11-h.264%E5%B9%B6%E8%A1%8C%E8%A7%A3%E7%A0%81%E7%AE%97%E6%B3%952d-wave%E5%AE%9E%E7%8E%B0(%E5%9F%BA%E4%BA%8E%E5%A4%9A%E6%A0%B8%E9%9D%9E%E5%85%B1%E4%BA%AB%E5%86%85%E5%AD%98%E7%B3%BB%E7%BB%9F).html" class="sidebar-link">
+			h.264并行解码算法2D-Wave实现（基于多核非共享内存系统）
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2016-09-18-h.264%E5%B9%B6%E8%A1%8C%E8%A7%A3%E7%A0%81%E7%AE%97%E6%B3%952d-wave%E5%AE%9E%E7%8E%B0(%E5%9F%BA%E4%BA%8E%E5%A4%9A%E6%A0%B8%E5%85%B1%E4%BA%AB%E5%86%85%E5%AD%98%E7%B3%BB%E7%BB%9F).html" class="sidebar-link">
+			h.264并行解码算法2D-Wave实现（基于多核共享内存系统）
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2016-09-30-h.264%E5%B9%B6%E8%A1%8C%E8%A7%A3%E7%A0%81%E7%AE%97%E6%B3%953d-wave%E5%AE%9E%E7%8E%B0(%E5%9F%BA%E4%BA%8E%E5%A4%9A%E6%A0%B8%E5%85%B1%E4%BA%AB%E5%86%85%E5%AD%98%E7%B3%BB%E7%BB%9F).html" class="sidebar-link">
+			h.264并行解码算法3D-Wave实现（基于多核共享内存系统）
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2017-04-04-h.264%E5%B9%B6%E8%A1%8C%E7%86%B5%E8%A7%A3%E7%A0%81.html" class="sidebar-link">
+			h.264并行熵解码
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2017-06-15-cabac%E6%80%BB%E7%BB%93%E4%B8%8E%E8%A1%A5%E5%85%85%E8%AE%A8%E8%AE%BA.html" class="sidebar-link">
+			CABAC总结与补充讨论
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2019-01-04-%5Bffmpeg%5D-h264%E5%B9%B6%E8%A1%8C%E8%A7%A3%E7%A0%81.html" class="sidebar-link">
+			ffmpeg h264并行解码
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2019-01-24-%5Bffmpeg%5D-h.264%E8%A7%A3%E7%A0%81%E6%89%80%E7%94%A8%E7%9A%84%E4%B8%BB%E8%A6%81%E7%BC%93%E5%86%B2%E5%8C%BA%E4%BB%8B%E7%BB%8D.html" class="sidebar-link">
+			ffmpeg h.264解码所用的主要缓冲区介绍
+		  </a>
+		</li>
+
+
+</ul>
+
+	  
+    </div>
+  </div>
+</div>
+
+<link rel="stylesheet" href="../icon/iconfont.css">
+<style>
+
+/* body {
+            background: #e4e9f5;
+        } */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            list-style: none;
+            text-decoration: none;
+        }
+
+        section {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font: 900 100px '';
+            color: #ffa21759;
+            background: rgb(34, 37, 39);
+        }
+
+        .shell {
+            position: fixed;
+            width: 60px;
+			left: 0;
+            height: 100%;
+            background: #000000;
+            z-index: 9999;
+            transition: width 0.5s;
+            /* padding-left: 10px; */
+            overflow: hidden;
+        }
+/* 悬停改变宽度 */
+        .shell:hover {
+            width: 300px;
+        }
+
+        .imageBox {
+            position: relative;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+
+        .imageBox img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .shell ul {
+            position: relative;
+            height: 100vh;
+        }
+
+        .shell ul li {
+            position: relative;
+            padding: 5px;
+        }
+
+        .active {
+            background: #e4e9f5;
+            border-top-left-radius: 50px;
+            border-bottom-left-radius: 50px;
+        }
+
+        .active::before {
+            content: "";
+            position: absolute;
+            top: -30px;
+            right: 0;
+            width: 30px;
+            height: 30px;
+            border-bottom-right-radius: 25px;
+            box-shadow: 5px 5px 0 5px #e4e9f5;
+            background: transparent;
+        }
+
+        .active::after {
+            content: "";
+            position: absolute;
+            bottom: -30px;
+            right: 0;
+            width: 30px;
+            height: 30px;
+            border-top-right-radius: 25px;
+            box-shadow: 5px -5px 0 5px #e4e9f5;
+            background: transparent;
+        }
+
+        #shelllogo {
+            margin: 40px 0 100px 0;
+        }
+
+        .shell ul li a {
+            position: relative;
+            display: flex;
+            white-space: nowrap;
+        }
+
+        .icon {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-width: 40px;
+            /* padding-left: 10px; */
+            height: 70px;
+            color: #333;
+            transition: 0.5s;
+            color: rgb(255, 255, 255);
+        }
+
+        .icon i {
+            font-size: 30px;
+            z-index: 999;
+        }
+
+        .text {
+            position: relative;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            font-size: 20px;
+            color: #ffad32c1;
+            padding-left: 15px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: 0.5s;
+        }
+
+        .shell ul li:hover a .icon,
+        .shell ul li:hover a .text {
+            color: #ffa117;
+        }
+
+        .active a .icon::before {
+            content: "";
+            position: absolute;
+            inset: 5px;
+            width: 60px;
+            background: #000000;
+            /* 圆形 */
+            border-radius: 50%;
+            transition: 0.5s;
+            border: 7px solid #ffa117;
+            box-sizing: border-box;
+        }
+</style>
+
+
+<div class="shell">
+	<ul class="nav">
+		<li class="active" id="shelllogo">
+			<a href="#">
+				<div class="icon">
+					<div class="imageBox">
+						<img src="../icon/cat.jpg" alt="">
+					</div>
+				</div>
+				<div class="text">前端小窝</div>
+			</a>
+		</li>
+		<li>
+			<a href="#home">
+				<div class="icon">
+					<i class="iconfont icon-cangku"></i>
+				</div>
+				<div class="text">Home</div>
+			</a>
+		</li>
+		<li>
+			<a href="#theme">
+				<div class="icon">
+					<!-- 调色板 -->
+					<i class="iconfont icon-tiaoseban"></i>
+				</div>
+				<div class="text">Theme</div>
+			</a>
+		</li>
+		<li>
+			<a href="#wallet">
+				<div class="icon">
+					<!-- 钱包 -->
+					<i class="iconfont icon-qianbao"></i>
+				</div>
+				<div class="text">Wallet</div>
+			</a>
+		</li>
+		<li>
+			<a href="#picture">
+				<div class="icon">
+					<!-- 图片 -->
+					<i class="iconfont icon-tupian"></i>
+				</div>
+				<div class="text">picture</div>
+			</a>
+		</li>
+		<li>
+			<a href="#code">
+				<div class="icon">
+					<!-- 二维码 -->
+					<i class="iconfont icon-erweima"></i>
+				</div>
+				<div class="text">QR code</div>
+			</a>
+		</li>
+		<li>
+			<a href="#authentication">
+				<div class="icon">
+					<!-- 盾牌保险认证 -->
+					<i class="iconfont icon-dunpaibaoxianrenzheng"></i>
+				</div>
+				<div class="text">auth</div>
+			</a>
+		</li>
+		<li>
+			<a href="#me">
+				<div class="icon">
+					<div class="imageBox">
+						<img src="./cat.jpg" alt="">
+					</div>
+				</div>
+				<div class="text">ME</div>
+			</a>
+		</li>
+	</ul>
+</div>
+
+<div class="content book-zh-cn with-sidebar 2014-12-28-intra-luma-prediction-guide">
+  <h1 id=""><a href="#" class="headerlink" title=""></a></h1><p>在宏块的帧内预测过程中，有四种宏块类型：I_4x4，I_8x8，I16x16，I_PCM。他们都需要在相邻块做去块滤波之前进行帧内预测。</p>
+<h1 id="亮度帧内预测的总体流程"><a href="#亮度帧内预测的总体流程" class="headerlink" title="亮度帧内预测的总体流程"></a>亮度帧内预测的总体流程</h1><p>1-4获取当前block的帧内预测模式的预测，5-7获得最佳预测模式并对应预测模式的预测做后续处理</p>
+<ol>
+<li><p>首先需要获得当前4x4（8x8）预测块有左、上的4x4（8x8）相邻块A、B，假设其所在宏块为mbAddrA、mbAddrB。</p>
+</li>
+<li><p>如果mbAddrA或mbAddrB中任意一个宏块不可用于帧内预测（<a target="_blank" rel="noopener" href="http://www.cnblogs.com/TaigaCon/p/4149938.html">请参考</a>），那么就会设置DC &#x3D; 1，否则DC &#x3D; 0。</p>
+</li>
+<li><p>如果DC &#x3D; 1，或者相邻宏块mbAddrA，mbAddrB不是以I_8x8或者I_4x4方式编码的，表明A、B不适用于当前的预测过程，那么设置A、B为PredModeA &#x3D; PredModeB &#x3D; 2。<br>否则DC &#x3D; 0，并且mbAddrA与mbAddrB都是以I_8x8或者I_4x4方式编码的，则分别取得A与B的预测模式PredModeA, PredModeB。<br>预测模式的选取分为三种情况：</p>
+</li>
+<li><p>左与上的相邻块都在当前宏块，即此时当前宏块还未决定是采用I_8x8还是I_4x4或者其他的预测方式。那么当前块的相邻块A,B的预测模式就采用与这轮的宏块模式相同的方式的预测模式。如，当前正以I_8x8进行帧内预测，那PredModeA &#x3D; PredMode8x8A，PredModeB &#x3D; PredMode8x8_B.</p>
+<img alt="" src="img/2014-12-28-intra-luma-prediction/282304539976993.jpg">
+</li>
+<li><p>左与上的宏块都位于相邻宏块，即当前块位于宏块的左上角。此时左与上块所在的宏块都已选定了所采用的帧内宏块预测方式，因此无论当前块是在哪轮的帧内预测上（I_4x4或I_8x8），都应采用相邻宏块的预测方式来作为当前块的相邻块的帧内预测模式，PredModeA &#x3D; PredModeMacroBlockA，PredModeB &#x3D; PredModeMacroBlockB.</p>
+<img alt="" src="img/2014-12-28-intra-luma-prediction/282304546385864.jpg">
+</li>
+<li><p>左或上的其中一个块为相邻宏块，仅有一个（左或上）块位于当前宏块。这种情况下，位于其他宏块的相邻块采用其所在宏块的帧内预测模式，位于当前宏块的相邻块采用这一轮预测模式。PredModeA &#x3D; PredMode4x4A，PredModeB &#x3D; PredModeMacroblockB.</p>
+<img alt="" src="img/2014-12-28-intra-luma-prediction/282304551224549.jpg">
+
+
+
+</li>
+<li><p>根据相邻块的帧内预测模式得到当前预测模式的预测：<br>PredPredMode &#x3D; Min(PredModeA, PredModeB)</p>
+</li>
+<li><p>上面得到的只是一个预测值，并不是当前块实际的预测模式。因此还需要通过计算得到最适合当前块的预测模式PredMode</p>
+</li>
+<li><p>如果PredPredMode &#x3D;&#x3D; PredMode，说明上方的预测是准确的，设置PredModeFlag &#x3D; 1;<br>否则PredModeFlag &#x3D; 0。</p>
+</li>
+<li><p>I_4x4与I_8x8都有9个模式，但是在PredModeFlag &#x3D; 0的时候，说明预测得到的预测模式PredPredMode可以被排除在外了，因此剩下的模式只有8个，这样刚刚好只用上3个bit就能表示。所以按照下方的做法，可以使原来4个bit才能表示的mode用3个bit就能表示：</p>
+</li>
+<li><p>如果PredMode &lt; PredPredMode，remPredMode &#x3D; PredMode</p>
+</li>
+<li><p>如果PredMode &gt; PredPredMode，remPredMode &#x3D; PredMode -1</p>
+</li>
+</ol>
+<p>remPredMode为最后用来编码的mode<br><img alt="" src="img/2014-12-28-intra-luma-prediction/282304556389692.jpg"></p>
+<p>现在所剩下的唯一疑点就是步骤5的：如何通过计算得当前块的最优预测模式。</p>
+<p>预测模式一共有9种。他们的序号与名称见下方表格</p>
+<p>可见4x4与8x8的预测模式都是以一样的顺序排列。<br>除了序号为2的DC模式外，其他模式都是通过相邻块的边缘像素点来进行线性预测的，预测方向如下<br><img alt="" src="img/2014-12-28-intra-luma-prediction/282304560138877.jpg"><br>在图像上，像素点坐标是按照左上至右下的顺序递增的。按照这种规律，可以得到一个坐标轴如下<br><img alt="" src="img/2014-12-28-intra-luma-prediction/282304563258848.jpg"><br>这样的话，预测模式就可以看做是斜率，只要知道坐标轴上的点（相邻块边界像素值），即可通过斜率（预测模式），得到该斜线上的坐标。<br><img alt="" src="img/2014-12-28-intra-luma-prediction/282304566696277.jpg"><br>就以上图的这种情况为例，可以看到当mode&#x3D;4时，斜率为1，即<br>$y&#x3D;x+b$<br>$-b&#x3D;x-y$<br>$-b$就是当$y&#x3D;0$时，在x轴上的偏移，因此有<br>$p[-b,0]&#x3D;p[x –y,0]$<br>由于同一条线上的值相等，所以有<br>$p[x,y]&#x3D;p[x-y,0]$<br>同理，当$mode&#x3D;5$时，斜率为2，有<br>$y&#x3D;2\times{(x+b)}$<br>得到<br>$p[-b,0]&#x3D;p[x-\frac{y}{2},0]&#x3D;p[x,y]$</p>
+<p>当然，以上只是大致阐述了用帧内预测来得到像素点的值的方式，在实际进行帧内预测的时候并不会这么简单，而且Intra4x4与Intra8x8在细节上也会有一些差别。下面会更详细地讨论Intra4x4预测模式。</p>
+<h1 id="Intra4x4"><a href="#Intra4x4" class="headerlink" title="Intra4x4"></a>Intra4x4</h1><p>对于一个4x4块来说，在进行帧内预测时会用到相邻像素点有13个，如上方图片中红色方块所示。但是在相邻宏块不可用于intra预测的时候，该相邻宏块上的像素点是不可用的，也就是说会存在相邻像素点不可用的情况。但是存在一个特殊情况：如果不可用的是（4<del>7，-1），而（3，-1）是可用的，那会令（4</del>7，-1）的值等于（3，-1）的像素点的值去进行预测。<br><img alt="" src="img/2014-12-28-intra-luma-prediction/282304570608691.jpg"></p>
+<ol>
+<li><p>Intra 4x4 Vertical Prediction Mode</p>
+<img alt="" src="img/2014-12-28-intra-luma-prediction/282304573416905.jpg">
+$Pred{4}\times{4}_{L}[x,y] = p[x,-1]$
+
+</li>
+<li><p>Intra 4x4 Horizontal Prediction mode</p>
+<img alt="" src="img/2014-12-28-intra-luma-prediction/282304578884805.jpg">
+$Pred{4}\times{4}_{L}[x,y] = p[-1,y]$
+
+</li>
+<li><p>Intra 4x4 DC Prediction Mode</p>
+</li>
+</ol>
+<ul>
+<li><p>If (0<del>3,-1) and (-1,0</del>3) is available for Intra 4x4 prediction$Pred{4}\times{4}<em>{L}[x,y] &#x3D; \displaystyle{\sum</em>{y&#x3D;0}^{3}{p[-1,y]} + \sum_{x&#x3D;0}^{3}{p[x,-1]}}$</p>
+</li>
+<li><p>Else if only (0~3, -1) is available for Intra 4x4 prediction$Pred{4}\times{4}<em>{L}[x,y] &#x3D; \displaystyle{\sum</em>{x&#x3D;0}^{3}{p[x,-1]}}$</p>
+</li>
+<li><p>Else if only (-1, 0~3) is available for Intra 4x4 prediction$Pred{4}\times{4}<em>{L}[x,y] &#x3D; \displaystyle{\sum</em>{y&#x3D;0}^{3}{p[-1,y]}} $</p>
+</li>
+<li><p>Else none is available for Intra 4x4 prediction$Pred{4}\times{4}_{L}[x,y] &#x3D; 1&lt;&lt;(BitDepth-1)$</p>
+</li>
+</ul>
+<ol start="4">
+<li>Intra 4x4 Diagonal Down Left Prediction Mode<img alt="" src="img/2014-12-28-intra-luma-prediction/282304582004775.jpg"></li>
+</ol>
+<ul>
+<li><p>If $x &#x3D; y &#x3D; 3$$Pred{4}\times{4}_{L}[x,y] &#x3D; (p[6,-1] + 3\times{p[7,-1]} + 2) &gt;&gt; 2$</p>
+</li>
+<li><p>Else$Pred{4}\times{4}_{L}[x,y] &#x3D; (p[x + y,-1] + 2\times{p[x + y + 1,-1]} + p[x + y +2, -1] + 2) &gt;&gt; 2$</p>
+</li>
+</ul>
+<p>由上面的式子可以看出，在斜的方向上预测时，会参考不止一个相邻像素点，而是周围的两到三个。</p>
+<ol start="5">
+<li>Intra 4x4 Diagonal Down Right Prediction Mode<img alt="" src="img/2014-12-28-intra-luma-prediction/282304586858161.jpg"></li>
+</ol>
+<ul>
+<li><p>If $x &gt; y$$Pred{4}\times{4}_{L}[x,y] &#x3D; (p[x-y-2,-1] + 2\times{p[x-y-1,-1]} + p[x-y, -1] + 2) &gt;&gt; 2$</p>
+</li>
+<li><p>Else if $x &lt; y$$Pred{4}\times{4}_{L}[x,y] &#x3D; (p[-1,y-x-2] + 2\times{p[-1,y-x-1]} + p[-1,y-x] + 2) &gt;&gt; 2$</p>
+</li>
+<li><p>Else$Pred{4}\times{4}_{L}[x,y] &#x3D; (p[0,-1] + 2\times{p[-1,-1]} + p[-1,0] +2)&gt;&gt;2$</p>
+</li>
+</ul>
+<ol start="6">
+<li>Intra 4x4 Vertical Right Prediction Mode<img alt="" src="img/2014-12-28-intra-luma-prediction/282304590444118.jpg"><br>$zVR &#x3D; 2\times{x}+y$</li>
+</ol>
+<ul>
+<li><p>If $zVR &#x3D; 0,2,4,6$$Pred{4}\times{4}_{L}[x,y] &#x3D; (p[x-\frac{y}{2}-1,-1] + p[x-\frac{y}{2}, -1] + 1) &gt;&gt; 1$</p>
+</li>
+<li><p>Else if $zVR &#x3D; 1,3,5$$Pred{4}\times{4}_{L}[x,y] &#x3D; (p[x-\frac{y}{2}-2,-1]+2\times{p[x-\frac{y}{2}-1,-1]} + p[x-\frac{y}{2}, -1] + 2) &gt;&gt; 2$</p>
+</li>
+<li><p>Else if $zVR &#x3D; -1$$Pred{4}\times{4}_{L}[x,y] &#x3D; (p[-1,0]+2\times{p[-1,-1]} + p[0, -1] + 2) &gt;&gt; 2$</p>
+</li>
+<li><p>Else $zVR &#x3D; -2, -3$$Pred{4}\times{4}_{L}[x,y] &#x3D; (p[-1,y-1]+2\times{p[-1,y-2]} + p[-1,y-3] + 2) &gt;&gt; 2$</p>
+</li>
+</ul>
+<ol start="7">
+<li>Intra 4x4 Horizontal Down Prediction<img alt="" src="img/2014-12-28-intra-luma-prediction/282304596535531.jpg">
+$zHD = 2\times{y}-x$</li>
+</ol>
+<ul>
+<li><p>If $zHD &#x3D; 0,2,4,6$$Pred{4}\times{4}_{L}[x,y] &#x3D; (p[-1,y-\frac{x}{2}-1] + p[-1,y-\frac{x}{2}] + 1) &gt;&gt; 1$</p>
+</li>
+<li><p>Else if $zHD &#x3D; 1,3,5$$Pred{4}\times{4}_{L}[x,y] &#x3D; (p[-1,y-\frac{x}{2}-2]+2\times{p[-1,y-\frac{x}{2}-1]} + p[-1,y-\frac{x}{2}] + 2) &gt;&gt; 2$</p>
+</li>
+<li><p>Else if $zHD &#x3D; -1$$Pred{4}\times{4}_{L}[x,y] &#x3D; (p[-1,0]+2\times{p[-1,-1]} + p[0, -1] + 2) &gt;&gt; 2$</p>
+</li>
+<li><p>Else $zHD &#x3D; -2, -3$$Pred{4}\times{4}_{L}[x,y] &#x3D; (p[x-1,-1]+2\times{p[x-2,-1]} + p[x-3,-1] + 2) &gt;&gt; 2$</p>
+</li>
+</ul>
+<ol start="8">
+<li>Intra 4x4 Vertical Left Prediction Mode<img alt="" src="img/2014-12-28-intra-luma-prediction/282304599818730.jpg"></li>
+</ol>
+<ul>
+<li><p>If $y &#x3D; 0,2$$Pred{4}\times{4}_{L}[x,y] &#x3D; (p[x+\frac{y}{2},-1] + p[x+\frac{y}{2}+1,-1] + 1) &gt;&gt; 1$</p>
+</li>
+<li><p>Else $ y &#x3D; 1,3$$Pred{4}\times{4}_{L}[x,y] &#x3D; (p[x-1,-1]+2\times{p[x-2,-1]} + p[x-3,-1] + 2) &gt;&gt; 2$</p>
+</li>
+</ul>
+<ol start="9">
+<li>Intra 4x4 Horizontal Up Predition<img alt="" src="img/2014-12-28-intra-luma-prediction/282305003256159.jpg">
+$zHU = x + 2\times{y}$</li>
+</ol>
+<ul>
+<li><p>If $zHU &#x3D; 0,2,4$$Pred{4}\times{4}_{L}[x,y] &#x3D; (p[-1,y+\frac{x}{2}] + p[-1,y+\frac{x}{2}+1] + 1) &gt;&gt; 1$</p>
+</li>
+<li><p>Else if $zHU &#x3D; 1,3$$Pred{4}\times{4}_{L}[x,y] &#x3D; (p[-1,y+\frac{x}{2}]+2\times{p[-1,y+\frac{x}{2}+1]} + p[-1,y+\frac{x}{2}+2] + 2) &gt;&gt; 2$</p>
+</li>
+<li><p>Else if $zHU &#x3D; 5$$Pred{4}\times{4}_{L}[x,y] &#x3D; (p[-1,2]+3\times{p[-1,3]} + 2) &gt;&gt; 2$</p>
+</li>
+<li><p>Else $zHU &gt; 5$$Pred{4}\times{4}_{L}[x,y] &#x3D; p[-1,3]$</p>
+</li>
+</ul>
+<p>以上，可以看到Intra4x4预测的整个流程。在上面的图可以看到各个预测所需要的相邻像素点，如果该像素点不可用于Intra4x4的预测，那么依赖于该像素点的预测模式是不可用的。</p>
+<h1 id="Intra8x8"><a href="#Intra8x8" class="headerlink" title="Intra8x8"></a>Intra8x8</h1><p>8x8块的帧内预测跟4x4的基本上是一样的，可以看做放大了的4x4块。例如上面提到的相邻宏块不可用的情况，8x8块在预测时也会用(7,-1)去补全(8~15,-1)。而预测的方向也是与上面4x4预测的9个完全一样。<br>但是有一个不同的地方，就是8x8块在预测之前会去做一次边界像素点的滤波，滤波后所得的新像素点会被用于当前8x8块的预测，不同于4x4会直接去用边界像素点了进行预测。<br><img alt="" src="img/2014-12-28-intra-luma-prediction/282305007471331.jpg"></p>
+<h1 id="Intra16x16"><a href="#Intra16x16" class="headerlink" title="Intra16x16"></a>Intra16x16</h1><p>Intra16x16是对整个宏块进行帧内预测，这种比4x4的更为简单，只有四种预测模式</p>
+<p>其中模式0,1,2可以看做是Intra4x4模式的放大版，模式3可以参考<a target="_blank" rel="noopener" href="http://www.cnblogs.com/TaigaCon/p/4149938.html">Chroma Intra Prediction的模式3</a>。</p>
+<h1 id="I-PCM"><a href="#I-PCM" class="headerlink" title="I_PCM"></a>I_PCM</h1><p>PCM模式就是把一个宏块共256个像素点的值不做任何处理，直接进行熵编码的模式，Chroma也有PCM这个模式。</p>
+
+  <div class="guide-links">
+    
+    
+  </div>
+
+    <div class="footer">
+        <p>
+          <a target="_blank" rel="noopener" href="https://changkun.de">欧长坤</a> &copy; 2016-2025 版权所有，
+          采用<a rel="license noopener" target="_blank" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议许可</a>，代码使用 <a href="https://opensource.org/licenses/MIT" target="_blank">MIT</a> 协议开源。</a>
+        </p>
+        <p>
+            如果你认为本书对你起到了帮助，可以<a href="/modern-cpp/about/donate.html">资助作者</a>。
+        </p>
+      </div>
+
+
+
+</div>
+
+	</div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/smooth-scroll/10.2.1/js/smooth-scroll.min.js"></script>
+
+    <!-- main custom script for sidebars, version selects etc. -->
+    <script src="https://cdn.jsdelivr.net/npm/css.escape@1.5.1/css.escape.min.js"></script>
+    <script src="/modern-cpp/js/common.js"></script>
+
+    <!-- fastclick -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      FastClick.attach(document.body)
+    }, false)
+    </script>
+  </body>
+</html>

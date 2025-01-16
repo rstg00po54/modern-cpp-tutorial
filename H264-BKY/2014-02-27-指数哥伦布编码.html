@@ -1,0 +1,643 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>指数哥伦布编码 现代 C++ 教程: 高速上手 C++ 11/14/17/20 - Modern C++ Tutorial: C++ 11/14/17/20 On the Fly</title>
+    <meta charset="utf-8">
+    <meta name="description" content="Modern C++ Tutorial | C++ 11/14/17/20 On the Fly | 现代 C++ 教程 | 高速上手 C++11/14/17/20">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="shortcut icon" type="image/x-icon" href="/modern-cpp/assets/cover-2nd.png">
+    <meta name="msapplication-TileColor" content="#7e2d36">
+    <meta name="theme-color" content="#7e2d36">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-80889616-2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-80889616-2');
+    </script>
+
+    <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600|Roboto Mono' rel='stylesheet' type='text/css'>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- main page styles -->
+    
+<link rel="stylesheet" href="/modern-cpp/css/page.css">
+
+
+    <!-- this needs to be loaded before guide's inline scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script>window.PAGE_TYPE = "book-zh-cn"</script>
+    <script async src="//changkun.de/urlstat/client.js"></script>
+  <meta name="generator" content="Hexo 7.3.0"></head>
+  <body class="docs">
+	<!-- body开始 -->
+
+		<!-- mobile-bar 2-->
+      <div id="mobile-bar" data-bg-text="现代 C++ 教程" >
+        <a class="menu-button"></a>
+        <a class="logo" href="/modern-cpp/"></a>
+      </div>
+
+	<!-- include header -->
+    <div id="header">
+  <a id="logo" href="/">
+      <img src="/modern-cpp/assets/cover-2nd-logo.png">
+      <span>教程：高速上手</span>
+  </a>
+  <ul id="nav">
+      <li class="nav-dropdown-container resource">
+  <a class="nav-link">资源</a><span class="arrow"></span>
+  <ul class="nav-dropdown">
+    <li><ul>
+      <li><a class="nav-link" href="/modern-cpp/zh-cn/00-preface/" >正文</a></li>
+      <!-- TODO -->
+      <!-- <li><a class="nav-link" href="/modern-cpp/code/1/" >代码</a></li>
+      <li><a class="nav-link" href="/modern-cpp/exercises/1/" >习题</a></li>
+      <li><a class="nav-link" href="/modern-cpp/answers/1/" >答案</a></li> -->
+    </ul></li>
+  </ul>
+</li>
+
+<li class="nav-dropdown-container about">
+  <a class="nav-link">关于</a><span class="arrow"></span>
+  <ul class="nav-dropdown">
+      <li><ul>
+      <li><a class="nav-link" href="/modern-cpp/about/donate.html" >资助</a></li>
+      <li><a class="nav-link" href="/modern-cpp/about/copyright.html" >版权声明</a></li>
+      <li><a class="nav-link" href="/modern-cpp/about/ack.html" >致谢</a></li>
+      </ul></li>
+  </ul>
+</li>
+
+
+<li class="nav-dropdown-container about">
+  <a class="nav-link" target="_blank" rel="noopener" href="https://github.com/rstg00po54/modern-cpp-tutorial">GitHub</a>
+</li>
+
+
+  </ul>
+</div>
+
+    
+      <div id="main" class="fix-sidebar">
+		<!-- body 111 -->
+        
+
+
+
+  <div class="sidebar">
+  <div class="sidebar-inner">
+    <ul class="main-menu">
+        <li class="nav-dropdown-container resource">
+  <a class="nav-link">资源</a><span class="arrow"></span>
+  <ul class="nav-dropdown">
+    <li><ul>
+      <li><a class="nav-link" href="/modern-cpp/zh-cn/00-preface/" >正文</a></li>
+      <!-- TODO -->
+      <!-- <li><a class="nav-link" href="/modern-cpp/code/1/" >代码</a></li>
+      <li><a class="nav-link" href="/modern-cpp/exercises/1/" >习题</a></li>
+      <li><a class="nav-link" href="/modern-cpp/answers/1/" >答案</a></li> -->
+    </ul></li>
+  </ul>
+</li>
+
+<li class="nav-dropdown-container about">
+  <a class="nav-link">关于</a><span class="arrow"></span>
+  <ul class="nav-dropdown">
+      <li><ul>
+      <li><a class="nav-link" href="/modern-cpp/about/donate.html" >资助</a></li>
+      <li><a class="nav-link" href="/modern-cpp/about/copyright.html" >版权声明</a></li>
+      <li><a class="nav-link" href="/modern-cpp/about/ack.html" >致谢</a></li>
+      </ul></li>
+  </ul>
+</li>
+
+
+<li class="nav-dropdown-container about">
+  <a class="nav-link" target="_blank" rel="noopener" href="https://github.com/rstg00po54/modern-cpp-tutorial">GitHub</a>
+</li>
+
+
+    </ul>
+    <div class="list">
+      <h2>
+		
+          正文
+
+      </h2>
+      <ul class="menu-root">
+	  <!-- 引入外部的 JS 文件 -->
+  <!-- <script src="/modern-cpp/js/menu.js"></script> -->
+
+
+	<!-- 传递数据到 JavaScript -->
+	
+	
+	
+
+	
+		<li>
+		  <a href="/H264-BKY/2014-02-15-h.264%E7%9A%84poc%E8%AE%A1%E7%AE%97.html" class="sidebar-link">
+			h.264的POC计算
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2014-02-27-%E6%8C%87%E6%95%B0%E5%93%A5%E4%BC%A6%E5%B8%83%E7%BC%96%E7%A0%81.html" class="sidebar-link current">
+			指数哥伦布编码
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2014-03-15-h.264%E5%8A%A0%E6%9D%83%E9%A2%84%E6%B5%8B.html" class="sidebar-link">
+			h.264加权预测
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2014-03-11-h.264%E7%A0%81%E7%8E%87%E6%8E%A7%E5%88%B6.html" class="sidebar-link">
+			h.264码率控制
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2014-04-23-h.264%E7%9B%B4%E6%8E%A5%E9%A2%84%E6%B5%8B.html" class="sidebar-link">
+			h.264直接预测
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2014-03-17-h.264-fmo.html" class="sidebar-link">
+			h.264 FMO
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2014-05-11-h.264%E5%8F%82%E8%80%83%E5%9B%BE%E5%83%8F%E5%88%97%E8%A1%A8%E3%80%81%E8%A7%A3%E7%A0%81%E5%9B%BE%E5%83%8F%E7%BC%93%E5%AD%98.html" class="sidebar-link">
+			h.264参考图像列表、解码图像缓存
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2014-06-06-h.264-mvp%E6%B1%82%E8%A7%A3%E8%BF%87%E7%A8%8B.html" class="sidebar-link">
+			h.264 mvp求解过程
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2014-06-16-umhexagons%E6%90%9C%E7%B4%A2%E8%BF%87%E7%A8%8B.html" class="sidebar-link">
+			UMHexagonS搜索过程
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2014-07-20-h.264%E5%85%A8%E6%90%9C%E7%B4%A2%E4%BB%A5%E5%8F%8A%E5%BF%AB%E9%80%9F%E5%85%A8%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95.html" class="sidebar-link">
+			h.264全搜索以及快速全搜索算法
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2014-06-18-h.264-%E7%8E%87%E5%A4%B1%E7%9C%9F%E4%BC%98%E5%8C%96.html" class="sidebar-link">
+			h.264 率失真优化
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2014-10-17-epzs%E6%90%9C%E7%B4%A2%E8%BF%87%E7%A8%8B.html" class="sidebar-link">
+			EPZS搜索过程
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2014-12-07-intra-chroma-prediction.html" class="sidebar-link">
+			Intra Chroma Prediction
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2014-12-28-intra-luma-prediction.html" class="sidebar-link">
+			Intra Luma Prediction
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2015-01-13-h.264-transfor.html" class="sidebar-link">
+			H.264 Transform
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2015-02-02-h.264-quantization.html" class="sidebar-link">
+			H.264 Quantization
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2015-04-06-quantization-method.html" class="sidebar-link">
+			Quantization Method
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2015-04-26-h.264-mode-decision.html" class="sidebar-link">
+			h.264 Mode Decision
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2015-05-17-h.264-bi-predictive-motion-searc.html" class="sidebar-link">
+			h.264 Bi-Predictive Motion Search
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2016-02-24-h.264%E8%AF%AD%E6%B3%95%E7%BB%93%E6%9E%84%E5%88%86%E6%9E%90.html" class="sidebar-link">
+			h.264语法结构分析
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2016-02-29-h.264%E5%AE%8F%E5%9D%97%E4%B8%8E%E5%AD%90%E5%AE%8F%E5%9D%97%E7%B1%BB%E5%9E%8B.html" class="sidebar-link">
+			h.264宏块与子宏块类型
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2016-03-05-h.264-scanning-process-for-transform-coefficients.html" class="sidebar-link">
+			h.264 scanning process for transform coefficients
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2016-03-08-cavlc.html" class="sidebar-link">
+			CAVLC
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2016-03-22-cabac.html" class="sidebar-link">
+			CABAC
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2016-03-25-%E7%AE%97%E6%9C%AF%E7%BC%96%E7%A0%81jm%E5%AE%9E%E7%8E%B0.html" class="sidebar-link">
+			算术编码JM实现
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2016-04-27-h.264%E5%B9%B6%E8%A1%8C%E8%A7%A3%E7%A0%81%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90.html" class="sidebar-link">
+			h.264并行解码算法分析
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2016-05-17-h.264-%E5%8E%BB%E5%9D%97%E6%BB%A4%E6%B3%A2.html" class="sidebar-link">
+			h.264 去块滤波
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2016-08-11-h.264%E5%B9%B6%E8%A1%8C%E8%A7%A3%E7%A0%81%E7%AE%97%E6%B3%952d-wave%E5%AE%9E%E7%8E%B0(%E5%9F%BA%E4%BA%8E%E5%A4%9A%E6%A0%B8%E9%9D%9E%E5%85%B1%E4%BA%AB%E5%86%85%E5%AD%98%E7%B3%BB%E7%BB%9F).html" class="sidebar-link">
+			h.264并行解码算法2D-Wave实现（基于多核非共享内存系统）
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2016-09-18-h.264%E5%B9%B6%E8%A1%8C%E8%A7%A3%E7%A0%81%E7%AE%97%E6%B3%952d-wave%E5%AE%9E%E7%8E%B0(%E5%9F%BA%E4%BA%8E%E5%A4%9A%E6%A0%B8%E5%85%B1%E4%BA%AB%E5%86%85%E5%AD%98%E7%B3%BB%E7%BB%9F).html" class="sidebar-link">
+			h.264并行解码算法2D-Wave实现（基于多核共享内存系统）
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2016-09-30-h.264%E5%B9%B6%E8%A1%8C%E8%A7%A3%E7%A0%81%E7%AE%97%E6%B3%953d-wave%E5%AE%9E%E7%8E%B0(%E5%9F%BA%E4%BA%8E%E5%A4%9A%E6%A0%B8%E5%85%B1%E4%BA%AB%E5%86%85%E5%AD%98%E7%B3%BB%E7%BB%9F).html" class="sidebar-link">
+			h.264并行解码算法3D-Wave实现（基于多核共享内存系统）
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2017-04-04-h.264%E5%B9%B6%E8%A1%8C%E7%86%B5%E8%A7%A3%E7%A0%81.html" class="sidebar-link">
+			h.264并行熵解码
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2017-06-15-cabac%E6%80%BB%E7%BB%93%E4%B8%8E%E8%A1%A5%E5%85%85%E8%AE%A8%E8%AE%BA.html" class="sidebar-link">
+			CABAC总结与补充讨论
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2019-01-04-%5Bffmpeg%5D-h264%E5%B9%B6%E8%A1%8C%E8%A7%A3%E7%A0%81.html" class="sidebar-link">
+			ffmpeg h264并行解码
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2019-01-24-%5Bffmpeg%5D-h.264%E8%A7%A3%E7%A0%81%E6%89%80%E7%94%A8%E7%9A%84%E4%B8%BB%E8%A6%81%E7%BC%93%E5%86%B2%E5%8C%BA%E4%BB%8B%E7%BB%8D.html" class="sidebar-link">
+			ffmpeg h.264解码所用的主要缓冲区介绍
+		  </a>
+		</li>
+
+
+</ul>
+
+	  
+    </div>
+  </div>
+</div>
+
+<link rel="stylesheet" href="../icon/iconfont.css">
+<style>
+
+/* body {
+            background: #e4e9f5;
+        } */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            list-style: none;
+            text-decoration: none;
+        }
+
+        section {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font: 900 100px '';
+            color: #ffa21759;
+            background: rgb(34, 37, 39);
+        }
+
+        .shell {
+            position: fixed;
+            width: 60px;
+			left: 0;
+            height: 100%;
+            background: #000000;
+            z-index: 9999;
+            transition: width 0.5s;
+            /* padding-left: 10px; */
+            overflow: hidden;
+        }
+/* 悬停改变宽度 */
+        .shell:hover {
+            width: 300px;
+        }
+
+        .imageBox {
+            position: relative;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+
+        .imageBox img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .shell ul {
+            position: relative;
+            height: 100vh;
+        }
+
+        .shell ul li {
+            position: relative;
+            padding: 5px;
+        }
+
+        .active {
+            background: #e4e9f5;
+            border-top-left-radius: 50px;
+            border-bottom-left-radius: 50px;
+        }
+
+        .active::before {
+            content: "";
+            position: absolute;
+            top: -30px;
+            right: 0;
+            width: 30px;
+            height: 30px;
+            border-bottom-right-radius: 25px;
+            box-shadow: 5px 5px 0 5px #e4e9f5;
+            background: transparent;
+        }
+
+        .active::after {
+            content: "";
+            position: absolute;
+            bottom: -30px;
+            right: 0;
+            width: 30px;
+            height: 30px;
+            border-top-right-radius: 25px;
+            box-shadow: 5px -5px 0 5px #e4e9f5;
+            background: transparent;
+        }
+
+        #shelllogo {
+            margin: 40px 0 100px 0;
+        }
+
+        .shell ul li a {
+            position: relative;
+            display: flex;
+            white-space: nowrap;
+        }
+
+        .icon {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-width: 40px;
+            /* padding-left: 10px; */
+            height: 70px;
+            color: #333;
+            transition: 0.5s;
+            color: rgb(255, 255, 255);
+        }
+
+        .icon i {
+            font-size: 30px;
+            z-index: 999;
+        }
+
+        .text {
+            position: relative;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            font-size: 20px;
+            color: #ffad32c1;
+            padding-left: 15px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: 0.5s;
+        }
+
+        .shell ul li:hover a .icon,
+        .shell ul li:hover a .text {
+            color: #ffa117;
+        }
+
+        .active a .icon::before {
+            content: "";
+            position: absolute;
+            inset: 5px;
+            width: 60px;
+            background: #000000;
+            /* 圆形 */
+            border-radius: 50%;
+            transition: 0.5s;
+            border: 7px solid #ffa117;
+            box-sizing: border-box;
+        }
+</style>
+
+
+<div class="shell">
+	<ul class="nav">
+		<li class="active" id="shelllogo">
+			<a href="#">
+				<div class="icon">
+					<div class="imageBox">
+						<img src="../icon/cat.jpg" alt="">
+					</div>
+				</div>
+				<div class="text">前端小窝</div>
+			</a>
+		</li>
+		<li>
+			<a href="#home">
+				<div class="icon">
+					<i class="iconfont icon-cangku"></i>
+				</div>
+				<div class="text">Home</div>
+			</a>
+		</li>
+		<li>
+			<a href="#theme">
+				<div class="icon">
+					<!-- 调色板 -->
+					<i class="iconfont icon-tiaoseban"></i>
+				</div>
+				<div class="text">Theme</div>
+			</a>
+		</li>
+		<li>
+			<a href="#wallet">
+				<div class="icon">
+					<!-- 钱包 -->
+					<i class="iconfont icon-qianbao"></i>
+				</div>
+				<div class="text">Wallet</div>
+			</a>
+		</li>
+		<li>
+			<a href="#picture">
+				<div class="icon">
+					<!-- 图片 -->
+					<i class="iconfont icon-tupian"></i>
+				</div>
+				<div class="text">picture</div>
+			</a>
+		</li>
+		<li>
+			<a href="#code">
+				<div class="icon">
+					<!-- 二维码 -->
+					<i class="iconfont icon-erweima"></i>
+				</div>
+				<div class="text">QR code</div>
+			</a>
+		</li>
+		<li>
+			<a href="#authentication">
+				<div class="icon">
+					<!-- 盾牌保险认证 -->
+					<i class="iconfont icon-dunpaibaoxianrenzheng"></i>
+				</div>
+				<div class="text">auth</div>
+			</a>
+		</li>
+		<li>
+			<a href="#me">
+				<div class="icon">
+					<div class="imageBox">
+						<img src="./cat.jpg" alt="">
+					</div>
+				</div>
+				<div class="text">ME</div>
+			</a>
+		</li>
+	</ul>
+</div>
+
+<div class="content book-zh-cn with-sidebar 2014-02-27-指数哥伦布编码-guide">
+  <h1 id="指数哥伦布编码"><a href="#指数哥伦布编码" class="headerlink" title="指数哥伦布编码"></a>指数哥伦布编码</h1><p><strong>哥伦布编码前言</strong><br>在计算机中，一般数字的编码都为二进制，但是由于以相等长度来记录不同数字，因此会出现很多的冗余信息，如下：</p>
+<p>如数字1，原本只需要1个bit就能表示的数据，如今需要8个bit来表示，那么其余7个bit就可以看做是冗余数据，<br>在网络传输时，如果以原本等长的编码方式来传输数据，则会出现很大的冗余量，加重网络负担<br>但是如果只用有效字节来传输上述码流，则会是：10110011111111101，这样根本不能分离出原本的数据</p>
+<p>哥伦布编码则是作为一种压缩编码算法，能很有效地对原本的数据进行压缩，并且能很容易地把编码后的码流分离成码字。</p>
+<p><strong>哥伦布编码思想</strong><br>一个码字的信息量，称之为熵，二进制上可用log2[n]来表示，也就是上面表格的有效字节，但是如果只是把有效码字串联起来，得到的只是一串无用的码流，因为这串码流中并没有描述单一码字的信息量，也就是无法对码流进行分离<br>哥伦布编码就采用了加0前缀，用于表达码字的信息量，在得到m个0前缀后，就能知道该码字在码流中的长度，并从码流中把码字分离出来</p>
+<p><strong>哥伦布编码概念</strong><br>指数哥伦布（Exp-Golomb）编码是一种在音视频编码标准中经常采用的可变长编码方法，它是使用一定规则构造码字的变长编码模式。它将所有数字分为等大小不同的组，符号值较小的组分配的码长较短，同一组内符号长基本相等，并且组的大小呈指数增长。<br>指数哥伦布码的比特串分为“前缀”（prefix）和“后缀”（suffix）两个部分。它的逻辑结构为：<br><strong>[Mzero][1][INFO]</strong><br>编码后码长为2M + 1 + k，M为前缀长度，1为中间的1长度，M+k为后缀长度</p>
+<p><strong>哥伦布编码流程</strong><br>zeroPrefixLength用于存储0前缀个数<br>codeNum是即将被编码的码字<br>k是指数哥伦布编码的指数<br>codeLen用于存储编码后长度<br>INFO为哥伦布编码后缀</p>
+<img alt="" src="img/2014-02-27-指数哥伦布编码/271504015208189.jpg">
+
+<p><strong>编码时</strong><br>M &#x3D; zeroPrefixLength &#x3D; floor(log2[codeNum + 2^k])<br>INFO &#x3D; codeNum + 1 - 2^M</p>
+<p>可以对编码过程进行如下分析：<br>首先求出码字的信息量，为N，<br>由于信息量肯定大于1，为减小码流，对其减一得 M &#x3D; N - 1(也就是上述的求下整)<br>然后也需要尽量对后缀进行压缩，因此利用前面所得的M进行缩减得，codeNum - 2^M<br>最后考虑到0这个数字的存在，为了使INFO非负，对其+1</p>
+<p><strong>解码时</strong><br>codeNum &#x3D; 2^M + INFO - 1<br>codeLen &#x3D; 2M + 1 + k</p>
+<p><strong>K阶指数哥伦布码表</strong></p>
+<p>一般来说，根据码字出现的概率调整哥伦布编码的阶数K，<br>如果是码字0出现的概率较大，那么应该用K &#x3D; 0，即0阶指数哥伦布编码<br>如果码字0与1出现的概率都比较大，那么应该用K &#x3D; 1，以此类推<br>在H.264中用的是K &#x3D; 0</p>
+<p>JM代码如下<br>voidue_linfo(intue,intdummy,int<em>len,int</em>info)<br>{inti,nn;</p>
+<p>  nn&#x3D;(ue+1)&#x2F;2;for(i&#x3D;0; i &lt;16&amp;&amp; nn !&#x3D;0; i++)<br>  {<br>    nn&#x2F;&#x3D;2;<br>  }<em>len&#x3D;2</em>i +1;&#x2F;&#x2F;哥伦布码码字的长度*info&#x3D;ue+1-(int)pow(2,i);&#x2F;&#x2F;码字的内容}</p>
+
+  <div class="guide-links">
+    
+    
+  </div>
+
+    <div class="footer">
+        <p>
+          <a target="_blank" rel="noopener" href="https://changkun.de">欧长坤</a> &copy; 2016-2025 版权所有，
+          采用<a rel="license noopener" target="_blank" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议许可</a>，代码使用 <a href="https://opensource.org/licenses/MIT" target="_blank">MIT</a> 协议开源。</a>
+        </p>
+        <p>
+            如果你认为本书对你起到了帮助，可以<a href="/modern-cpp/about/donate.html">资助作者</a>。
+        </p>
+      </div>
+
+
+
+</div>
+
+	</div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/smooth-scroll/10.2.1/js/smooth-scroll.min.js"></script>
+
+    <!-- main custom script for sidebars, version selects etc. -->
+    <script src="https://cdn.jsdelivr.net/npm/css.escape@1.5.1/css.escape.min.js"></script>
+    <script src="/modern-cpp/js/common.js"></script>
+
+    <!-- fastclick -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      FastClick.attach(document.body)
+    }, false)
+    </script>
+  </body>
+</html>

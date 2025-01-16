@@ -1,0 +1,678 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>h.264宏块与子宏块类型 现代 C++ 教程: 高速上手 C++ 11/14/17/20 - Modern C++ Tutorial: C++ 11/14/17/20 On the Fly</title>
+    <meta charset="utf-8">
+    <meta name="description" content="Modern C++ Tutorial | C++ 11/14/17/20 On the Fly | 现代 C++ 教程 | 高速上手 C++11/14/17/20">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="shortcut icon" type="image/x-icon" href="/modern-cpp/assets/cover-2nd.png">
+    <meta name="msapplication-TileColor" content="#7e2d36">
+    <meta name="theme-color" content="#7e2d36">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-80889616-2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-80889616-2');
+    </script>
+
+    <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600|Roboto Mono' rel='stylesheet' type='text/css'>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- main page styles -->
+    
+<link rel="stylesheet" href="/modern-cpp/css/page.css">
+
+
+    <!-- this needs to be loaded before guide's inline scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script>window.PAGE_TYPE = "book-zh-cn"</script>
+    <script async src="//changkun.de/urlstat/client.js"></script>
+  <meta name="generator" content="Hexo 7.3.0"></head>
+  <body class="docs">
+	<!-- body开始 -->
+
+		<!-- mobile-bar 2-->
+      <div id="mobile-bar" data-bg-text="现代 C++ 教程" >
+        <a class="menu-button"></a>
+        <a class="logo" href="/modern-cpp/"></a>
+      </div>
+
+	<!-- include header -->
+    <div id="header">
+  <a id="logo" href="/">
+      <img src="/modern-cpp/assets/cover-2nd-logo.png">
+      <span>教程：高速上手</span>
+  </a>
+  <ul id="nav">
+      <li class="nav-dropdown-container resource">
+  <a class="nav-link">资源</a><span class="arrow"></span>
+  <ul class="nav-dropdown">
+    <li><ul>
+      <li><a class="nav-link" href="/modern-cpp/zh-cn/00-preface/" >正文</a></li>
+      <!-- TODO -->
+      <!-- <li><a class="nav-link" href="/modern-cpp/code/1/" >代码</a></li>
+      <li><a class="nav-link" href="/modern-cpp/exercises/1/" >习题</a></li>
+      <li><a class="nav-link" href="/modern-cpp/answers/1/" >答案</a></li> -->
+    </ul></li>
+  </ul>
+</li>
+
+<li class="nav-dropdown-container about">
+  <a class="nav-link">关于</a><span class="arrow"></span>
+  <ul class="nav-dropdown">
+      <li><ul>
+      <li><a class="nav-link" href="/modern-cpp/about/donate.html" >资助</a></li>
+      <li><a class="nav-link" href="/modern-cpp/about/copyright.html" >版权声明</a></li>
+      <li><a class="nav-link" href="/modern-cpp/about/ack.html" >致谢</a></li>
+      </ul></li>
+  </ul>
+</li>
+
+
+<li class="nav-dropdown-container about">
+  <a class="nav-link" target="_blank" rel="noopener" href="https://github.com/rstg00po54/modern-cpp-tutorial">GitHub</a>
+</li>
+
+
+  </ul>
+</div>
+
+    
+      <div id="main" class="fix-sidebar">
+		<!-- body 111 -->
+        
+
+
+
+  <div class="sidebar">
+  <div class="sidebar-inner">
+    <ul class="main-menu">
+        <li class="nav-dropdown-container resource">
+  <a class="nav-link">资源</a><span class="arrow"></span>
+  <ul class="nav-dropdown">
+    <li><ul>
+      <li><a class="nav-link" href="/modern-cpp/zh-cn/00-preface/" >正文</a></li>
+      <!-- TODO -->
+      <!-- <li><a class="nav-link" href="/modern-cpp/code/1/" >代码</a></li>
+      <li><a class="nav-link" href="/modern-cpp/exercises/1/" >习题</a></li>
+      <li><a class="nav-link" href="/modern-cpp/answers/1/" >答案</a></li> -->
+    </ul></li>
+  </ul>
+</li>
+
+<li class="nav-dropdown-container about">
+  <a class="nav-link">关于</a><span class="arrow"></span>
+  <ul class="nav-dropdown">
+      <li><ul>
+      <li><a class="nav-link" href="/modern-cpp/about/donate.html" >资助</a></li>
+      <li><a class="nav-link" href="/modern-cpp/about/copyright.html" >版权声明</a></li>
+      <li><a class="nav-link" href="/modern-cpp/about/ack.html" >致谢</a></li>
+      </ul></li>
+  </ul>
+</li>
+
+
+<li class="nav-dropdown-container about">
+  <a class="nav-link" target="_blank" rel="noopener" href="https://github.com/rstg00po54/modern-cpp-tutorial">GitHub</a>
+</li>
+
+
+    </ul>
+    <div class="list">
+      <h2>
+		
+          正文
+
+      </h2>
+      <ul class="menu-root">
+	  <!-- 引入外部的 JS 文件 -->
+  <!-- <script src="/modern-cpp/js/menu.js"></script> -->
+
+
+	<!-- 传递数据到 JavaScript -->
+	
+	
+	
+
+	
+		<li>
+		  <a href="/H264-BKY/2014-02-15-h.264%E7%9A%84poc%E8%AE%A1%E7%AE%97.html" class="sidebar-link">
+			h.264的POC计算
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2014-02-27-%E6%8C%87%E6%95%B0%E5%93%A5%E4%BC%A6%E5%B8%83%E7%BC%96%E7%A0%81.html" class="sidebar-link">
+			指数哥伦布编码
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2014-03-15-h.264%E5%8A%A0%E6%9D%83%E9%A2%84%E6%B5%8B.html" class="sidebar-link">
+			h.264加权预测
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2014-03-11-h.264%E7%A0%81%E7%8E%87%E6%8E%A7%E5%88%B6.html" class="sidebar-link">
+			h.264码率控制
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2014-04-23-h.264%E7%9B%B4%E6%8E%A5%E9%A2%84%E6%B5%8B.html" class="sidebar-link">
+			h.264直接预测
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2014-03-17-h.264-fmo.html" class="sidebar-link">
+			h.264 FMO
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2014-05-11-h.264%E5%8F%82%E8%80%83%E5%9B%BE%E5%83%8F%E5%88%97%E8%A1%A8%E3%80%81%E8%A7%A3%E7%A0%81%E5%9B%BE%E5%83%8F%E7%BC%93%E5%AD%98.html" class="sidebar-link">
+			h.264参考图像列表、解码图像缓存
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2014-06-06-h.264-mvp%E6%B1%82%E8%A7%A3%E8%BF%87%E7%A8%8B.html" class="sidebar-link">
+			h.264 mvp求解过程
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2014-06-16-umhexagons%E6%90%9C%E7%B4%A2%E8%BF%87%E7%A8%8B.html" class="sidebar-link">
+			UMHexagonS搜索过程
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2014-07-20-h.264%E5%85%A8%E6%90%9C%E7%B4%A2%E4%BB%A5%E5%8F%8A%E5%BF%AB%E9%80%9F%E5%85%A8%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95.html" class="sidebar-link">
+			h.264全搜索以及快速全搜索算法
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2014-06-18-h.264-%E7%8E%87%E5%A4%B1%E7%9C%9F%E4%BC%98%E5%8C%96.html" class="sidebar-link">
+			h.264 率失真优化
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2014-10-17-epzs%E6%90%9C%E7%B4%A2%E8%BF%87%E7%A8%8B.html" class="sidebar-link">
+			EPZS搜索过程
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2014-12-07-intra-chroma-prediction.html" class="sidebar-link">
+			Intra Chroma Prediction
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2014-12-28-intra-luma-prediction.html" class="sidebar-link">
+			Intra Luma Prediction
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2015-01-13-h.264-transfor.html" class="sidebar-link">
+			H.264 Transform
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2015-02-02-h.264-quantization.html" class="sidebar-link">
+			H.264 Quantization
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2015-04-06-quantization-method.html" class="sidebar-link">
+			Quantization Method
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2015-04-26-h.264-mode-decision.html" class="sidebar-link">
+			h.264 Mode Decision
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2015-05-17-h.264-bi-predictive-motion-searc.html" class="sidebar-link">
+			h.264 Bi-Predictive Motion Search
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2016-02-24-h.264%E8%AF%AD%E6%B3%95%E7%BB%93%E6%9E%84%E5%88%86%E6%9E%90.html" class="sidebar-link">
+			h.264语法结构分析
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2016-02-29-h.264%E5%AE%8F%E5%9D%97%E4%B8%8E%E5%AD%90%E5%AE%8F%E5%9D%97%E7%B1%BB%E5%9E%8B.html" class="sidebar-link current">
+			h.264宏块与子宏块类型
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2016-03-05-h.264-scanning-process-for-transform-coefficients.html" class="sidebar-link">
+			h.264 scanning process for transform coefficients
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2016-03-08-cavlc.html" class="sidebar-link">
+			CAVLC
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2016-03-22-cabac.html" class="sidebar-link">
+			CABAC
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2016-03-25-%E7%AE%97%E6%9C%AF%E7%BC%96%E7%A0%81jm%E5%AE%9E%E7%8E%B0.html" class="sidebar-link">
+			算术编码JM实现
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2016-04-27-h.264%E5%B9%B6%E8%A1%8C%E8%A7%A3%E7%A0%81%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90.html" class="sidebar-link">
+			h.264并行解码算法分析
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2016-05-17-h.264-%E5%8E%BB%E5%9D%97%E6%BB%A4%E6%B3%A2.html" class="sidebar-link">
+			h.264 去块滤波
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2016-08-11-h.264%E5%B9%B6%E8%A1%8C%E8%A7%A3%E7%A0%81%E7%AE%97%E6%B3%952d-wave%E5%AE%9E%E7%8E%B0(%E5%9F%BA%E4%BA%8E%E5%A4%9A%E6%A0%B8%E9%9D%9E%E5%85%B1%E4%BA%AB%E5%86%85%E5%AD%98%E7%B3%BB%E7%BB%9F).html" class="sidebar-link">
+			h.264并行解码算法2D-Wave实现（基于多核非共享内存系统）
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2016-09-18-h.264%E5%B9%B6%E8%A1%8C%E8%A7%A3%E7%A0%81%E7%AE%97%E6%B3%952d-wave%E5%AE%9E%E7%8E%B0(%E5%9F%BA%E4%BA%8E%E5%A4%9A%E6%A0%B8%E5%85%B1%E4%BA%AB%E5%86%85%E5%AD%98%E7%B3%BB%E7%BB%9F).html" class="sidebar-link">
+			h.264并行解码算法2D-Wave实现（基于多核共享内存系统）
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2016-09-30-h.264%E5%B9%B6%E8%A1%8C%E8%A7%A3%E7%A0%81%E7%AE%97%E6%B3%953d-wave%E5%AE%9E%E7%8E%B0(%E5%9F%BA%E4%BA%8E%E5%A4%9A%E6%A0%B8%E5%85%B1%E4%BA%AB%E5%86%85%E5%AD%98%E7%B3%BB%E7%BB%9F).html" class="sidebar-link">
+			h.264并行解码算法3D-Wave实现（基于多核共享内存系统）
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2017-04-04-h.264%E5%B9%B6%E8%A1%8C%E7%86%B5%E8%A7%A3%E7%A0%81.html" class="sidebar-link">
+			h.264并行熵解码
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2017-06-15-cabac%E6%80%BB%E7%BB%93%E4%B8%8E%E8%A1%A5%E5%85%85%E8%AE%A8%E8%AE%BA.html" class="sidebar-link">
+			CABAC总结与补充讨论
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2019-01-04-%5Bffmpeg%5D-h264%E5%B9%B6%E8%A1%8C%E8%A7%A3%E7%A0%81.html" class="sidebar-link">
+			ffmpeg h264并行解码
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2019-01-24-%5Bffmpeg%5D-h.264%E8%A7%A3%E7%A0%81%E6%89%80%E7%94%A8%E7%9A%84%E4%B8%BB%E8%A6%81%E7%BC%93%E5%86%B2%E5%8C%BA%E4%BB%8B%E7%BB%8D.html" class="sidebar-link">
+			ffmpeg h.264解码所用的主要缓冲区介绍
+		  </a>
+		</li>
+
+
+</ul>
+
+	  
+    </div>
+  </div>
+</div>
+
+<link rel="stylesheet" href="../icon/iconfont.css">
+<style>
+
+/* body {
+            background: #e4e9f5;
+        } */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            list-style: none;
+            text-decoration: none;
+        }
+
+        section {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font: 900 100px '';
+            color: #ffa21759;
+            background: rgb(34, 37, 39);
+        }
+
+        .shell {
+            position: fixed;
+            width: 60px;
+			left: 0;
+            height: 100%;
+            background: #000000;
+            z-index: 9999;
+            transition: width 0.5s;
+            /* padding-left: 10px; */
+            overflow: hidden;
+        }
+/* 悬停改变宽度 */
+        .shell:hover {
+            width: 300px;
+        }
+
+        .imageBox {
+            position: relative;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+
+        .imageBox img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .shell ul {
+            position: relative;
+            height: 100vh;
+        }
+
+        .shell ul li {
+            position: relative;
+            padding: 5px;
+        }
+
+        .active {
+            background: #e4e9f5;
+            border-top-left-radius: 50px;
+            border-bottom-left-radius: 50px;
+        }
+
+        .active::before {
+            content: "";
+            position: absolute;
+            top: -30px;
+            right: 0;
+            width: 30px;
+            height: 30px;
+            border-bottom-right-radius: 25px;
+            box-shadow: 5px 5px 0 5px #e4e9f5;
+            background: transparent;
+        }
+
+        .active::after {
+            content: "";
+            position: absolute;
+            bottom: -30px;
+            right: 0;
+            width: 30px;
+            height: 30px;
+            border-top-right-radius: 25px;
+            box-shadow: 5px -5px 0 5px #e4e9f5;
+            background: transparent;
+        }
+
+        #shelllogo {
+            margin: 40px 0 100px 0;
+        }
+
+        .shell ul li a {
+            position: relative;
+            display: flex;
+            white-space: nowrap;
+        }
+
+        .icon {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-width: 40px;
+            /* padding-left: 10px; */
+            height: 70px;
+            color: #333;
+            transition: 0.5s;
+            color: rgb(255, 255, 255);
+        }
+
+        .icon i {
+            font-size: 30px;
+            z-index: 999;
+        }
+
+        .text {
+            position: relative;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            font-size: 20px;
+            color: #ffad32c1;
+            padding-left: 15px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: 0.5s;
+        }
+
+        .shell ul li:hover a .icon,
+        .shell ul li:hover a .text {
+            color: #ffa117;
+        }
+
+        .active a .icon::before {
+            content: "";
+            position: absolute;
+            inset: 5px;
+            width: 60px;
+            background: #000000;
+            /* 圆形 */
+            border-radius: 50%;
+            transition: 0.5s;
+            border: 7px solid #ffa117;
+            box-sizing: border-box;
+        }
+</style>
+
+
+<div class="shell">
+	<ul class="nav">
+		<li class="active" id="shelllogo">
+			<a href="#">
+				<div class="icon">
+					<div class="imageBox">
+						<img src="../icon/cat.jpg" alt="">
+					</div>
+				</div>
+				<div class="text">前端小窝</div>
+			</a>
+		</li>
+		<li>
+			<a href="#home">
+				<div class="icon">
+					<i class="iconfont icon-cangku"></i>
+				</div>
+				<div class="text">Home</div>
+			</a>
+		</li>
+		<li>
+			<a href="#theme">
+				<div class="icon">
+					<!-- 调色板 -->
+					<i class="iconfont icon-tiaoseban"></i>
+				</div>
+				<div class="text">Theme</div>
+			</a>
+		</li>
+		<li>
+			<a href="#wallet">
+				<div class="icon">
+					<!-- 钱包 -->
+					<i class="iconfont icon-qianbao"></i>
+				</div>
+				<div class="text">Wallet</div>
+			</a>
+		</li>
+		<li>
+			<a href="#picture">
+				<div class="icon">
+					<!-- 图片 -->
+					<i class="iconfont icon-tupian"></i>
+				</div>
+				<div class="text">picture</div>
+			</a>
+		</li>
+		<li>
+			<a href="#code">
+				<div class="icon">
+					<!-- 二维码 -->
+					<i class="iconfont icon-erweima"></i>
+				</div>
+				<div class="text">QR code</div>
+			</a>
+		</li>
+		<li>
+			<a href="#authentication">
+				<div class="icon">
+					<!-- 盾牌保险认证 -->
+					<i class="iconfont icon-dunpaibaoxianrenzheng"></i>
+				</div>
+				<div class="text">auth</div>
+			</a>
+		</li>
+		<li>
+			<a href="#me">
+				<div class="icon">
+					<div class="imageBox">
+						<img src="./cat.jpg" alt="">
+					</div>
+				</div>
+				<div class="text">ME</div>
+			</a>
+		</li>
+	</ul>
+</div>
+
+<div class="content book-zh-cn with-sidebar 2016-02-29-h.264宏块与子宏块类型-guide">
+  <h1 id="宏块类型mb-type"><a href="#宏块类型mb-type" class="headerlink" title="宏块类型mb_type"></a>宏块类型mb_type</h1><p>宏块类型表示的是宏块不同的分割和编码方式，在h.264的语法结构中，宏块类型在宏块层（macroblock_layer）中用mb_type表示（请参考<a target="_blank" rel="noopener" href="http://www.cnblogs.com/TaigaCon/p/5215448.html">h.264语法结构分析</a>中的macroblock_layer）。而mb_type是与当前宏块所在的slice相关的，相同数值的mb_type在不同类型的slice中表示的类型会不一样。</p>
+<h4 id="I-slice的宏块类型"><a href="#I-slice的宏块类型" class="headerlink" title="I slice的宏块类型"></a>I slice的宏块类型</h4><p>I slice中的宏块类型只能是I宏块类型（I开头），下标列出了所有的I宏块类型</p>
+<p><strong>mb_type</strong>宏块类型的数值，I slice共有26个数值<br><strong>name</strong>宏块类型的名称，其中</p>
+<ul>
+<li>名称开头的I表示I宏块类型</li>
+<li>I_NxN表示的是I_8x8或者I_4x4</li>
+<li>I_16x16_a_b_c中的I_16x16代表以intra_16x16为预测方式</li>
+<li>I_16x16_a_b_c中的a代表intra_16x16当中的4种模式</li>
+<li>I_16x16_a_b_c中的b代表使用intra_16x16预测方式时的Chroma CBP</li>
+<li>I_16x16_a_b_c中的c代表使用intra_16x16预测方式时的Luma CBP<br><strong>transform_size_8x8_flag</strong>1表示采用8x8的块进行熵编码，0表示采用4x4块进行熵编码，na的情况同0<br>**MbPartPredMode(mb_type, 0)**表明当前宏块类型所采用的Intra预测方式，关于Intra预测方式参考<a target="_blank" rel="noopener" href="http://www.cnblogs.com/TaigaCon/p/4190806.html">Intra Luma Prediction</a><br><strong>Intra16x16PredMode</strong>如果当前宏块类型采用的预测方式为Intra_16x16，那么该字段有效，它用0<del>3表示了Intra_16x16中的四种模式，请参考<a target="_blank" rel="noopener" href="http://www.cnblogs.com/TaigaCon/p/4190806.html">Intra Luma Prediction</a>中的Intra16x16 部分<br><strong>CodedBlockPatternChroma</strong>如果当前宏块类型采用的预测方式为Intra_16x16，那么该字段有效，它用0</del>2表示了Chroma宏块中的CBP，请参考<a target="_blank" rel="noopener" href="http://www.cnblogs.com/TaigaCon/p/5215448.html">h.264语法结构分析</a>中的coded_block_pattern<br><strong>CodedBlockPatternLuma</strong>如果当前宏块类型采用的预测方式为Intra_16x16，那么该字段有效，它表示了Luma宏块中的CBP。从<a target="_blank" rel="noopener" href="http://www.cnblogs.com/TaigaCon/p/5215448.html">h.264语法结构分析</a>的residual部分，我们知道当预测模式为Intra_16x16时，宏块需要分开AC level与DC level进行熵编码。0：表示宏块内的16个4x4块中的AC level全部都为0，15：宏块内的16个4x4块中至少有一个块的AC level不全为0</li>
+</ul>
+<p>从中能看出mb_type表中用较大的篇幅表示了Intra_16x16的情况，当预测方式为Intra_16x16时，mb_type还表示了Intra_16x16的模式，Chroma CBP以及Luma CBP，而Intra_8x8与Intra_4x4的模式与CBP是需要单独用语法元素来进行表达的。请参考<a target="_blank" rel="noopener" href="http://www.cnblogs.com/TaigaCon/p/5215448.html">h.264语法结构分析</a>macroblock_layer以及mb_pred部分。</p>
+<h4 id="P-slice的宏块类型"><a href="#P-slice的宏块类型" class="headerlink" title="P slice的宏块类型"></a>P slice的宏块类型</h4><p>P slice中包含了I宏块类型（I开头）与P宏块类型（P开头）。I宏块类型mb_type数值为5<del>30，见上面I宏块类型的表格，其序号为mb_type-5。P宏块类型为0</del>4，见下表</p>
+<p><strong>mb_type</strong>宏块类型的数值，P slice共有31个数值<br><strong>name</strong>宏块类型的名称，其中</p>
+<ul>
+<li>开头的P表示P宏块类型</li>
+<li>末尾的mxn代表宏块的分割方式</li>
+<li>P_L0_16x16表示宏块的分割方式为16x16，也就是不进行分割，那么它只有一个前向参考图像L0</li>
+<li>P_L0_L0_16x8表示宏块的的分割方式为16x8，也就是宏块被分成俩个16x8的块，每个16x8的块都有一个前向参考图像L0，即两个L0，按顺序写成P_L0_L0_16x8</li>
+<li>P_L0_L0_16x8表示宏块的的分割方式为8x16，也就是宏块被分成俩个8x16的块，每个8x16的块都有一个前向参考图像L0，即两个L0，按顺序写成P_L0_L0_8x16</li>
+<li>P_8x8表示宏块分成4个8x8的子宏块，对每个子宏块会采用sub_mb_type来表明该子宏块的类型，下面一节会进行分析</li>
+<li>P_8x8ref0表示同上，不过该宏块的4个子宏块采用的参考图像都是ref0，在sub_mb_pred（请参考<a target="_blank" rel="noopener" href="http://www.cnblogs.com/TaigaCon/p/5215448.html">h.264语法结构分析</a>中的sub_mb_pred部分）语法结构中不会包含他们的refIdx</li>
+<li>P_Skip表示该宏块在码流中没有更多的数据了。请注意他的mb_type为inferred，不过它并不在mb_type中表示，而是在slice_data处就已经用skip_run或者skip_flag来表示，请参考<a target="_blank" rel="noopener" href="http://www.cnblogs.com/TaigaCon/p/5215448.html">h.264语法结构分析</a>中的slice_data部分<br>**NumMbPart(mb_type)**宏块被分割成多少部分<br>**MbPartPredMode(mb_type,0)**宏块分割后的第一部分的预测模式为前向预测，还是后向预测，还是双向预测，由于是P slice，这里只能是前向预测Pred_L0<br>**MbPartPredMode(mb_type,1)**宏块分割后的第二部分的预测模式为前向预测，还是后向预测，还是双向预测，由于是P slice，这里只能是前向预测Pred_L0<br>**MbPartWidth(mb_type)**分割后的块的宽度<br>**MbPartHeight(mb_type)**分割后的块的高度</li>
+</ul>
+<h4 id="B-slice的宏块类型"><a href="#B-slice的宏块类型" class="headerlink" title="B slice的宏块类型"></a>B slice的宏块类型</h4><p>B slice中包含了I宏块类型（I开头）与B宏块类型（B开头）。I宏块类型mb_type数值为23<del>48，见上面I宏块类型的表格，其序号为mb_type-23。P宏块类型为0</del>22，见下表</p>
+<p><strong>mb_type</strong>宏块类型的数值，P slice共有49个数值<br><strong>name</strong>宏块类型的名称，其中</p>
+<ul>
+<li>开头的B代表B宏块类型</li>
+<li>末尾的mxn代表宏块的分割方式</li>
+<li>B_Direct_16x16  整个宏块都采用Direct的方式进行预测（请参考<a target="_blank" rel="noopener" href="http://www.cnblogs.com/TaigaCon/p/3677540.html">h.264直接预测</a>），不需要编码mvd以及refIdx，在解码时重建宏块所用的mv与refIdx靠直接预测进行推导，只需要编码residual（请参考<a target="_blank" rel="noopener" href="http://www.cnblogs.com/TaigaCon/p/5215448.html">h.264语法结构分析</a>）</li>
+<li>B_X0_mxn  当宏块的分割方式为16x16时，意味着宏块不需要进行分割，因此只需要用一个字段（L0:前向预测；L1:后向预测；Bi：双向预测）来表示当前宏块的预测类型</li>
+<li>B_X0_X1_mxn  当前宏块的分割方式为16x8或者8x16时，意味着宏块会被分割成两部分，因此需要用两个字段来分别表示这两个部分的预测类型（如L0_Bi表示第一部分为前向预测，第二部分为双向预测）</li>
+<li>B_8x8表示宏块分成4个8x8的子宏块，对每个子宏块会采用sub_mb_type来表明该子宏块的类型，下面一节会进行分析</li>
+<li>B_Skip表示该宏块在码流中没有更多的数据了。请注意他的mb_type为inferred，不过它并不在mb_type中表示，而是在slice_data处就已经用skip_run或者skip_flag来表示，请参考<a target="_blank" rel="noopener" href="http://www.cnblogs.com/TaigaCon/p/5215448.html">h.264语法结构分析</a>中的slice_data部分<br>**NumMbPart(mb_type)**宏块被分割成多少部分<br>**MbPartPredMode(mb_type,0)**宏块分割后的第一部分的预测模式为前向预测，还是后向预测，还是双向预测<br>**MbPartPredMode(mb_type,1)**宏块分割后的第二部分的预测模式为前向预测，还是后向预测，还是双向预测<br>**MbPartWidth(mb_type)**分割后的块的宽度<br>**MbPartHeight(mb_type)**分割后的块的高度</li>
+</ul>
+<h1 id="子宏块类型sub-mb-type"><a href="#子宏块类型sub-mb-type" class="headerlink" title="子宏块类型sub_mb_type"></a>子宏块类型sub_mb_type</h1><p>子宏块即8x8块，一个16x16的宏块分为4个子宏块，每个子宏块类型表示都是一个8x8块的分割、预测方式，因此，采用子宏块预测的宏块其语法结构中会有4个子宏块类型。在h.264码流结构中，子宏块类型在sub_mb_pred中用sub_mb_type表示（请参考<a target="_blank" rel="noopener" href="http://www.cnblogs.com/TaigaCon/p/5215448.html">h.264语法结构分析</a>中的sub_mb_pred）。sub_mb_type也是与slice类型相关的，在I slice中是没有子宏块类型的，因为I slice中只包含intra预测，而子宏块类型是inter预测中的部分。另外，数值相同的sub_mb_type在P slice与B slice中表示的是不同的类型。</p>
+<h4 id="P-slice的子宏块类型"><a href="#P-slice的子宏块类型" class="headerlink" title="P slice的子宏块类型"></a>P slice的子宏块类型</h4><p>P slice的子宏块类型只包含了以下P子宏块类型（P开头），数值为0~3，见下表</p>
+<p><strong>sub_mb_type</strong>子宏块类型的值<br><strong>mbPartIdx</strong>由于一个宏块可以分割成4个子宏块，因此用这个符号来表示这四个子宏块<br><strong>name</strong>子宏块类型的名称，其中</p>
+<ul>
+<li>P表示为P子宏块类型</li>
+<li>P_L0_mxn中的L0表示子宏块的预测方式</li>
+<li>P_L0_mxn中的mxn表示子宏块的分割方式<br><strong>NumSubMbPart</strong>子宏块会被分割成多少部分<br><strong>SubMbPredMode</strong>子宏块预测模式，由于是P slice，因此只能是前向预测Pred_L0<br><strong>SubMbPartWidth</strong>分割后的块的宽度<br><strong>SubMbPartHeight</strong>分割后的块的高度</li>
+</ul>
+<h4 id="B-slice的子宏块类型"><a href="#B-slice的子宏块类型" class="headerlink" title="B slice的子宏块类型"></a>B slice的子宏块类型</h4><p>B slice的子宏块类型只包含了以下B子宏块类型（B开头），数值为0~12，见下表</p>
+<p><strong>sub_mb_type</strong>子宏块类型的值<br><strong>mbPartIdx</strong>由于一个宏块可以分割成4个子宏块，因此用这个符号来表示这四个子宏块<br><strong>name</strong>子宏块类型的名称，其中</p>
+<ul>
+<li>B表示为B子宏块类型</li>
+<li>B_X0_mxn中的X0表示子宏块的预测模式，由于参考图像索引refIdx是以8x8块为单位的，因此一个子宏块中的所有子块共用参考图像索引（请参考<a target="_blank" rel="noopener" href="http://www.cnblogs.com/TaigaCon/p/5215448.html">h.264语法结构分析</a>中的sub_mb_pred部分），也就是说整个子宏块的预测模式只能是是前向预测Pred_L0、后向预测Pred_L1、双向预测BiPred中的某一种。</li>
+<li>B_X0_mxn中的mxn表示子宏块的分割方式<br><strong>NumSubMbPart</strong>子宏块会被分割成多少部分<br><strong>SubMbPredMode</strong>子宏块预测模式，由于是B slice，因此预测模式相比P slice的前向预测Pred_L0增加了后向预测Pred_L1以及双向预测BiPred中。<br><strong>SubMbPartWidth</strong>分割后的块的宽度<br><strong>SubMbPartHeight</strong>分割后的块的高度</li>
+</ul>
+
+  <div class="guide-links">
+    
+    
+  </div>
+
+    <div class="footer">
+        <p>
+          <a target="_blank" rel="noopener" href="https://changkun.de">欧长坤</a> &copy; 2016-2025 版权所有，
+          采用<a rel="license noopener" target="_blank" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议许可</a>，代码使用 <a href="https://opensource.org/licenses/MIT" target="_blank">MIT</a> 协议开源。</a>
+        </p>
+        <p>
+            如果你认为本书对你起到了帮助，可以<a href="/modern-cpp/about/donate.html">资助作者</a>。
+        </p>
+      </div>
+
+
+
+</div>
+
+	</div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/smooth-scroll/10.2.1/js/smooth-scroll.min.js"></script>
+
+    <!-- main custom script for sidebars, version selects etc. -->
+    <script src="https://cdn.jsdelivr.net/npm/css.escape@1.5.1/css.escape.min.js"></script>
+    <script src="/modern-cpp/js/common.js"></script>
+
+    <!-- fastclick -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      FastClick.attach(document.body)
+    }, false)
+    </script>
+  </body>
+</html>

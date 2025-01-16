@@ -1,0 +1,997 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Quantization Method 现代 C++ 教程: 高速上手 C++ 11/14/17/20 - Modern C++ Tutorial: C++ 11/14/17/20 On the Fly</title>
+    <meta charset="utf-8">
+    <meta name="description" content="Modern C++ Tutorial | C++ 11/14/17/20 On the Fly | 现代 C++ 教程 | 高速上手 C++11/14/17/20">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="shortcut icon" type="image/x-icon" href="/modern-cpp/assets/cover-2nd.png">
+    <meta name="msapplication-TileColor" content="#7e2d36">
+    <meta name="theme-color" content="#7e2d36">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-80889616-2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-80889616-2');
+    </script>
+
+    <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600|Roboto Mono' rel='stylesheet' type='text/css'>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- main page styles -->
+    
+<link rel="stylesheet" href="/modern-cpp/css/page.css">
+
+
+    <!-- this needs to be loaded before guide's inline scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script>window.PAGE_TYPE = "book-zh-cn"</script>
+    <script async src="//changkun.de/urlstat/client.js"></script>
+  <meta name="generator" content="Hexo 7.3.0"></head>
+  <body class="docs">
+	<!-- body开始 -->
+
+		<!-- mobile-bar 2-->
+      <div id="mobile-bar" data-bg-text="现代 C++ 教程" >
+        <a class="menu-button"></a>
+        <a class="logo" href="/modern-cpp/"></a>
+      </div>
+
+	<!-- include header -->
+    <div id="header">
+  <a id="logo" href="/">
+      <img src="/modern-cpp/assets/cover-2nd-logo.png">
+      <span>教程：高速上手</span>
+  </a>
+  <ul id="nav">
+      <li class="nav-dropdown-container resource">
+  <a class="nav-link">资源</a><span class="arrow"></span>
+  <ul class="nav-dropdown">
+    <li><ul>
+      <li><a class="nav-link" href="/modern-cpp/zh-cn/00-preface/" >正文</a></li>
+      <!-- TODO -->
+      <!-- <li><a class="nav-link" href="/modern-cpp/code/1/" >代码</a></li>
+      <li><a class="nav-link" href="/modern-cpp/exercises/1/" >习题</a></li>
+      <li><a class="nav-link" href="/modern-cpp/answers/1/" >答案</a></li> -->
+    </ul></li>
+  </ul>
+</li>
+
+<li class="nav-dropdown-container about">
+  <a class="nav-link">关于</a><span class="arrow"></span>
+  <ul class="nav-dropdown">
+      <li><ul>
+      <li><a class="nav-link" href="/modern-cpp/about/donate.html" >资助</a></li>
+      <li><a class="nav-link" href="/modern-cpp/about/copyright.html" >版权声明</a></li>
+      <li><a class="nav-link" href="/modern-cpp/about/ack.html" >致谢</a></li>
+      </ul></li>
+  </ul>
+</li>
+
+
+<li class="nav-dropdown-container about">
+  <a class="nav-link" target="_blank" rel="noopener" href="https://github.com/rstg00po54/modern-cpp-tutorial">GitHub</a>
+</li>
+
+
+  </ul>
+</div>
+
+    
+      <div id="main" class="fix-sidebar">
+		<!-- body 111 -->
+        
+
+
+
+  <div class="sidebar">
+  <div class="sidebar-inner">
+    <ul class="main-menu">
+        <li class="nav-dropdown-container resource">
+  <a class="nav-link">资源</a><span class="arrow"></span>
+  <ul class="nav-dropdown">
+    <li><ul>
+      <li><a class="nav-link" href="/modern-cpp/zh-cn/00-preface/" >正文</a></li>
+      <!-- TODO -->
+      <!-- <li><a class="nav-link" href="/modern-cpp/code/1/" >代码</a></li>
+      <li><a class="nav-link" href="/modern-cpp/exercises/1/" >习题</a></li>
+      <li><a class="nav-link" href="/modern-cpp/answers/1/" >答案</a></li> -->
+    </ul></li>
+  </ul>
+</li>
+
+<li class="nav-dropdown-container about">
+  <a class="nav-link">关于</a><span class="arrow"></span>
+  <ul class="nav-dropdown">
+      <li><ul>
+      <li><a class="nav-link" href="/modern-cpp/about/donate.html" >资助</a></li>
+      <li><a class="nav-link" href="/modern-cpp/about/copyright.html" >版权声明</a></li>
+      <li><a class="nav-link" href="/modern-cpp/about/ack.html" >致谢</a></li>
+      </ul></li>
+  </ul>
+</li>
+
+
+<li class="nav-dropdown-container about">
+  <a class="nav-link" target="_blank" rel="noopener" href="https://github.com/rstg00po54/modern-cpp-tutorial">GitHub</a>
+</li>
+
+
+    </ul>
+    <div class="list">
+      <h2>
+		
+          正文
+
+      </h2>
+      <ul class="menu-root">
+	  <!-- 引入外部的 JS 文件 -->
+  <!-- <script src="/modern-cpp/js/menu.js"></script> -->
+
+
+	<!-- 传递数据到 JavaScript -->
+	
+	
+	
+
+	
+		<li>
+		  <a href="/H264-BKY/2014-02-15-h.264%E7%9A%84poc%E8%AE%A1%E7%AE%97.html" class="sidebar-link">
+			h.264的POC计算
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2014-02-27-%E6%8C%87%E6%95%B0%E5%93%A5%E4%BC%A6%E5%B8%83%E7%BC%96%E7%A0%81.html" class="sidebar-link">
+			指数哥伦布编码
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2014-03-15-h.264%E5%8A%A0%E6%9D%83%E9%A2%84%E6%B5%8B.html" class="sidebar-link">
+			h.264加权预测
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2014-03-11-h.264%E7%A0%81%E7%8E%87%E6%8E%A7%E5%88%B6.html" class="sidebar-link">
+			h.264码率控制
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2014-04-23-h.264%E7%9B%B4%E6%8E%A5%E9%A2%84%E6%B5%8B.html" class="sidebar-link">
+			h.264直接预测
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2014-03-17-h.264-fmo.html" class="sidebar-link">
+			h.264 FMO
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2014-05-11-h.264%E5%8F%82%E8%80%83%E5%9B%BE%E5%83%8F%E5%88%97%E8%A1%A8%E3%80%81%E8%A7%A3%E7%A0%81%E5%9B%BE%E5%83%8F%E7%BC%93%E5%AD%98.html" class="sidebar-link">
+			h.264参考图像列表、解码图像缓存
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2014-06-06-h.264-mvp%E6%B1%82%E8%A7%A3%E8%BF%87%E7%A8%8B.html" class="sidebar-link">
+			h.264 mvp求解过程
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2014-06-16-umhexagons%E6%90%9C%E7%B4%A2%E8%BF%87%E7%A8%8B.html" class="sidebar-link">
+			UMHexagonS搜索过程
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2014-07-20-h.264%E5%85%A8%E6%90%9C%E7%B4%A2%E4%BB%A5%E5%8F%8A%E5%BF%AB%E9%80%9F%E5%85%A8%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95.html" class="sidebar-link">
+			h.264全搜索以及快速全搜索算法
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2014-06-18-h.264-%E7%8E%87%E5%A4%B1%E7%9C%9F%E4%BC%98%E5%8C%96.html" class="sidebar-link">
+			h.264 率失真优化
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2014-10-17-epzs%E6%90%9C%E7%B4%A2%E8%BF%87%E7%A8%8B.html" class="sidebar-link">
+			EPZS搜索过程
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2014-12-07-intra-chroma-prediction.html" class="sidebar-link">
+			Intra Chroma Prediction
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2014-12-28-intra-luma-prediction.html" class="sidebar-link">
+			Intra Luma Prediction
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2015-01-13-h.264-transfor.html" class="sidebar-link">
+			H.264 Transform
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2015-02-02-h.264-quantization.html" class="sidebar-link">
+			H.264 Quantization
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2015-04-06-quantization-method.html" class="sidebar-link current">
+			Quantization Method
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2015-04-26-h.264-mode-decision.html" class="sidebar-link">
+			h.264 Mode Decision
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2015-05-17-h.264-bi-predictive-motion-searc.html" class="sidebar-link">
+			h.264 Bi-Predictive Motion Search
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2016-02-24-h.264%E8%AF%AD%E6%B3%95%E7%BB%93%E6%9E%84%E5%88%86%E6%9E%90.html" class="sidebar-link">
+			h.264语法结构分析
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2016-02-29-h.264%E5%AE%8F%E5%9D%97%E4%B8%8E%E5%AD%90%E5%AE%8F%E5%9D%97%E7%B1%BB%E5%9E%8B.html" class="sidebar-link">
+			h.264宏块与子宏块类型
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2016-03-05-h.264-scanning-process-for-transform-coefficients.html" class="sidebar-link">
+			h.264 scanning process for transform coefficients
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2016-03-08-cavlc.html" class="sidebar-link">
+			CAVLC
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2016-03-22-cabac.html" class="sidebar-link">
+			CABAC
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2016-03-25-%E7%AE%97%E6%9C%AF%E7%BC%96%E7%A0%81jm%E5%AE%9E%E7%8E%B0.html" class="sidebar-link">
+			算术编码JM实现
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2016-04-27-h.264%E5%B9%B6%E8%A1%8C%E8%A7%A3%E7%A0%81%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90.html" class="sidebar-link">
+			h.264并行解码算法分析
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2016-05-17-h.264-%E5%8E%BB%E5%9D%97%E6%BB%A4%E6%B3%A2.html" class="sidebar-link">
+			h.264 去块滤波
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2016-08-11-h.264%E5%B9%B6%E8%A1%8C%E8%A7%A3%E7%A0%81%E7%AE%97%E6%B3%952d-wave%E5%AE%9E%E7%8E%B0(%E5%9F%BA%E4%BA%8E%E5%A4%9A%E6%A0%B8%E9%9D%9E%E5%85%B1%E4%BA%AB%E5%86%85%E5%AD%98%E7%B3%BB%E7%BB%9F).html" class="sidebar-link">
+			h.264并行解码算法2D-Wave实现（基于多核非共享内存系统）
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2016-09-18-h.264%E5%B9%B6%E8%A1%8C%E8%A7%A3%E7%A0%81%E7%AE%97%E6%B3%952d-wave%E5%AE%9E%E7%8E%B0(%E5%9F%BA%E4%BA%8E%E5%A4%9A%E6%A0%B8%E5%85%B1%E4%BA%AB%E5%86%85%E5%AD%98%E7%B3%BB%E7%BB%9F).html" class="sidebar-link">
+			h.264并行解码算法2D-Wave实现（基于多核共享内存系统）
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2016-09-30-h.264%E5%B9%B6%E8%A1%8C%E8%A7%A3%E7%A0%81%E7%AE%97%E6%B3%953d-wave%E5%AE%9E%E7%8E%B0(%E5%9F%BA%E4%BA%8E%E5%A4%9A%E6%A0%B8%E5%85%B1%E4%BA%AB%E5%86%85%E5%AD%98%E7%B3%BB%E7%BB%9F).html" class="sidebar-link">
+			h.264并行解码算法3D-Wave实现（基于多核共享内存系统）
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2017-04-04-h.264%E5%B9%B6%E8%A1%8C%E7%86%B5%E8%A7%A3%E7%A0%81.html" class="sidebar-link">
+			h.264并行熵解码
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2017-06-15-cabac%E6%80%BB%E7%BB%93%E4%B8%8E%E8%A1%A5%E5%85%85%E8%AE%A8%E8%AE%BA.html" class="sidebar-link">
+			CABAC总结与补充讨论
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2019-01-04-%5Bffmpeg%5D-h264%E5%B9%B6%E8%A1%8C%E8%A7%A3%E7%A0%81.html" class="sidebar-link">
+			ffmpeg h264并行解码
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2019-01-24-%5Bffmpeg%5D-h.264%E8%A7%A3%E7%A0%81%E6%89%80%E7%94%A8%E7%9A%84%E4%B8%BB%E8%A6%81%E7%BC%93%E5%86%B2%E5%8C%BA%E4%BB%8B%E7%BB%8D.html" class="sidebar-link">
+			ffmpeg h.264解码所用的主要缓冲区介绍
+		  </a>
+		</li>
+
+
+</ul>
+
+	  
+    </div>
+  </div>
+</div>
+
+<link rel="stylesheet" href="../icon/iconfont.css">
+<style>
+
+/* body {
+            background: #e4e9f5;
+        } */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            list-style: none;
+            text-decoration: none;
+        }
+
+        section {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font: 900 100px '';
+            color: #ffa21759;
+            background: rgb(34, 37, 39);
+        }
+
+        .shell {
+            position: fixed;
+            width: 60px;
+			left: 0;
+            height: 100%;
+            background: #000000;
+            z-index: 9999;
+            transition: width 0.5s;
+            /* padding-left: 10px; */
+            overflow: hidden;
+        }
+/* 悬停改变宽度 */
+        .shell:hover {
+            width: 300px;
+        }
+
+        .imageBox {
+            position: relative;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+
+        .imageBox img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .shell ul {
+            position: relative;
+            height: 100vh;
+        }
+
+        .shell ul li {
+            position: relative;
+            padding: 5px;
+        }
+
+        .active {
+            background: #e4e9f5;
+            border-top-left-radius: 50px;
+            border-bottom-left-radius: 50px;
+        }
+
+        .active::before {
+            content: "";
+            position: absolute;
+            top: -30px;
+            right: 0;
+            width: 30px;
+            height: 30px;
+            border-bottom-right-radius: 25px;
+            box-shadow: 5px 5px 0 5px #e4e9f5;
+            background: transparent;
+        }
+
+        .active::after {
+            content: "";
+            position: absolute;
+            bottom: -30px;
+            right: 0;
+            width: 30px;
+            height: 30px;
+            border-top-right-radius: 25px;
+            box-shadow: 5px -5px 0 5px #e4e9f5;
+            background: transparent;
+        }
+
+        #shelllogo {
+            margin: 40px 0 100px 0;
+        }
+
+        .shell ul li a {
+            position: relative;
+            display: flex;
+            white-space: nowrap;
+        }
+
+        .icon {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-width: 40px;
+            /* padding-left: 10px; */
+            height: 70px;
+            color: #333;
+            transition: 0.5s;
+            color: rgb(255, 255, 255);
+        }
+
+        .icon i {
+            font-size: 30px;
+            z-index: 999;
+        }
+
+        .text {
+            position: relative;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            font-size: 20px;
+            color: #ffad32c1;
+            padding-left: 15px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: 0.5s;
+        }
+
+        .shell ul li:hover a .icon,
+        .shell ul li:hover a .text {
+            color: #ffa117;
+        }
+
+        .active a .icon::before {
+            content: "";
+            position: absolute;
+            inset: 5px;
+            width: 60px;
+            background: #000000;
+            /* 圆形 */
+            border-radius: 50%;
+            transition: 0.5s;
+            border: 7px solid #ffa117;
+            box-sizing: border-box;
+        }
+</style>
+
+
+<div class="shell">
+	<ul class="nav">
+		<li class="active" id="shelllogo">
+			<a href="#">
+				<div class="icon">
+					<div class="imageBox">
+						<img src="../icon/cat.jpg" alt="">
+					</div>
+				</div>
+				<div class="text">前端小窝</div>
+			</a>
+		</li>
+		<li>
+			<a href="#home">
+				<div class="icon">
+					<i class="iconfont icon-cangku"></i>
+				</div>
+				<div class="text">Home</div>
+			</a>
+		</li>
+		<li>
+			<a href="#theme">
+				<div class="icon">
+					<!-- 调色板 -->
+					<i class="iconfont icon-tiaoseban"></i>
+				</div>
+				<div class="text">Theme</div>
+			</a>
+		</li>
+		<li>
+			<a href="#wallet">
+				<div class="icon">
+					<!-- 钱包 -->
+					<i class="iconfont icon-qianbao"></i>
+				</div>
+				<div class="text">Wallet</div>
+			</a>
+		</li>
+		<li>
+			<a href="#picture">
+				<div class="icon">
+					<!-- 图片 -->
+					<i class="iconfont icon-tupian"></i>
+				</div>
+				<div class="text">picture</div>
+			</a>
+		</li>
+		<li>
+			<a href="#code">
+				<div class="icon">
+					<!-- 二维码 -->
+					<i class="iconfont icon-erweima"></i>
+				</div>
+				<div class="text">QR code</div>
+			</a>
+		</li>
+		<li>
+			<a href="#authentication">
+				<div class="icon">
+					<!-- 盾牌保险认证 -->
+					<i class="iconfont icon-dunpaibaoxianrenzheng"></i>
+				</div>
+				<div class="text">auth</div>
+			</a>
+		</li>
+		<li>
+			<a href="#me">
+				<div class="icon">
+					<div class="imageBox">
+						<img src="./cat.jpg" alt="">
+					</div>
+				</div>
+				<div class="text">ME</div>
+			</a>
+		</li>
+	</ul>
+</div>
+
+<div class="content book-zh-cn with-sidebar 2015-04-06-quantization-method-guide">
+  <p>如上一篇<a target="_blank" rel="noopener" href="http://www.cnblogs.com/TaigaCon/p/4266686.html">Quantization</a>所说，可以在编码端通过设置offset来调整量化后的值，从而趋向于期望的量化值，而且在逆量化公式可以看出offset值在逆量化的时候是不会用到的。<br>目前来说，确定offset的算法有三种：static offset、around offset、trellis offset。</p>
+<h4 id="Static-Offset"><a href="#Static-Offset" class="headerlink" title="Static Offset"></a><strong>Static Offset</strong></h4><p>H.264参考模型建议：当帧内预测时：$f &#x3D; \frac{1}{3}\bigtriangleup$;当帧间预测时$f &#x3D; \frac{1}{6}\bigtriangleup$。这种采用固定的比例作为量化的offset。<img alt="" src="img/2015-04-06-quantization-method/060113170406149.jpg"></p>
+<h4 id="Around-Offset"><a href="#Around-Offset" class="headerlink" title="Around Offset"></a><strong>Around Offset</strong></h4><p>量化的时候加上Offset，目的是为了通过Offset的调整，使量化能趋向于得到最优结果。那么如何才是最优？当然是对量化后level进行反量化后，得到的数值与量化前的数值保持一致。当然这是不可能的，不过我们可以对第i次的量化结果，反馈到第i+1次量化计算中。通过这种自行反馈的方式，调整量化offset，使其趋向于最优的量化结果。<br>Around Offset会采用当前位置的上一次量化结果对这次的量化offset进行调整。<br>$ M_{i+1} &#x3D; M_i + weight \times ((coeff_i – level_i &lt;&lt; Qbits_i) &gt;&gt; (Qbits_i + 1))$<br>$ f_{i+1} &#x3D; M_{i+1} &lt;&lt; Qbits_{i+1}$</p>
+<img alt="" src="img/2015-04-06-quantization-method/060113179934991.jpg">
+<img alt="" src="img/2015-04-06-quantization-method/ContractedBlock.gif"><img alt="" src="img/2015-04-06-quantization-method/ExpandedBlockStart.gif">//Q_offsets.c//fi+1 = Mi+1 << Qbitsi+1staticinlinevoidupdate_q_offset4x4(LevelQuantParams **q_params,short*offsetList,intq_bits)  
+{inti, j;short*p_list = &offsetList[0];for(j =0; j <4; j++)
+  {for(i =0; i <4; i++)
+    {          
+      q_params[j][i].OffsetComp= (int) *p_list++ <<q_bits;
+    }
+  }
+}/*!
+ ************************************************************************
+ * \brief
+ *    Calculation of the quantization offset parameters at the frame level
+ *
+ * \par Input:
+ *    none
+ *
+ * \par Output:
+ *    none
+ *************************************************************************/voidCalculateOffset4x4Param (VideoParameters *p_Vid)
+{
+  QuantParameters*p_Quant = p_Vid->p_Quant;intk;intqp_per, qp;intimg_type = ((p_Vid->type == SI_SLICE) ? I_SLICE : (p_Vid->type == SP_SLICE ? P_SLICE : p_Vid->type));intmax_qp_scale = imax(p_Vid->bitdepth_luma_qp_scale, p_Vid->bitdepth_chroma_qp_scale);intmax_qp =51+max_qp_scale;
+  InputParameters*p_Inp = p_Vid->p_Inp;
+
+<p>  p_Vid-&gt;AdaptRndWeight   &#x3D; p_Inp-&gt;AdaptRndWFactor  [p_Vid-&gt;nal_reference_idc !&#x3D;0][img_type];<br>  p_Vid-&gt;AdaptRndCrWeight &#x3D; p_Inp-&gt;AdaptRndCrWFactor[p_Vid-&gt;nal_reference_idc !&#x3D;0][img_type];if(img_type &#x3D;&#x3D;I_SLICE )<br>  {for(qp &#x3D;0; qp &lt; max_qp +1; qp++)<br>    {<br>      k&#x3D; p_Quant-&gt;qp_per_matrix [qp];<br>      qp_per&#x3D; Q_BITS + k -OffsetBits;<br>      k&#x3D; p_Inp-&gt;AdaptRoundingFixed ?0: qp;&#x2F;&#x2F;Intra4x4 lumaupdate_q_offset4x4(p_Quant-&gt;q_params_4x4[0][1][qp], p_Quant-&gt;OffsetList4x4[k][0], qp_per);&#x2F;&#x2F;Intra4x4 chroma uupdate_q_offset4x4(p_Quant-&gt;q_params_4x4[1][1][qp], p_Quant-&gt;OffsetList4x4[k][1], qp_per);&#x2F;&#x2F;Intra4x4 chroma vupdate_q_offset4x4(p_Quant-&gt;q_params_4x4[2][1][qp], p_Quant-&gt;OffsetList4x4[k][2], qp_per);<br>    }<br>  }elseif(img_type &#x3D;&#x3D;B_SLICE)<br>  {for(qp &#x3D;0; qp &lt; max_qp +1; qp++)<br>    {<br>      k&#x3D; p_Quant-&gt;qp_per_matrix [qp];<br>      qp_per&#x3D; Q_BITS + k -OffsetBits;<br>      k&#x3D; p_Inp-&gt;AdaptRoundingFixed ?0: qp;&#x2F;&#x2F;Inter4x4 lumaupdate_q_offset4x4(p_Quant-&gt;q_params_4x4[0][0][qp], p_Quant-&gt;OffsetList4x4[k][12], qp_per);&#x2F;&#x2F;Intra4x4 lumaupdate_q_offset4x4(p_Quant-&gt;q_params_4x4[0][1][qp], p_Quant-&gt;OffsetList4x4[k][6], qp_per);&#x2F;&#x2F;Inter4x4 chroma uupdate_q_offset4x4(p_Quant-&gt;q_params_4x4[1][0][qp], p_Quant-&gt;OffsetList4x4[k][13], qp_per);&#x2F;&#x2F;Intra4x4 chroma uupdate_q_offset4x4(p_Quant-&gt;q_params_4x4[1][1][qp], p_Quant-&gt;OffsetList4x4[k][7], qp_per);&#x2F;&#x2F;Inter4x4 chroma vupdate_q_offset4x4(p_Quant-&gt;q_params_4x4[2][0][qp], p_Quant-&gt;OffsetList4x4[k][14], qp_per);&#x2F;&#x2F;Intra4x4 chroma vupdate_q_offset4x4(p_Quant-&gt;q_params_4x4[2][1][qp], p_Quant-&gt;OffsetList4x4[k][8], qp_per);<br>    }<br>  }else{for(qp &#x3D;0; qp &lt; max_qp +1; qp++)<br>    {<br>      k&#x3D; p_Quant-&gt;qp_per_matrix [qp];<br>      qp_per&#x3D; Q_BITS + k -OffsetBits;<br>      k&#x3D; p_Inp-&gt;AdaptRoundingFixed ?0: qp;&#x2F;&#x2F;Inter4x4 lumaupdate_q_offset4x4(p_Quant-&gt;q_params_4x4[0][0][qp], p_Quant-&gt;OffsetList4x4[k][9], qp_per);&#x2F;&#x2F;Intra4x4 lumaupdate_q_offset4x4(p_Quant-&gt;q_params_4x4[0][1][qp], p_Quant-&gt;OffsetList4x4[k][3], qp_per);&#x2F;&#x2F;Inter4x4 chroma uupdate_q_offset4x4(p_Quant-&gt;q_params_4x4[1][0][qp], p_Quant-&gt;OffsetList4x4[k][10], qp_per);&#x2F;&#x2F;Intra4x4 chroma uupdate_q_offset4x4(p_Quant-&gt;q_params_4x4[1][1][qp], p_Quant-&gt;OffsetList4x4[k][4], qp_per);&#x2F;&#x2F;Inter4x4 chroma vupdate_q_offset4x4(p_Quant-&gt;q_params_4x4[2][0][qp], p_Quant-&gt;OffsetList4x4[k][11], qp_per);&#x2F;&#x2F;Intra4x4 chroma vupdate_q_offset4x4(p_Quant-&gt;q_params_4x4[2][1][qp], p_Quant-&gt;OffsetList4x4[k][5], qp_per);<br>    }<br>  }<br>}&#x2F;&#x2F;Q_around.c&#x2F;&#x2F;Mi+1 &#x3D; Mi + k&#x2F;*!</p>
+<hr>
+<ul>
+<li>\brief</li>
+<li>update rounding offsets based on JVT-N011</li>
+</ul>
+<p>*************************************************************************&#x2F;voidupdate_offset_params(Macroblock <em>currMB,intmode,byteluma_transform_size_8x8_flag)<br>{<br>  VideoParameters</em>p_Vid &#x3D; currMB-&gt;p_Vid;<br>  InputParameters<em>p_Inp &#x3D; currMB-&gt;p_Inp;intis_inter &#x3D; (mode !&#x3D; I4MB)&amp;&amp;(mode !&#x3D; I16MB) &amp;&amp; (mode !&#x3D;I8MB);intluma_pos &#x3D; AdaptRndPos[(is_inter&lt;&lt;1) + luma_transform_size_8x8_flag][p_Vid-&gt;type];inti,j;intqp &#x3D; currMB-&gt;qp + p_Vid-&gt;bitdepth_luma_qp_scale;intcur_qp &#x3D; p_Inp-&gt;AdaptRoundingFixed ?0: qp;inttemp &#x3D;0;<br>  QuantParameters</em>p_Quant &#x3D; p_Vid-&gt;p_Quant;intoffsetRange &#x3D;1&lt;&lt; (OffsetBits -1);intblk_mask &#x3D;0x03+ (luma_transform_size_8x8_flag&lt;&lt;2);intblk_shift &#x3D;2+luma_transform_size_8x8_flag;short<strong>offsetList &#x3D; luma_transform_size_8x8_flag ? p_Quant-&gt;OffsetList8x8[cur_qp] : p_Quant-&gt;OffsetList4x4[cur_qp];short*cur_offset_list &#x3D;offsetList[luma_pos];int</strong>fAdjust &#x3D; luma_transform_size_8x8_flag ? p_Vid-&gt;ARCofAdj8x8[0][mode] : p_Vid-&gt;ARCofAdj4x4[0][mode];if(mode &#x3D;&#x3D; IPCM)return;if( (p_Vid-&gt;active_sps-&gt;chroma_format_idc &#x3D;&#x3D; YUV444) &amp;&amp; (p_Inp-&gt;separate_colour_plane_flag !&#x3D;0) )<br>  {if( luma_transform_size_8x8_flag )&#x2F;&#x2F;8x8luma_pos +&#x3D;5* p_Vid-&gt;colour_plane_id;else&#x2F;&#x2F;4x4luma_pos +&#x3D; p_Vid-&gt;colour_plane_id;<br>    cur_offset_list&#x3D;offsetList[luma_pos];<br>  }for(j&#x3D;0; j &lt; MB_BLOCK_SIZE; j++)<br>  {intj_pos &#x3D; ((j &amp; blk_mask)&lt;&lt;blk_shift);for(i&#x3D;0; i &lt; MB_BLOCK_SIZE; i++)<br>    {<br>      temp&#x3D; j_pos + (i &amp;blk_mask);<br>      cur_offset_list[temp]&#x3D; (short) iClip3(0, offsetRange, cur_offset_list[temp] + (short) fAdjust[j][i]);<br>    }<br>  }if(p_Vid-&gt;P444_joined)<br>  {int*<em>fAdjustCbCr;intuv;for(uv &#x3D;0; uv &lt;2; uv++)<br>    {<br>      luma_pos&#x3D; AdaptRndPos[(is_inter&lt;&lt;1) + luma_transform_size_8x8_flag][p_Vid-&gt;type];<br>      fAdjustCbCr&#x3D; luma_transform_size_8x8_flag ? p_Vid-&gt;ARCofAdj8x8[uv +1][mode] : p_Vid-&gt;ARCofAdj4x4[uv +1][mode];if(luma_transform_size_8x8_flag )&#x2F;&#x2F;8x8luma_pos +&#x3D;5</em> (uv+1);else&#x2F;&#x2F;4x4luma_pos +&#x3D; (uv+1);<br>      cur_offset_list&#x3D;offsetList[luma_pos];for(j&#x3D;0; j &lt; MB_BLOCK_SIZE; j++)<br>      {intj_pos &#x3D; ((j &amp; blk_mask)&lt;&lt;blk_shift);for(i&#x3D;0; i &lt; MB_BLOCK_SIZE; i++)<br>        {<br>          temp&#x3D; j_pos + (i &amp;blk_mask);<br>          cur_offset_list[temp]&#x3D; (short) iClip3(0, offsetRange, cur_offset_list[temp] + (short) fAdjustCbCr[j][i]);<br>        }<br>      }<br>    }<br>  }if((p_Inp-&gt;AdaptRndChroma) &amp;&amp; (p_Vid-&gt;yuv_format &#x3D;&#x3D; YUV420 || p_Vid-&gt;yuv_format &#x3D;&#x3D;YUV422 ))<br>  {intu_pos &#x3D; AdaptRndCrPos[is_inter][p_Vid-&gt;type];intv_pos &#x3D; u_pos +1;intk, jpos, uv &#x3D;1;for(k &#x3D; u_pos; k &lt;&#x3D; v_pos; k++)<br>    {int*<em>fAdjustChroma &#x3D; (luma_transform_size_8x8_flag &amp;&amp; mode &#x3D;&#x3D; P8x8 )? p_Vid-&gt;ARCofAdj4x4[uv][4] : p_Vid-&gt;ARCofAdj4x4[uv][mode];<br>      uv++;<br>      cur_offset_list&#x3D; p_Quant-&gt;OffsetList4x4[cur_qp][k];for(j &#x3D;0; j &lt; p_Vid-&gt;mb_cr_size_y; j++)<br>      {<br>        jpos&#x3D; ((j &amp;0x03)&lt;&lt;2);for(i &#x3D;0; i &lt; p_Vid-&gt;mb_cr_size_x; i++)<br>        {<br>          temp&#x3D; jpos + (i &amp;0x03);<br>          cur_offset_list[temp]&#x3D; (short) iClip3(0, offsetRange, cur_offset_list[temp] + (short) fAdjustChroma[j][i]);<br>        }<br>      }<br>    }<br>  }<br>}&#x2F;&#x2F;Quant4x4_around.c&#x2F;&#x2F;k &#x3D; weight * ((coeff - level&lt;&lt;Qbits) &gt;&gt; Qbits+1)&#x2F;</em>!</p>
+<hr>
+<ul>
+<li><p>\brief </p>
+</li>
+<li><p>Quantization process for All coefficients for a 4x4 block</p>
+</li>
+<li><p> *************************************************************************&#x2F;intquant_4x4_around(Macroblock <em>currMB,int**tblock,structquant_methods <em>q_method)<br>{<br>VideoParameters</em>p_Vid &#x3D; currMB-&gt;p_Vid;<br>QuantParameters</em>p_Quant &#x3D; p_Vid-&gt;p_Quant;<br>Slice<em>currSlice &#x3D; currMB-&gt;p_Slice;<br>Boolean is_cavlc&#x3D; (Boolean) (currSlice-&gt;symbol_mode &#x3D;&#x3D;CAVLC);intAdaptRndWeight &#x3D; p_Vid-&gt;AdaptRndWeight;intblock_x &#x3D; q_method-&gt;block_x;intqp &#x3D; q_method-&gt;qp;int</em>  ACL &#x3D; &amp;q_method-&gt;ACLevel[0];int*  ACR &#x3D; &amp;q_method-&gt;ACRun[0];<br>LevelQuantParams*<em>q_params_4x4 &#x3D; q_method-&gt;q_params;constbyte(<em>pos_scan)[2] &#x3D; q_method-&gt;pos_scan;constbyte</em>c_cost &#x3D; q_method-&gt;c_cost;int</em>coeff_cost &#x3D; q_method-&gt;coeff_cost;</p>
+<p>LevelQuantParams<em>q_params &#x3D;NULL;int**fadjust4x4 &#x3D; q_method-&gt;fadjust;inti,j, coeff_ctr;int</em>m7;intscaled_coeff;intlevel, run &#x3D;0;intnonzero &#x3D;FALSE;intqp_per &#x3D; p_Quant-&gt;qp_per_matrix[qp];intq_bits &#x3D; Q_BITS +qp_per;constbyte<em>p_scan &#x3D; &amp;pos_scan[0][0];int</em>padjust4x4;&#x2F;&#x2F;Quantizationfor(coeff_ctr &#x3D;0; coeff_ctr &lt;16; ++coeff_ctr)<br>{<br>  i&#x3D; *p_scan++;&#x2F;&#x2F;horizontal positionj &#x3D; *p_scan++;&#x2F;&#x2F;vertical positionpadjust4x4&#x3D; &amp;fadjust4x4[j][block_x +i];<br>  m7&#x3D; &amp;tblock[j][block_x +i];if(*m7 !&#x3D;0)<br>  {<br>q_params&#x3D; &amp;q_params_4x4[j][i];<br>scaled_coeff&#x3D; iabs (*m7) * q_params-&gt;ScaleComp;<br>level&#x3D; (scaled_coeff + q_params-&gt;OffsetComp) &gt;&gt;q_bits;if(level !&#x3D;0)<br>{if(is_cavlc)<br>    level&#x3D;imin(level, CAVLC_LEVEL_LIMIT);*padjust4x4 &#x3D; rshift_rnd_sf((AdaptRndWeight * (scaled_coeff - (level &lt;&lt; q_bits))), q_bits +1);*coeff_cost +&#x3D; (level &gt;1) ?MAX_VALUE : c_cost[run];<br><br>  level&#x3D; isignab(level, *m7);<em>m7     &#x3D; rshift_rnd_sf(((level * q_params-&gt;InvScaleComp) &lt;&lt; qp_per),4);&#x2F;&#x2F;inverse scale can be alternative performed as follows to ensure 16bit&#x2F;&#x2F;arithmetic is satisfied.&#x2F;&#x2F;*m7 &#x3D; (qp_per&lt;4) ? rshift_rnd_sf((level*q_params-&gt;InvScaleComp),4-qp_per) : (level</em>q_params-&gt;InvScaleComp)&lt;&lt;(qp_per-4);*ACL++  &#x3D;level;*ACR++  &#x3D;run;&#x2F;&#x2F;reset zero level counterrun     &#x3D;0;<br>  nonzero&#x3D;TRUE;<br>}else{*padjust4x4 &#x3D;0;*m7 &#x3D;0;++run;<br>}<br>  }else{*padjust4x4 &#x3D;0;++run;<br>  }<br>}*ACL &#x3D;0;returnnonzero;</p>
+</li>
+</ul>
+<p>}</p>
+<p>View Code</p>
+<h4 id="trellis-offset"><a href="#trellis-offset" class="headerlink" title="trellis offset"></a><strong>trellis offset</strong></h4><p>trellis offset其实用trellis quantization来描述更为准确，因为这种量化方式不会用到offset。Trellis就是采用Rdoq来得到最佳量化值，即取0、level还是level+1会达到最优的量化结果。由于不会用到offset，因此得到的level统一都是取下整，这样的话需要进行Rdo的候选level有三个：0、level、level+1。三个候选值还是稍微多了，可以采用以下方式进行筛选。<br><img alt="" src="img/2015-04-06-quantization-method/060113185867877.jpg"><br>Rdoq当中包含Rdo这三个字母，这意味它依赖编码后的码流长度以及残差来选择最优结果，不过由于Rdoq处于编码途中，因此无法得到确切的编码后码流长度以及残差，因此只能通过预测值来，即上述候选值来进行计算。计算码流长度涉及到熵编码，而熵编码是以8x8或4x4为单位进行的，但是由于当前像素进行预测时，其后面的像素还没有进行预测，所以进行Rdoq时，当前像素之前的像素点采用的是预测后的level，而当前像素点之后的像素点采用level[num-1]的像素点。<br><img alt="" src="img/2015-04-06-quantization-method/060113199467661.jpg"><br>Rdoq实际上就是对于当前像素点所在的block进行Rdo：在该block上，当前像素采用的是0、level还是level+1才能得到最优的结果。</p>
+<p><img alt="" src="img/2015-04-06-quantization-method/ContractedBlock.gif"><img alt="" src="img/2015-04-06-quantization-method/ExpandedBlockStart.gif"><br>&#x2F;*!</p>
+<hr>
+<ul>
+<li>\brief</li>
+<li>Quantization process for All coefficients for a 4x4 block</li>
+<li></li>
+</ul>
+<hr>
+<p> *&#x2F;<br>int quant_4x4_trellis(Macroblock *currMB, int **tblock, struct quant_methods *q_method)<br>{<br>  int   block_x &#x3D; q_method-&gt;block_x;</p>
+<p>  int*  ACL &#x3D; &amp;q_method-&gt;ACLevel[0];<br>  int*  ACR &#x3D; &amp;q_method-&gt;ACRun[0];<br>  Slice *currSlice &#x3D; currMB-&gt;p_Slice;<br>  QuantParameters *p_Quant &#x3D; currMB-&gt;p_Vid-&gt;p_Quant;<br>  int  qp &#x3D; q_method-&gt;qp;<br>  LevelQuantParams **q_params_4x4 &#x3D; q_method-&gt;q_params;<br>  const byte (*pos_scan)[2] &#x3D; q_method-&gt;pos_scan;<br>  const byte *c_cost &#x3D; q_method-&gt;c_cost;<br>  int *coeff_cost &#x3D; q_method-&gt;coeff_cost;</p>
+<p>  Boolean is_cavlc &#x3D; (Boolean) (currSlice-&gt;symbol_mode &#x3D;&#x3D; CAVLC);</p>
+<p>  int i,j, coeff_ctr;</p>
+<p>  int *m7;</p>
+<p>  int   level, run &#x3D; 0;<br>  int   nonzero &#x3D; FALSE;<br>  int   qp_per &#x3D; p_Quant-&gt;qp_per_matrix[qp];<br>  const byte *p_scan &#x3D; &amp;pos_scan[0][0];</p>
+<p>  int levelTrellis[16];</p>
+<p> &#x2F;*    rdoq_4x4</p>
+<ul>
+<li>To decide witch level to use</li>
+<li>0:0       1:level       2:level+1 (lowerint &#x3D;&#x3D; 0)</li>
+</ul>
+<p>  *&#x2F;<br>  currSlice-&gt;rdoq_4x4(currMB, tblock, q_method, levelTrellis);</p>
+<p>  &#x2F;&#x2F; Quantization<br>  for (coeff_ctr &#x3D; 0; coeff_ctr &lt; 16; ++coeff_ctr)<br>  {<br>    i &#x3D; *p_scan++;  &#x2F;&#x2F; horizontal position<br>    j &#x3D; *p_scan++;  &#x2F;&#x2F; vertical position</p>
+<pre><code>m7 = &amp;tblock[j][block_x + i];
+
+if (*m7 != 0)
+&#123;    
+  /*
+  scaled_coeff = iabs (*m7) * q_params_4x4[j][i].ScaleComp;
+  level = (scaled_coeff + q_params_4x4[j][i].OffsetComp) &gt;&gt; q_bits;
+  */
+  level = levelTrellis[coeff_ctr];
+
+  if (level != 0)
+  &#123;
+    if (is_cavlc)
+      level = imin(level, CAVLC_LEVEL_LIMIT);
+
+    *coeff_cost += (level &gt; 1) ? MAX_VALUE : c_cost[run];
+
+    level   = isignab(level, *m7);
+    *m7     = rshift_rnd_sf(((level * q_params_4x4[j][i].InvScaleComp) &lt;&lt; qp_per), 4);
+    *ACL++  = level;
+    *ACR++  = run; 
+    // reset zero level counter
+    run     = 0;
+    nonzero = TRUE;        
+  &#125;
+  else
+  &#123;
+    *m7 = 0;
+    ++run;
+  &#125; 
+&#125;
+else
+&#123;
+  ++run;
+&#125; 
+</code></pre>
+<p>  }</p>
+<p>  *ACL &#x3D; 0;</p>
+<p>  return nonzero;<br>}</p>
+<p>&#x2F;*!</p>
+<hr>
+<ul>
+<li>\brief</li>
+<li>Rate distortion optimized Quantization process for </li>
+<li>all coefficients in a 4x4 block (CAVLC)</li>
+<li></li>
+</ul>
+<hr>
+<p>*&#x2F;<br>void rdoq_4x4_CAVLC(Macroblock *currMB, int **tblock, struct quant_methods *q_method, int levelTrellis[])<br>{<br>  VideoParameters *p_Vid &#x3D; currMB-&gt;p_Vid;<br>  int   block_x &#x3D; q_method-&gt;block_x;<br>  int   block_y &#x3D; q_method-&gt;block_y;<br>  LevelQuantParams **q_params_4x4 &#x3D; q_method-&gt;q_params;<br>  const byte (*pos_scan)[2] &#x3D; q_method-&gt;pos_scan;<br>  const byte *p_scan &#x3D; &amp;pos_scan[0][0];<br>  int  qp &#x3D; q_method-&gt;qp;<br>  QuantParameters *p_Quant &#x3D; currMB-&gt;p_Vid-&gt;p_Quant;<br>  int   qp_per &#x3D; p_Quant-&gt;qp_per_matrix[qp];<br>  int   qp_rem &#x3D; p_Quant-&gt;qp_rem_matrix[qp];</p>
+<p>  levelDataStruct levelData[16];<br>  double  lambda_md &#x3D; p_Vid-&gt;lambda_rdoq[p_Vid-&gt;type][p_Vid-&gt;masterQP]; </p>
+<p>  int type &#x3D; LUMA_4x4;<br>  int   pos_x   &#x3D; block_x &gt;&gt; BLOCK_SHIFT;<br>  int   pos_y   &#x3D; block_y &gt;&gt; BLOCK_SHIFT;<br>  int   b8      &#x3D; 2*(pos_y &gt;&gt; 1) + (pos_x &gt;&gt; 1);<br>  int   b4      &#x3D; 2*(pos_y &amp; 0x01) + (pos_x &amp; 0x01);</p>
+<p>  init_trellis_data_4x4_CAVLC(currMB, tblock, block_x, qp_per, qp_rem, q_params_4x4, p_scan, &amp;levelData[0], type);<br>  est_RunLevel_CAVLC(currMB, levelData, levelTrellis, LUMA, b8, b4, 16, lambda_md);<br>}</p>
+<p>&#x2F;*!</p>
+<hr>
+<ul>
+<li>\brief</li>
+<li>Initialize levelData</li>
+</ul>
+<hr>
+<p>*&#x2F;<br>void init_trellis_data_4x4_CAVLC(Macroblock *currMB, int **tblock, int block_x, int qp_per, int qp_rem, LevelQuantParams **q_params,<br>                                 const byte *p_scan, levelDataStruct *dataLevel, int type)<br>{<br>  Slice *currSlice &#x3D; currMB-&gt;p_Slice;<br>  int i, j, coeff_ctr;<br>  int *m7;<br>  int end_coeff_ctr &#x3D; ( ( type &#x3D;&#x3D; LUMA_4x4 ) ? 16 : 15 );<br>  int q_bits &#x3D; Q_BITS + qp_per;<br>  int q_offset &#x3D; ( 1 &lt;&lt; (q_bits - 1) );<br>  int scaled_coeff, level, lowerInt, k;<br>  double err, estErr;</p>
+<p>  for (coeff_ctr &#x3D; 0; coeff_ctr &lt; end_coeff_ctr; coeff_ctr++)<br>  {<br>    i &#x3D; *p_scan++;  &#x2F;&#x2F; horizontal position<br>    j &#x3D; *p_scan++;  &#x2F;&#x2F; vertical position</p>
+<pre><code>m7 = &amp;tblock[j][block_x + i];
+
+if (*m7 == 0)
+&#123;
+  dataLevel-&gt;levelDouble = 0;
+  dataLevel-&gt;level[0] = 0;
+  dataLevel-&gt;noLevels = 1;
+  err = 0.0;
+  dataLevel-&gt;errLevel[0] = 0.0;
+  dataLevel-&gt;pre_level = 0;
+  dataLevel-&gt;sign = 0;
+&#125;
+else
+&#123;
+  estErr = ((double) estErr4x4[qp_rem][j][i]) / currSlice-&gt;norm_factor_4x4;
+
+  scaled_coeff = iabs(*m7) * q_params[j][i].ScaleComp;
+  dataLevel-&gt;levelDouble = scaled_coeff;
+  level = (scaled_coeff &gt;&gt; q_bits);
+
+  lowerInt = ((scaled_coeff - (level &lt;&lt; q_bits)) &lt; q_offset )? 1 : 0;
+  
+  dataLevel-&gt;level[0] = 0;
+  if (level == 0 &amp;&amp; lowerInt == 1)
+  &#123;
+    dataLevel-&gt;noLevels = 1;
+  &#125;
+  else if (level == 0 &amp;&amp; lowerInt == 0)
+  &#123;
+    dataLevel-&gt;level[1] = 1;
+    dataLevel-&gt;noLevels = 2;
+  &#125;
+  else if (level &gt; 0 &amp;&amp; lowerInt == 1)
+  &#123;
+    dataLevel-&gt;level[1] = level;
+    dataLevel-&gt;noLevels = 2;
+  &#125;
+  else
+  &#123;
+    dataLevel-&gt;level[1] = level;
+    dataLevel-&gt;level[2] = level + 1;
+    dataLevel-&gt;noLevels = 3;
+  &#125;
+
+  for (k = 0; k &lt; dataLevel-&gt;noLevels; k++)
+  &#123;
+    err = (double)(dataLevel-&gt;level[k] &lt;&lt; q_bits) - (double)scaled_coeff;
+    dataLevel-&gt;errLevel[k] = (err * err * estErr); 
+  &#125;
+
+  if(dataLevel-&gt;noLevels == 1)
+    dataLevel-&gt;pre_level = 0;
+  else
+    dataLevel-&gt;pre_level = (iabs (*m7) * q_params[j][i].ScaleComp + q_params[j][i].OffsetComp) &gt;&gt; q_bits;
+  dataLevel-&gt;sign = isign(*m7);
+&#125;
+dataLevel++;
+</code></pre>
+<p>  }<br>}</p>
+<p>&#x2F;*!</p>
+<hr>
+<ul>
+<li>\brief</li>
+<li>estimate run and level for CAVLC</li>
+</ul>
+<hr>
+<p>*&#x2F;<br>void est_RunLevel_CAVLC(Macroblock *currMB, levelDataStruct *levelData, int *levelTrellis, int block_type,<br>                        int b8, int b4, int coeff_num, double lambda)<br>{<br>  int k, lastnonzero &#x3D; -1, coeff_ctr;<br>  int level_to_enc[16] &#x3D; {0}, sign_to_enc[16] &#x3D; {0};<br>  int cstat, bestcstat &#x3D; 0;<br>  int nz_coeff&#x3D;0;<br>  double lagr, lagrAcc &#x3D; 0, minlagr &#x3D; 0;<br>  VideoParameters *p_Vid &#x3D; currMB-&gt;p_Vid;</p>
+<p>  int subblock_x &#x3D; ((b8 &amp; 0x1) &#x3D;&#x3D; 0) ? (((b4 &amp; 0x1) &#x3D;&#x3D; 0) ? 0 : 1) : (((b4 &amp; 0x1) &#x3D;&#x3D; 0) ? 2 : 3);<br>  &#x2F;&#x2F; horiz. position for coeff_count context<br>  int subblock_y &#x3D; (b8 &lt; 2) ? ((b4 &lt; 2) ? 0 : 1) :((b4 &lt; 2) ? 2 : 3);<br>  &#x2F;&#x2F; vert.  position for coeff_count context<br>  int nnz;<br>  levelDataStruct *dataLevel &#x3D; &amp;levelData[0];</p>
+<p>  if (block_type !&#x3D; CHROMA_AC)<br>    nnz &#x3D; predict_nnz(currMB, LUMA, subblock_x, subblock_y);<br>  else<br>    nnz &#x3D; predict_nnz_chroma(currMB, currMB-&gt;subblock_x &gt;&gt; 2, (currMB-&gt;subblock_y &gt;&gt; 2) + 4);</p>
+<p>  for (coeff_ctr&#x3D;0;coeff_ctr &lt; coeff_num;coeff_ctr++)<br>  {<br>    levelTrellis[coeff_ctr] &#x3D; 0;</p>
+<pre><code>for(k=0; k &lt; dataLevel-&gt;noLevels; k++)
+&#123;
+  dataLevel-&gt;errLevel[k] /= 32768;
+&#125;
+
+lagrAcc += dataLevel-&gt;errLevel[imax(0, dataLevel-&gt;noLevels - 1)];
+
+level_to_enc[coeff_ctr] = dataLevel-&gt;pre_level;
+sign_to_enc[coeff_ctr]  = dataLevel-&gt;sign;
+
+if(dataLevel-&gt;noLevels &gt; 1)
+&#123;
+  dataLevel-&gt;coeff_ctr = coeff_ctr;
+  lastnonzero = coeff_ctr;
+&#125;
+else
+  dataLevel-&gt;coeff_ctr = -1;
+dataLevel++;
+</code></pre>
+<p>  }</p>
+<p>  if(lastnonzero !&#x3D; -1)<br>  {<br>    &#x2F;&#x2F;sort the coefficients based on their absolute value<br>    qsort(levelData, lastnonzero + 1, sizeof(levelDataStruct), cmp);<br>    dataLevel &#x3D; &amp;levelData[lastnonzero];</p>
+<pre><code>for(coeff_ctr = lastnonzero; coeff_ctr &gt;= 0; coeff_ctr--) // go over all coeff
+&#123;
+  if(dataLevel-&gt;noLevels == 1)
+  &#123;
+    dataLevel--;
+    continue;
+  &#125;
+
+  lagrAcc -= dataLevel-&gt;errLevel[dataLevel-&gt;noLevels-1];
+  for(cstat=0; cstat&lt;dataLevel-&gt;noLevels; cstat++) // go over all states of cur coeff k
+  &#123;
+    level_to_enc[dataLevel-&gt;coeff_ctr] = dataLevel-&gt;level[cstat];
+    lagr = lagrAcc + dataLevel-&gt;errLevel[cstat];
+    lagr += lambda * est_CAVLC_bits( p_Vid, level_to_enc, sign_to_enc, nnz, block_type);
+    if(cstat==0 || lagr&lt;minlagr)
+    &#123;
+      minlagr = lagr;
+      bestcstat = cstat;
+    &#125;
+  &#125;
+
+  lagrAcc += dataLevel-&gt;errLevel[bestcstat];
+  level_to_enc[dataLevel-&gt;coeff_ctr] = dataLevel-&gt;level[bestcstat];
+  dataLevel--;
+&#125;
+
+for(coeff_ctr = 0; coeff_ctr &lt;= lastnonzero; coeff_ctr++)
+&#123;
+  levelTrellis[coeff_ctr] = level_to_enc[coeff_ctr];
+  if (level_to_enc[coeff_ctr] != 0)
+    nz_coeff++;
+&#125;
+</code></pre>
+<p>  }</p>
+<p>  p_Vid-&gt;nz_coeff [p_Vid-&gt;current_mb_nr ][subblock_x][subblock_y] &#x3D; nz_coeff;<br>}</p>
+<p>&#x2F;*!</p>
+<hr>
+<ul>
+<li>\brief</li>
+<li>estimate CAVLC bits</li>
+</ul>
+<hr>
+<p>*&#x2F;<br>int est_CAVLC_bits (VideoParameters *p_Vid, int level_to_enc[16], int sign_to_enc[16], int nnz, int block_type)<br>{<br>  int           no_bits    &#x3D; 0;<br>  SyntaxElement se;</p>
+<p>  int coeff_ctr, scan_pos &#x3D; 0;<br>  int k, level &#x3D; 1, run &#x3D; -1, vlcnum;<br>  int numcoeff &#x3D; 0, lastcoeff &#x3D; 0, numtrailingones &#x3D; 0;<br>  int numones &#x3D; 0, totzeros &#x3D; 0, zerosleft, numcoef;<br>  int numcoeff_vlc;<br>  int level_two_or_higher;<br>  int max_coeff_num &#x3D; 0, cdc &#x3D; (block_type &#x3D;&#x3D; CHROMA_DC ? 1 : 0);<br>  int yuv &#x3D; p_Vid-&gt;yuv_format - 1;<br>  static const int incVlc[] &#x3D; {0, 3, 6, 12, 24, 48, 32768};  &#x2F;&#x2F; maximum vlc &#x3D; 6</p>
+<p>  int  pLevel[16] &#x3D; {0};<br>  int  pRun[16] &#x3D; {0};</p>
+<p>  static const int Token_lentab[3][4][17] &#x3D;<br>  {<br>    {<br>      { 1, 6, 8, 9,10,11,13,13,13,14,14,15,15,16,16,16,16},<br>      { 0, 2, 6, 8, 9,10,11,13,13,14,14,15,15,15,16,16,16},<br>      { 0, 0, 3, 7, 8, 9,10,11,13,13,14,14,15,15,16,16,16},<br>      { 0, 0, 0, 5, 6, 7, 8, 9,10,11,13,14,14,15,15,16,16}<br>    },<br>    {<br>      { 2, 6, 6, 7, 8, 8, 9,11,11,12,12,12,13,13,13,14,14},<br>      { 0, 2, 5, 6, 6, 7, 8, 9,11,11,12,12,13,13,14,14,14},<br>      { 0, 0, 3, 6, 6, 7, 8, 9,11,11,12,12,13,13,13,14,14},<br>      { 0, 0, 0, 4, 4, 5, 6, 6, 7, 9,11,11,12,13,13,13,14}<br>    },<br>    {<br>      { 4, 6, 6, 6, 7, 7, 7, 7, 8, 8, 9, 9, 9,10,10,10,10},<br>      { 0, 4, 5, 5, 5, 5, 6, 6, 7, 8, 8, 9, 9, 9,10,10,10},<br>      { 0, 0, 4, 5, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9,10,10,10},<br>      { 0, 0, 0, 4, 4, 4, 4, 4, 5, 6, 7, 8, 8, 9,10,10,10}<br>    }<br>  };</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">static const int Totalzeros_lentab[TOTRUN_NUM][16] = </span><br><span class="line">&#123;</span><br><span class="line">  &#123; 1,3,3,4,4,5,5,6,6,7,7,8,8,9,9,9&#125;,  </span><br><span class="line">  &#123; 3,3,3,3,3,4,4,4,4,5,5,6,6,6,6&#125;,  </span><br><span class="line">  &#123; 4,3,3,3,4,4,3,3,4,5,5,6,5,6&#125;,  </span><br><span class="line">  &#123; 5,3,4,4,3,3,3,4,3,4,5,5,5&#125;,  </span><br><span class="line">  &#123; 4,4,4,3,3,3,3,3,4,5,4,5&#125;,  </span><br><span class="line">  &#123; 6,5,3,3,3,3,3,3,4,3,6&#125;,  </span><br><span class="line">  &#123; 6,5,3,3,3,2,3,4,3,6&#125;,  </span><br><span class="line">  &#123; 6,4,5,3,2,2,3,3,6&#125;,  </span><br><span class="line">  &#123; 6,6,4,2,2,3,2,5&#125;,  </span><br><span class="line">  &#123; 5,5,3,2,2,2,4&#125;,  </span><br><span class="line">  &#123; 4,4,3,3,1,3&#125;,  </span><br><span class="line">  &#123; 4,4,2,1,3&#125;,  </span><br><span class="line">  &#123; 3,3,1,2&#125;,  </span><br><span class="line">  &#123; 2,2,1&#125;,  </span><br><span class="line">  &#123; 1,1&#125;,  </span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">static const int Run_lentab[TOTRUN_NUM][16] = </span><br><span class="line">&#123;</span><br><span class="line">  &#123;1,1&#125;,</span><br><span class="line">  &#123;1,2,2&#125;,</span><br><span class="line">  &#123;2,2,2,2&#125;,</span><br><span class="line">  &#123;2,2,2,3,3&#125;,</span><br><span class="line">  &#123;2,2,3,3,3,3&#125;,</span><br><span class="line">  &#123;2,3,3,3,3,3,3&#125;,</span><br><span class="line">  &#123;3,3,3,3,3,3,3,4,5,6,7,8,9,10,11&#125;,</span><br><span class="line">&#125;;</span><br><span class="line">static const int Token_lentab_cdc[3][4][17] =</span><br><span class="line">&#123;</span><br><span class="line">  //YUV420</span><br><span class="line"> &#123;&#123; 2, 6, 6, 6, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0&#125;,</span><br><span class="line">  &#123; 0, 1, 6, 7, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0&#125;,</span><br><span class="line">  &#123; 0, 0, 3, 7, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0&#125;,</span><br><span class="line">  &#123; 0, 0, 0, 6, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0&#125;&#125;,</span><br><span class="line">  //YUV422</span><br><span class="line"> &#123;&#123; 1, 7, 7, 9, 9,10,11,12,13, 0, 0, 0, 0, 0, 0, 0, 0&#125;,</span><br><span class="line">  &#123; 0, 2, 7, 7, 9,10,11,12,12, 0, 0, 0, 0, 0, 0, 0, 0&#125;,</span><br><span class="line">  &#123; 0, 0, 3, 7, 7, 9,10,11,12, 0, 0, 0, 0, 0, 0, 0, 0&#125;,</span><br><span class="line">  &#123; 0, 0, 0, 5, 6, 7, 7,10,11, 0, 0, 0, 0, 0, 0, 0, 0&#125;&#125;,</span><br><span class="line">  //YUV444</span><br><span class="line"> &#123;&#123; 1, 6, 8, 9,10,11,13,13,13,14,14,15,15,16,16,16,16&#125;,</span><br><span class="line">  &#123; 0, 2, 6, 8, 9,10,11,13,13,14,14,15,15,15,16,16,16&#125;,</span><br><span class="line">  &#123; 0, 0, 3, 7, 8, 9,10,11,13,13,14,14,15,15,16,16,16&#125;,</span><br><span class="line">  &#123; 0, 0, 0, 5, 6, 7, 8, 9,10,11,13,14,14,15,15,16,16&#125;&#125;</span><br><span class="line">&#125;;</span><br><span class="line">static const int Totalzeros_lentab_cdc[3][TOTRUN_NUM][16] =</span><br><span class="line">&#123;</span><br><span class="line">  //YUV420</span><br><span class="line"> &#123;&#123; 1,2,3,3&#125;,</span><br><span class="line">  &#123; 1,2,2&#125;,</span><br><span class="line">  &#123; 1,1&#125;&#125;,</span><br><span class="line">  //YUV422</span><br><span class="line"> &#123;&#123; 1,3,3,4,4,4,5,5&#125;,</span><br><span class="line">  &#123; 3,2,3,3,3,3,3&#125;,</span><br><span class="line">  &#123; 3,3,2,2,3,3&#125;,</span><br><span class="line">  &#123; 3,2,2,2,3&#125;,</span><br><span class="line">  &#123; 2,2,2,2&#125;,</span><br><span class="line">  &#123; 2,2,1&#125;,</span><br><span class="line">  &#123; 1,1&#125;&#125;,</span><br><span class="line">  //YUV444</span><br><span class="line"> &#123;&#123; 1,3,3,4,4,5,5,6,6,7,7,8,8,9,9,9&#125;,</span><br><span class="line">  &#123; 3,3,3,3,3,4,4,4,4,5,5,6,6,6,6&#125;,</span><br><span class="line">  &#123; 4,3,3,3,4,4,3,3,4,5,5,6,5,6&#125;,</span><br><span class="line">  &#123; 5,3,4,4,3,3,3,4,3,4,5,5,5&#125;,</span><br><span class="line">  &#123; 4,4,4,3,3,3,3,3,4,5,4,5&#125;,</span><br><span class="line">  &#123; 6,5,3,3,3,3,3,3,4,3,6&#125;,</span><br><span class="line">  &#123; 6,5,3,3,3,2,3,4,3,6&#125;,</span><br><span class="line">  &#123; 6,4,5,3,2,2,3,3,6&#125;,</span><br><span class="line">  &#123; 6,6,4,2,2,3,2,5&#125;,</span><br><span class="line">  &#123; 5,5,3,2,2,2,4&#125;,</span><br><span class="line">  &#123; 4,4,3,3,1,3&#125;,</span><br><span class="line">  &#123; 4,4,2,1,3&#125;,</span><br><span class="line">  &#123; 3,3,1,2&#125;,</span><br><span class="line">  &#123; 2,2,1&#125;,</span><br><span class="line">  &#123; 1,1&#125;&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>  max_coeff_num &#x3D; ( (block_type &#x3D;&#x3D; CHROMA_DC) ? p_Vid-&gt;num_cdc_coeff :<br>  ( (block_type &#x3D;&#x3D; LUMA_INTRA16x16AC || block_type &#x3D;&#x3D; CB_INTRA16x16AC || block_type &#x3D;&#x3D; CR_INTRA16x16AC || block_type &#x3D;&#x3D; CHROMA_AC) ? 15 : 16) );</p>
+<p>  &#x2F;&#x2F;convert zigzag scan to (run, level) pairs<br>  for (coeff_ctr &#x3D; 0; coeff_ctr &lt; max_coeff_num; coeff_ctr++)<br>  {<br>    run++;<br>    level &#x3D; level_to_enc[coeff_ctr];<br>    if (level !&#x3D; 0)<br>    {<br>      pLevel[scan_pos] &#x3D; isignab(level, sign_to_enc[coeff_ctr]);<br>      pRun  [scan_pos] &#x3D; run;<br>      ++scan_pos;<br>      run &#x3D; -1;                     &#x2F;&#x2F; reset zero level counter<br>    }<br>  }</p>
+<p>  level &#x3D; 1;<br>  for(k &#x3D; 0; (k &lt; max_coeff_num) &amp;&amp; level !&#x3D; 0; k++)<br>  {<br>    level &#x3D; pLevel[k]; &#x2F;&#x2F; level<br>    run   &#x3D; pRun[k];   &#x2F;&#x2F; run</p>
+<pre><code>if (level)
+&#123;
+  totzeros += run; // lets add run always (even if zero) to avoid conditional
+  if (iabs(level) == 1)
+  &#123;
+    numones ++;
+    numtrailingones ++;
+    numtrailingones = imin(numtrailingones, 3); // clip to 3
+  &#125;
+  else
+  &#123;
+    numtrailingones = 0;
+  &#125;
+  numcoeff ++;
+  lastcoeff = k;
+&#125;
+</code></pre>
+<p>  }</p>
+<p>  if (!cdc)<br>  {<br>    numcoeff_vlc &#x3D; (nnz &lt; 2) ? 0 : ((nnz &lt; 4) ? 1 : ((nnz &lt; 8) ? 2 : 3));<br>  }<br>  else<br>  {<br>    &#x2F;&#x2F; chroma DC (has its own VLC)<br>    &#x2F;&#x2F; numcoeff_vlc not relevant<br>    numcoeff_vlc &#x3D; 0;<br>  }</p>
+<p>  se.value1 &#x3D; numcoeff;<br>  se.value2 &#x3D; numtrailingones;<br>  se.len    &#x3D; numcoeff_vlc; &#x2F;* use len to pass vlcnum *&#x2F;</p>
+<p>  if (!cdc)<br>  {<br>    if (se.len &#x3D;&#x3D; 3)<br>      no_bits +&#x3D; 6;  &#x2F;&#x2F; 4 + 2 bit FLC<br>    else<br>      no_bits +&#x3D; Token_lentab[se.len][se.value2][se.value1];<br>  }<br>  else<br>    no_bits +&#x3D; Token_lentab_cdc[yuv][se.value2][se.value1];  </p>
+<p>  if (!numcoeff)<br>    return no_bits;<br>  else<br>  {<br>    if (numtrailingones)<br>      no_bits +&#x3D; numtrailingones;</p>
+<pre><code>// encode levels
+level_two_or_higher = (numcoeff &gt; 3 &amp;&amp; numtrailingones == 3) ? 0 : 1;
+
+vlcnum = (numcoeff &gt; 10 &amp;&amp; numtrailingones &lt; 3) ? 1 : 0;
+
+for (k = lastcoeff - numtrailingones; k &gt;= 0; k--)
+&#123;
+  level = pLevel[k]; // level
+
+  se.value1 = level;
+
+  if (level_two_or_higher)
+  &#123;
+    level_two_or_higher = 0;
+    if (se.value1 &gt; 0)
+      se.value1 --;
+    else
+      se.value1 ++;
+  &#125;
+
+  //    encode level
+  if (vlcnum == 0)
+    estSyntaxElement_Level_VLC1(&amp;se);
+  else
+    estSyntaxElement_Level_VLCN(&amp;se, vlcnum);
+
+  // update VLC table
+  if (iabs(level) &gt; incVlc[vlcnum])
+    vlcnum++;
+
+  if ((k == lastcoeff - numtrailingones) &amp;&amp; iabs(level) &gt; 3)
+    vlcnum = 2;
+
+  no_bits  += se.len;
+&#125;
+
+// encode total zeroes
+if (numcoeff &lt; max_coeff_num)
+&#123;
+  se.value1 = totzeros;
+
+  vlcnum = numcoeff-1;
+
+  se.len = vlcnum;
+
+  if (!cdc)
+    no_bits += Totalzeros_lentab[se.len][se.value1];
+  else
+    no_bits += Totalzeros_lentab_cdc[yuv][se.len][se.value1];
+&#125;
+
+// encode run before each coefficient
+zerosleft = totzeros;
+numcoef = numcoeff;
+for (k = lastcoeff; k &gt;= 0; k--)
+&#123;
+  run = pRun[k]; // run
+
+  se.value1 = run;
+
+  // for last coeff, run is remaining totzeros
+  // when zerosleft is zero, remaining coeffs have 0 run
+  if ((!zerosleft) || (numcoeff &lt;= 1 ))
+    break;
+
+  if (numcoef &gt; 1 &amp;&amp; zerosleft) 
+  &#123;
+    vlcnum = imin(zerosleft - 1, RUNBEFORE_NUM_M1);
+    se.len = vlcnum;
+    no_bits += Run_lentab[se.len][se.value1];
+    zerosleft -= run;
+    numcoef --;
+  &#125;
+&#125;
+</code></pre>
+<p>  }</p>
+<p>  return no_bits;<br>}</p>
+
+  <div class="guide-links">
+    
+    
+  </div>
+
+    <div class="footer">
+        <p>
+          <a target="_blank" rel="noopener" href="https://changkun.de">欧长坤</a> &copy; 2016-2025 版权所有，
+          采用<a rel="license noopener" target="_blank" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议许可</a>，代码使用 <a href="https://opensource.org/licenses/MIT" target="_blank">MIT</a> 协议开源。</a>
+        </p>
+        <p>
+            如果你认为本书对你起到了帮助，可以<a href="/modern-cpp/about/donate.html">资助作者</a>。
+        </p>
+      </div>
+
+
+
+</div>
+
+	</div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/smooth-scroll/10.2.1/js/smooth-scroll.min.js"></script>
+
+    <!-- main custom script for sidebars, version selects etc. -->
+    <script src="https://cdn.jsdelivr.net/npm/css.escape@1.5.1/css.escape.min.js"></script>
+    <script src="/modern-cpp/js/common.js"></script>
+
+    <!-- fastclick -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      FastClick.attach(document.body)
+    }, false)
+    </script>
+  </body>
+</html>

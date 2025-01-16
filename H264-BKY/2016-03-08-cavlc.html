@@ -1,0 +1,783 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>CAVLC 现代 C++ 教程: 高速上手 C++ 11/14/17/20 - Modern C++ Tutorial: C++ 11/14/17/20 On the Fly</title>
+    <meta charset="utf-8">
+    <meta name="description" content="Modern C++ Tutorial | C++ 11/14/17/20 On the Fly | 现代 C++ 教程 | 高速上手 C++11/14/17/20">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="shortcut icon" type="image/x-icon" href="/modern-cpp/assets/cover-2nd.png">
+    <meta name="msapplication-TileColor" content="#7e2d36">
+    <meta name="theme-color" content="#7e2d36">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-80889616-2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-80889616-2');
+    </script>
+
+    <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600|Roboto Mono' rel='stylesheet' type='text/css'>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- main page styles -->
+    
+<link rel="stylesheet" href="/modern-cpp/css/page.css">
+
+
+    <!-- this needs to be loaded before guide's inline scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script>window.PAGE_TYPE = "book-zh-cn"</script>
+    <script async src="//changkun.de/urlstat/client.js"></script>
+  <meta name="generator" content="Hexo 7.3.0"></head>
+  <body class="docs">
+	<!-- body开始 -->
+
+		<!-- mobile-bar 2-->
+      <div id="mobile-bar" data-bg-text="现代 C++ 教程" >
+        <a class="menu-button"></a>
+        <a class="logo" href="/modern-cpp/"></a>
+      </div>
+
+	<!-- include header -->
+    <div id="header">
+  <a id="logo" href="/">
+      <img src="/modern-cpp/assets/cover-2nd-logo.png">
+      <span>教程：高速上手</span>
+  </a>
+  <ul id="nav">
+      <li class="nav-dropdown-container resource">
+  <a class="nav-link">资源</a><span class="arrow"></span>
+  <ul class="nav-dropdown">
+    <li><ul>
+      <li><a class="nav-link" href="/modern-cpp/zh-cn/00-preface/" >正文</a></li>
+      <!-- TODO -->
+      <!-- <li><a class="nav-link" href="/modern-cpp/code/1/" >代码</a></li>
+      <li><a class="nav-link" href="/modern-cpp/exercises/1/" >习题</a></li>
+      <li><a class="nav-link" href="/modern-cpp/answers/1/" >答案</a></li> -->
+    </ul></li>
+  </ul>
+</li>
+
+<li class="nav-dropdown-container about">
+  <a class="nav-link">关于</a><span class="arrow"></span>
+  <ul class="nav-dropdown">
+      <li><ul>
+      <li><a class="nav-link" href="/modern-cpp/about/donate.html" >资助</a></li>
+      <li><a class="nav-link" href="/modern-cpp/about/copyright.html" >版权声明</a></li>
+      <li><a class="nav-link" href="/modern-cpp/about/ack.html" >致谢</a></li>
+      </ul></li>
+  </ul>
+</li>
+
+
+<li class="nav-dropdown-container about">
+  <a class="nav-link" target="_blank" rel="noopener" href="https://github.com/rstg00po54/modern-cpp-tutorial">GitHub</a>
+</li>
+
+
+  </ul>
+</div>
+
+    
+      <div id="main" class="fix-sidebar">
+		<!-- body 111 -->
+        
+
+
+
+  <div class="sidebar">
+  <div class="sidebar-inner">
+    <ul class="main-menu">
+        <li class="nav-dropdown-container resource">
+  <a class="nav-link">资源</a><span class="arrow"></span>
+  <ul class="nav-dropdown">
+    <li><ul>
+      <li><a class="nav-link" href="/modern-cpp/zh-cn/00-preface/" >正文</a></li>
+      <!-- TODO -->
+      <!-- <li><a class="nav-link" href="/modern-cpp/code/1/" >代码</a></li>
+      <li><a class="nav-link" href="/modern-cpp/exercises/1/" >习题</a></li>
+      <li><a class="nav-link" href="/modern-cpp/answers/1/" >答案</a></li> -->
+    </ul></li>
+  </ul>
+</li>
+
+<li class="nav-dropdown-container about">
+  <a class="nav-link">关于</a><span class="arrow"></span>
+  <ul class="nav-dropdown">
+      <li><ul>
+      <li><a class="nav-link" href="/modern-cpp/about/donate.html" >资助</a></li>
+      <li><a class="nav-link" href="/modern-cpp/about/copyright.html" >版权声明</a></li>
+      <li><a class="nav-link" href="/modern-cpp/about/ack.html" >致谢</a></li>
+      </ul></li>
+  </ul>
+</li>
+
+
+<li class="nav-dropdown-container about">
+  <a class="nav-link" target="_blank" rel="noopener" href="https://github.com/rstg00po54/modern-cpp-tutorial">GitHub</a>
+</li>
+
+
+    </ul>
+    <div class="list">
+      <h2>
+		
+          正文
+
+      </h2>
+      <ul class="menu-root">
+	  <!-- 引入外部的 JS 文件 -->
+  <!-- <script src="/modern-cpp/js/menu.js"></script> -->
+
+
+	<!-- 传递数据到 JavaScript -->
+	
+	
+	
+
+	
+		<li>
+		  <a href="/H264-BKY/2014-02-15-h.264%E7%9A%84poc%E8%AE%A1%E7%AE%97.html" class="sidebar-link">
+			h.264的POC计算
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2014-02-27-%E6%8C%87%E6%95%B0%E5%93%A5%E4%BC%A6%E5%B8%83%E7%BC%96%E7%A0%81.html" class="sidebar-link">
+			指数哥伦布编码
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2014-03-15-h.264%E5%8A%A0%E6%9D%83%E9%A2%84%E6%B5%8B.html" class="sidebar-link">
+			h.264加权预测
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2014-03-11-h.264%E7%A0%81%E7%8E%87%E6%8E%A7%E5%88%B6.html" class="sidebar-link">
+			h.264码率控制
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2014-04-23-h.264%E7%9B%B4%E6%8E%A5%E9%A2%84%E6%B5%8B.html" class="sidebar-link">
+			h.264直接预测
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2014-03-17-h.264-fmo.html" class="sidebar-link">
+			h.264 FMO
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2014-05-11-h.264%E5%8F%82%E8%80%83%E5%9B%BE%E5%83%8F%E5%88%97%E8%A1%A8%E3%80%81%E8%A7%A3%E7%A0%81%E5%9B%BE%E5%83%8F%E7%BC%93%E5%AD%98.html" class="sidebar-link">
+			h.264参考图像列表、解码图像缓存
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2014-06-06-h.264-mvp%E6%B1%82%E8%A7%A3%E8%BF%87%E7%A8%8B.html" class="sidebar-link">
+			h.264 mvp求解过程
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2014-06-16-umhexagons%E6%90%9C%E7%B4%A2%E8%BF%87%E7%A8%8B.html" class="sidebar-link">
+			UMHexagonS搜索过程
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2014-07-20-h.264%E5%85%A8%E6%90%9C%E7%B4%A2%E4%BB%A5%E5%8F%8A%E5%BF%AB%E9%80%9F%E5%85%A8%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95.html" class="sidebar-link">
+			h.264全搜索以及快速全搜索算法
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2014-06-18-h.264-%E7%8E%87%E5%A4%B1%E7%9C%9F%E4%BC%98%E5%8C%96.html" class="sidebar-link">
+			h.264 率失真优化
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2014-10-17-epzs%E6%90%9C%E7%B4%A2%E8%BF%87%E7%A8%8B.html" class="sidebar-link">
+			EPZS搜索过程
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2014-12-07-intra-chroma-prediction.html" class="sidebar-link">
+			Intra Chroma Prediction
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2014-12-28-intra-luma-prediction.html" class="sidebar-link">
+			Intra Luma Prediction
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2015-01-13-h.264-transfor.html" class="sidebar-link">
+			H.264 Transform
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2015-02-02-h.264-quantization.html" class="sidebar-link">
+			H.264 Quantization
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2015-04-06-quantization-method.html" class="sidebar-link">
+			Quantization Method
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2015-04-26-h.264-mode-decision.html" class="sidebar-link">
+			h.264 Mode Decision
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2015-05-17-h.264-bi-predictive-motion-searc.html" class="sidebar-link">
+			h.264 Bi-Predictive Motion Search
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2016-02-24-h.264%E8%AF%AD%E6%B3%95%E7%BB%93%E6%9E%84%E5%88%86%E6%9E%90.html" class="sidebar-link">
+			h.264语法结构分析
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2016-02-29-h.264%E5%AE%8F%E5%9D%97%E4%B8%8E%E5%AD%90%E5%AE%8F%E5%9D%97%E7%B1%BB%E5%9E%8B.html" class="sidebar-link">
+			h.264宏块与子宏块类型
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2016-03-05-h.264-scanning-process-for-transform-coefficients.html" class="sidebar-link">
+			h.264 scanning process for transform coefficients
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2016-03-08-cavlc.html" class="sidebar-link current">
+			CAVLC
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2016-03-22-cabac.html" class="sidebar-link">
+			CABAC
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2016-03-25-%E7%AE%97%E6%9C%AF%E7%BC%96%E7%A0%81jm%E5%AE%9E%E7%8E%B0.html" class="sidebar-link">
+			算术编码JM实现
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2016-04-27-h.264%E5%B9%B6%E8%A1%8C%E8%A7%A3%E7%A0%81%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90.html" class="sidebar-link">
+			h.264并行解码算法分析
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2016-05-17-h.264-%E5%8E%BB%E5%9D%97%E6%BB%A4%E6%B3%A2.html" class="sidebar-link">
+			h.264 去块滤波
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2016-08-11-h.264%E5%B9%B6%E8%A1%8C%E8%A7%A3%E7%A0%81%E7%AE%97%E6%B3%952d-wave%E5%AE%9E%E7%8E%B0(%E5%9F%BA%E4%BA%8E%E5%A4%9A%E6%A0%B8%E9%9D%9E%E5%85%B1%E4%BA%AB%E5%86%85%E5%AD%98%E7%B3%BB%E7%BB%9F).html" class="sidebar-link">
+			h.264并行解码算法2D-Wave实现（基于多核非共享内存系统）
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2016-09-18-h.264%E5%B9%B6%E8%A1%8C%E8%A7%A3%E7%A0%81%E7%AE%97%E6%B3%952d-wave%E5%AE%9E%E7%8E%B0(%E5%9F%BA%E4%BA%8E%E5%A4%9A%E6%A0%B8%E5%85%B1%E4%BA%AB%E5%86%85%E5%AD%98%E7%B3%BB%E7%BB%9F).html" class="sidebar-link">
+			h.264并行解码算法2D-Wave实现（基于多核共享内存系统）
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2016-09-30-h.264%E5%B9%B6%E8%A1%8C%E8%A7%A3%E7%A0%81%E7%AE%97%E6%B3%953d-wave%E5%AE%9E%E7%8E%B0(%E5%9F%BA%E4%BA%8E%E5%A4%9A%E6%A0%B8%E5%85%B1%E4%BA%AB%E5%86%85%E5%AD%98%E7%B3%BB%E7%BB%9F).html" class="sidebar-link">
+			h.264并行解码算法3D-Wave实现（基于多核共享内存系统）
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2017-04-04-h.264%E5%B9%B6%E8%A1%8C%E7%86%B5%E8%A7%A3%E7%A0%81.html" class="sidebar-link">
+			h.264并行熵解码
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2017-06-15-cabac%E6%80%BB%E7%BB%93%E4%B8%8E%E8%A1%A5%E5%85%85%E8%AE%A8%E8%AE%BA.html" class="sidebar-link">
+			CABAC总结与补充讨论
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2019-01-04-%5Bffmpeg%5D-h264%E5%B9%B6%E8%A1%8C%E8%A7%A3%E7%A0%81.html" class="sidebar-link">
+			ffmpeg h264并行解码
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2019-01-24-%5Bffmpeg%5D-h.264%E8%A7%A3%E7%A0%81%E6%89%80%E7%94%A8%E7%9A%84%E4%B8%BB%E8%A6%81%E7%BC%93%E5%86%B2%E5%8C%BA%E4%BB%8B%E7%BB%8D.html" class="sidebar-link">
+			ffmpeg h.264解码所用的主要缓冲区介绍
+		  </a>
+		</li>
+
+
+</ul>
+
+	  
+    </div>
+  </div>
+</div>
+
+<link rel="stylesheet" href="../icon/iconfont.css">
+<style>
+
+/* body {
+            background: #e4e9f5;
+        } */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            list-style: none;
+            text-decoration: none;
+        }
+
+        section {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font: 900 100px '';
+            color: #ffa21759;
+            background: rgb(34, 37, 39);
+        }
+
+        .shell {
+            position: fixed;
+            width: 60px;
+			left: 0;
+            height: 100%;
+            background: #000000;
+            z-index: 9999;
+            transition: width 0.5s;
+            /* padding-left: 10px; */
+            overflow: hidden;
+        }
+/* 悬停改变宽度 */
+        .shell:hover {
+            width: 300px;
+        }
+
+        .imageBox {
+            position: relative;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+
+        .imageBox img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .shell ul {
+            position: relative;
+            height: 100vh;
+        }
+
+        .shell ul li {
+            position: relative;
+            padding: 5px;
+        }
+
+        .active {
+            background: #e4e9f5;
+            border-top-left-radius: 50px;
+            border-bottom-left-radius: 50px;
+        }
+
+        .active::before {
+            content: "";
+            position: absolute;
+            top: -30px;
+            right: 0;
+            width: 30px;
+            height: 30px;
+            border-bottom-right-radius: 25px;
+            box-shadow: 5px 5px 0 5px #e4e9f5;
+            background: transparent;
+        }
+
+        .active::after {
+            content: "";
+            position: absolute;
+            bottom: -30px;
+            right: 0;
+            width: 30px;
+            height: 30px;
+            border-top-right-radius: 25px;
+            box-shadow: 5px -5px 0 5px #e4e9f5;
+            background: transparent;
+        }
+
+        #shelllogo {
+            margin: 40px 0 100px 0;
+        }
+
+        .shell ul li a {
+            position: relative;
+            display: flex;
+            white-space: nowrap;
+        }
+
+        .icon {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-width: 40px;
+            /* padding-left: 10px; */
+            height: 70px;
+            color: #333;
+            transition: 0.5s;
+            color: rgb(255, 255, 255);
+        }
+
+        .icon i {
+            font-size: 30px;
+            z-index: 999;
+        }
+
+        .text {
+            position: relative;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            font-size: 20px;
+            color: #ffad32c1;
+            padding-left: 15px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: 0.5s;
+        }
+
+        .shell ul li:hover a .icon,
+        .shell ul li:hover a .text {
+            color: #ffa117;
+        }
+
+        .active a .icon::before {
+            content: "";
+            position: absolute;
+            inset: 5px;
+            width: 60px;
+            background: #000000;
+            /* 圆形 */
+            border-radius: 50%;
+            transition: 0.5s;
+            border: 7px solid #ffa117;
+            box-sizing: border-box;
+        }
+</style>
+
+
+<div class="shell">
+	<ul class="nav">
+		<li class="active" id="shelllogo">
+			<a href="#">
+				<div class="icon">
+					<div class="imageBox">
+						<img src="../icon/cat.jpg" alt="">
+					</div>
+				</div>
+				<div class="text">前端小窝</div>
+			</a>
+		</li>
+		<li>
+			<a href="#home">
+				<div class="icon">
+					<i class="iconfont icon-cangku"></i>
+				</div>
+				<div class="text">Home</div>
+			</a>
+		</li>
+		<li>
+			<a href="#theme">
+				<div class="icon">
+					<!-- 调色板 -->
+					<i class="iconfont icon-tiaoseban"></i>
+				</div>
+				<div class="text">Theme</div>
+			</a>
+		</li>
+		<li>
+			<a href="#wallet">
+				<div class="icon">
+					<!-- 钱包 -->
+					<i class="iconfont icon-qianbao"></i>
+				</div>
+				<div class="text">Wallet</div>
+			</a>
+		</li>
+		<li>
+			<a href="#picture">
+				<div class="icon">
+					<!-- 图片 -->
+					<i class="iconfont icon-tupian"></i>
+				</div>
+				<div class="text">picture</div>
+			</a>
+		</li>
+		<li>
+			<a href="#code">
+				<div class="icon">
+					<!-- 二维码 -->
+					<i class="iconfont icon-erweima"></i>
+				</div>
+				<div class="text">QR code</div>
+			</a>
+		</li>
+		<li>
+			<a href="#authentication">
+				<div class="icon">
+					<!-- 盾牌保险认证 -->
+					<i class="iconfont icon-dunpaibaoxianrenzheng"></i>
+				</div>
+				<div class="text">auth</div>
+			</a>
+		</li>
+		<li>
+			<a href="#me">
+				<div class="icon">
+					<div class="imageBox">
+						<img src="./cat.jpg" alt="">
+					</div>
+				</div>
+				<div class="text">ME</div>
+			</a>
+		</li>
+	</ul>
+</div>
+
+<div class="content book-zh-cn with-sidebar 2016-03-08-cavlc-guide">
+  <p>在H.264标准中，CAVLC（Context-based Adaptive Variable Length Coding）被用于亮度和色度残差数据编码。在标准的码流结构中，CAVLC编码方式描述为ce(v)。如果在编码时采用CAVLC，那么尽管在DCT时是以8x8块为单位进行的，在进行CAVLC时也会强制采用4x4块为单位进行编码（请参考<a target="_blank" rel="noopener" href="http://www.cnblogs.com/TaigaCon/p/5215448.html">h.264语法结构分析</a>中的redisual_luma部分）。在进行熵编码之前，需要把4x4块的矩阵中的元素按照一定顺序重新排列成大小为16的序列，这部分工作请参考<a target="_blank" rel="noopener" href="http://www.cnblogs.com/TaigaCon/p/5245108.html">h.264 scanning process for transform coefficients</a>，熵编码就是以这些序列为基础进行编码的。</p>
+<p>CAVLC可分为五个部分</p>
+<ol>
+<li>编码非零系数的数目（TotalCoeffs）、拖尾系数（TrailingOnes）的数目</li>
+<li>对每个拖尾系数（TrailingOnes）的符号进行编码</li>
+<li>对除了拖尾系数之外的非零系数（level）进行编码</li>
+<li>对最后一个非零系数前面零的数目（TotalZeros）进行编码</li>
+<li>对每个非零系数前面连续的零的个数（RunBefore）进行编码</li>
+</ol>
+<h1 id="一-编码TotalCoeffs-TrailingOnes"><a href="#一-编码TotalCoeffs-TrailingOnes" class="headerlink" title="一. 编码TotalCoeffs,TrailingOnes"></a>一. 编码TotalCoeffs,TrailingOnes</h1><p><strong>TotalCoeffs</strong>：非零系数数目。变换系数level中所有不为0的level的数目。<br><strong>TrailingOnes</strong>：拖尾系数的数目。指的是矩阵重排列后，序列末尾连续出现的$\pm 1$的个数（中间可以间隔任意多个0）。如果$\pm 1$的个数大于3个，则只有最后三个$\pm 1$会被视为拖尾系数，其余的被视为普通的非零系数。<br>我们用一个例子来解释TotalCoeffs以及TrailingOnes<br><a target="_blank" rel="noopener" href="http://images2015.cnblogs.com/blog/421096/201603/421096-20160308175828194-1409634026.png"><img alt="" src="img/2016-03-08-cavlc/421096-20160308175828819-948853858.png"></a><br>在上述例子中，共有5个非零系数，因此TotalCoeffs为5；其中有四个非零系数都是$\pm 1$，只有最后三个被视为拖尾系数，因此TrailingOnes为3。</p>
+<p>TotalCoeffs与TrailingOnes是一起进行编码的，编码通过查表的方式进行，码表请参考标准中的表9-5。<br>用来编码TotalCoeffs与TrailingOnes的码表，需要根据变量nC的值进行选择。除了色度的直流系数（Chroma DC）之外，其它系数类型的nC值是根据当前块左边4x4块的非零系数数目（nA）和当前块上边4x4块的非零系数数目（nB）求得。nC的求值过程见下表。其中“X”表示与当前块同属于一个slice并可用。</p>
+<p>另外，如果输入的系数是色度的直流系数（而且视频格式为4：2：0），nC&#x3D;-1；如果输入的系数是色度的直流系数（而且视频格式为4：2：2），nC&#x3D;-2。</p>
+<p>原理上说，nC代表了当前块的相邻块非零系数的情况，由于块与块之间的相关性，当我们知道了相邻块的非零系数的情况，就有很大概率知道了当前块非零系数的情况。有了概率，h.264标准在这里引入了huffman编码，不过huffman的编码过程不用我们自己处理，h.264标准已经根据实验得到的数据组合成了码表9-5。</p>
+<h1 id="二-对TrailingOnes的符号进行编码"><a href="#二-对TrailingOnes的符号进行编码" class="headerlink" title="二. 对TrailingOnes的符号进行编码"></a>二. 对TrailingOnes的符号进行编码</h1><p>在第一步时，对于TrailingOnes，我们只编码了它的个数。在这一步，我们对TrailingOnes的符号进行编码。对每个拖尾系数需要用一个bit表示它的符号。标准规定用0表示“+”，用1表示“-”。编码顺序是按照扫描逆序进行，也就是从高频数据开始。<br><a target="_blank" rel="noopener" href="http://images2015.cnblogs.com/blog/421096/201603/421096-20160308175829460-742352095.png"><img alt="" src="img/2016-03-08-cavlc/421096-20160308175830038-1379666635.png"></a></p>
+<h1 id="三-对除了拖尾系数之外的非零level进行编码"><a href="#三-对除了拖尾系数之外的非零level进行编码" class="headerlink" title="三. 对除了拖尾系数之外的非零level进行编码"></a>三. 对除了拖尾系数之外的非零level进行编码</h1><p>除了拖尾系数之外的非零level可能会有多个，编码顺序与上述TrailingOnes的一样，也是逆序进行。<br><a target="_blank" rel="noopener" href="http://images2015.cnblogs.com/blog/421096/201603/421096-20160308175830679-14520034.png"><img alt="" src="img/2016-03-08-cavlc/421096-20160308175831163-554363657.png"></a></p>
+<p>对于每个level，编码结果包括两部分：前缀（level_prefix）和后缀（level_suffix）。<br><a target="_blank" rel="noopener" href="http://images2015.cnblogs.com/blog/421096/201603/421096-20160308175831585-429685182.png"><img alt="" src="img/2016-03-08-cavlc/421096-20160308175831897-434633587.png"></a><br>其中前缀的码值需要根据level_prefix的值去参照标准中的表9-6，后缀的码值就是level_suffix的二进制。</p>
+<p>如何计算level_prefix以及level_suffix的这部分比较麻烦，我们有必要照着标准分析。<br>标准规定了CAVLC解码的步骤如下，我们能根据这些步骤逆推出它的编码步骤</p>
+<ol>
+<li>The syntax element level_prefix is decoded as specified in clause 9.2.2.1.</li>
+<li>The variable levelSuffixSize is set as follows:</li>
+</ol>
+<ul>
+<li>If level_prefix is equal to 14 and suffixLength is equal to 0, levelSuffixSize is set equal to 4.</li>
+<li>Otherwise, if level_prefix is greater than or equal to 15, levelSuffixSize is set equal to level_prefix − 3.</li>
+<li>Otherwise, levelSuffixSize is set equal to suffixLength.</li>
+</ul>
+<ol start="3">
+<li>The syntax element level_suffix is decoded as follows:</li>
+</ol>
+<ul>
+<li>If levelSuffixSize is greater than 0, the syntax element level_suffix is decoded as unsigned integerrepresentation u(v) with levelSuffixSize bits.</li>
+<li>Otherwise (levelSuffixSize is equal to 0), the syntax element level_suffix is inferred to be equal to 0.</li>
+</ul>
+<ol start="4">
+<li>The variable levelCode is set equal to ( Min( 15, level_prefix ) &lt;&lt; suffixLength ) + level_suffix.</li>
+<li>When level_prefix is greater than or equal to 15 and suffixLength is equal to 0, levelCode is incremented by 15.</li>
+<li>When level_prefix is greater than or equal to 15( 16 is the same ), levelCode is incremented by (1&lt;&lt;( level_prefix − 3 )) − 4096.</li>
+<li>When the index i is equal to TrailingOnes( coeff_token ) and TrailingOnes( coeff_token ) is less than 3, levelCode is incremented by 2.</li>
+<li>The variable levelVal[ i ] is derived as follows:</li>
+</ol>
+<ul>
+<li>If levelCode is an even number, levelVal[ i ] is set equal to ( levelCode + 2 ) &gt;&gt; 1.</li>
+<li>Otherwise (levelCode is an odd number), levelVal[ i ] is set equal to ( −levelCode − 1) &gt;&gt; 1.</li>
+</ul>
+<ol start="9">
+<li>When suffixLength is equal to 0, suffixLength is set equal to 1.</li>
+<li>When the absolute value of levelVal[ i ] is greater than ( 3 &lt;&lt; ( suffixLength − 1 ) ) and suffixLength is less than 6, suffixLength is incremented by 1.</li>
+<li>The index i is incremented by 1.<br>下面的分析过程会把这些步骤记为“上述步骤”</li>
+</ol>
+<h4 id="1-有符号的level转换为无符号的levelCode"><a href="#1-有符号的level转换为无符号的levelCode" class="headerlink" title="1. 有符号的level转换为无符号的levelCode"></a>1. 有符号的level转换为无符号的levelCode</h4><p>我们知道level的值可能为正，也可能为负，是带符号的，我们需要把它转化成无符号的levelCode以供后面的计算。根据（上述步骤8），我们知道在进行CAVLC编码时levelCode的计算方式如下：<br>如果$level$为正，$levelCode &#x3D; (|level|-1)&lt;&lt;1$<br>如果$level$为负，$levelCode &#x3D; (|level|-1)&lt;&lt;1+1$<br>因此有以下转换<br><a target="_blank" rel="noopener" href="http://images2015.cnblogs.com/blog/421096/201603/421096-20160308175832554-1330319868.png"><img alt="" src="img/2016-03-08-cavlc/421096-20160308175833257-1296349008.png"></a><br>可以看到正的level变成了levelCode中的偶数部分，负的level变成了levelCode的奇数部分，及levelCode中的最低位的bit代表符号。<br>此外，存在一种需要调整levelCode大小的情况：如果当前编码块的拖尾系数的个数小于3（TrailingOnes &lt; 3），那么需要对第一个进行编码的非零非拖尾level的levelCode减去2（上述步骤7）。<br><img alt="" src="img/2016-03-08-cavlc/421096-20180308183617182-1053091367.png"></p>
+<h4 id="2-levelCode的拆分"><a href="#2-levelCode的拆分" class="headerlink" title="2. levelCode的拆分"></a>2. levelCode的拆分</h4><p>这部分我们首先需要了解这两个变量的含义<br><strong>levelSuffixSize：</strong>后缀level_suffix的实际长度<br><strong>suffixLength：</strong>在某些情况下，levelSuffixSize等于这个变量的值，suffixLength也用于计算前缀的值，它贯穿于整个CAVLC编码过程，会在一个宏块开始编码level时进行初始化（见下述标准中抓取的部分），并且在每个level编码后进行更新。</p>
+<ul>
+<li>If TotalCoeff( coeff_token ) is greater than 10 and TrailingOnes( coeff_token ) is less than 3, suffixLength is set<br>equal to 1.</li>
+<li>Otherwise (TotalCoeff( coeff_token ) is less than or equal to 10 or TrailingOnes( coeff_token ) is equal to 3),<br>suffixLength is set equal to 0.<br>suffixLength会根据宏块的非零系数以及拖尾系数的个数被初始化为0或者1；在每个level编码后的更新，如果此时suffixLength为0，则suffixLength加1（上述步骤9），这意味着我们在对一个宏块进行CAVLC时，最多只有一次是suffixLength为0；如果此时已被编码的level大于( 3 &lt;&lt; ( suffixLength − 1 ) ) ，suffixLength也会加1（上述步骤10）。</li>
+</ul>
+<p>根据上述标准，在拆分levelCode上我们可以分成两大类情况</p>
+<h5 id="1-suffixLength为0"><a href="#1-suffixLength为0" class="headerlink" title="1. suffixLength为0"></a>1. suffixLength为0</h5><p>其中可细分为三种情况进行编码<br>①  如果$| level |&lt;8$，那么levelSuffixSize为0，也就是没有后缀level_suffix，这些level分别为$\pm 1,\pm 2,…,\pm 7$，这14个level由$level_prefix &#x3D; 0,1,2,…,13$表示。（上述步骤2第3条）<br>②  如果$8 \leqslant | level |&lt;16$，那么levelSuffixSize为4，也就是后缀共有四个bit，也就是说后缀能表达16个level，由于此时固定了$level_prefix&#x3D;14$，因此这种情况能表达的level就是16个，即$\pm 8,\pm 9,…,\pm 15$。（上述步骤2第1条）<br>③  否则，$level_prefix\geqslant 15$。这种情况下，levelSuffixSize的值为level_prefix-3（上述步骤2第2条）。此时levelCode在解码端的计算方法为<br>$\begin{align*}<br>levelCode<br>&amp;&#x3D;\underbrace{ \left\lfloor 15, level_prefix \right\rfloor &lt;&lt; suffixLength  + level_suffix}<em>{step.4} \quad \underbrace{+15}</em>{step.5}\quad \underbrace{+1&lt;&lt;(level_prefix-3)-4096}_{step.6}\<br>&amp;&#x3D;15&lt;&lt;0+level_suffix+15+ 1&lt;&lt;(level_prefix-3)-4096\<br>&amp;&#x3D;level_suffix+1&lt;&lt;(level_prefix-3)-4066<br>\end{align*}$<br>其中level_prefix的值为$15,16,…$，在编码端，levelCode已知，我们只需要按照递增顺序一个一个带入level_prefix，并且保证level_suffix在其所占用 的bit的范围内，即可得出合适的level_prefix与level_suffix。</p>
+<p>JM18.6代码如下<br>int writeSyntaxElement_Level_VLC1(SyntaxElement *se, DataPartition *dp, int profile_idc)<br>{<br>  int level  &#x3D; se-&gt;value1;<br>  int sign   &#x3D; (level &lt; 0 ? 1 : 0);<br>  int levabs &#x3D; iabs(level);</p>
+<p>  if (levabs &lt; 8)      &#x2F;&#x2F;① level_prefix &lt; 14        ((8-1)*2 - len(inf) &#x3D; 14 - 1)<br>  {<br>    se-&gt;len &#x3D; levabs * 2 + sign - 1;<br>    se-&gt;inf &#x3D; 1;<br>  }<br>  else if (levabs &lt; 16)    &#x2F;&#x2F;② level_prefix &#x3D; 14        (len - len(inf) &#x3D; 19 - len(16) &#x3D; 19 - 5 &#x3D; 14)<br>  {<br>    &#x2F;&#x2F; escape code1<br>    se-&gt;len &#x3D; 19;<br>    se-&gt;inf &#x3D; 16 | ((levabs &lt;&lt; 1) - 16) | sign;<br>  }<br>  else     &#x2F;&#x2F;③ level_prefix &gt;&#x3D; 15           (28 - len(4096) + numPrefix &#x3D; 15 + numPrefix)<br>  {<br>    int iMask &#x3D; 4096, numPrefix &#x3D; 0;<br>    int levabsm16 &#x3D; levabs + 2032;</p>
+<pre><code>// escape code2   select level_prefix, which level_prefix = 15 + numPrefix
+if ((levabsm16) &gt;= 4096)
+&#123;
+  numPrefix++;
+  while ((levabsm16) &gt;= (4096 &lt;&lt; numPrefix))
+  &#123;
+    numPrefix++;
+  &#125;
+&#125;
+
+iMask &lt;&lt;= numPrefix;
+se-&gt;inf = iMask | ((levabsm16 &lt;&lt; 1) - iMask) | sign;
+</code></pre>
+<p>  &#x2F;*  caution : int levabs &#x3D; iabs(level);<br>   *</p>
+<ul>
+<li>(levabsm16 &lt;&lt; 1) - iMask</li>
+<li>&#x3D; ((levabs + 2032) &lt;&lt; 1) - (4096 &lt;&lt; numPrefix)</li>
+<li>&#x3D; ((iabs(level) + 2032) &lt;&lt; 1) - (4096 &lt;&lt; numPrefix)</li>
+<li>&#x3D; ((iabs(level) - 1 + 2033) &lt;&lt; 1) - (1 &lt;&lt; levelSuffixSize)</li>
+<li>&#x3D; ((iabs(level) - 1 + 2048 - 15) &lt;&lt; 1) - (1 &lt;&lt; levelSuffixSize)</li>
+<li>&#x3D; ((iabs(level) - 1 - 15) &lt;&lt; 1) + 4096 - (1 &lt;&lt; levelSuffixSize)</li>
+<li>&#x3D; ((iabs(level) - 1 - 15) &lt;&lt; 1) - ((1 &lt;&lt; levelSuffixSize) - 4096)</li>
+<li></li>
+<li>belonging to above,you can find the relationship from the spec<br>   *&#x2F;</li>
+</ul>
+<pre><code>/* Assert to make sure that the code fits in the VLC */
+/* make sure that we are in High Profile to represent level_prefix &gt; 15 */
+if (numPrefix &gt; 0 &amp;&amp; !is_FREXT_profile( profile_idc ))
+&#123;
+  //error( &quot;level_prefix must be &lt;= 15 except in High Profile\n&quot;,  1000 );
+  se-&gt;len = 0x0000FFFF; // This can be some other big number
+  return (se-&gt;len);
+&#125;
+
+se-&gt;len = 28 + (numPrefix &lt;&lt; 1);
+</code></pre>
+<p>  }</p>
+<p>  symbol2vlc(se);</p>
+<p>  writeUVLC2buffer(se, dp-&gt;bitstream);</p>
+<p>  if(se-&gt;type !&#x3D; SE_HEADER)<br>    dp-&gt;bitstream-&gt;write_flag &#x3D; 1;</p>
+<p>#if TRACE<br>  if(dp-&gt;bitstream-&gt;trace_enabled)<br>    trace2out (se);<br>#endif</p>
+<p>  return (se-&gt;len);<br>}</p>
+<h5 id="2-suffixLength为N-（N-1-2-3-4-5-6）"><a href="#2-suffixLength为N-（N-1-2-3-4-5-6）" class="headerlink" title="2. suffixLength为N （N &#x3D; 1,2,3,4,5,6）"></a>2. suffixLength为N （N &#x3D; 1,2,3,4,5,6）</h5><p>suffixLength不为0的情况下，可细分为以下两种编码过程<br>①  如果$levelCode&lt;( 15&lt;&lt; suffixLength )$，为什么这里会有个15呢？因为15表明当前level所需要的level_prefix小于15，即（0~14）共15个数值。此时<br>$\begin{Bmatrix}<br>levelSuffixSize&#x3D;suffixLength\qquad\qquad\qquad\qquad\qquad\quad &amp; (step.2.1) \<br>levelCode &#x3D; level_prefix&lt;&lt;suffixLength + level_suffix &amp; (step.4)<br>\end{Bmatrix}$<br>按照这两个条件，得到<br>$\begin{Bmatrix}<br>level_prefix &amp;&#x3D; &amp;levelCode &gt;&gt; suffixLength \<br>level_suffix &amp;&#x3D; &amp;levelCode \ &amp; \ \underbrace{11…1}_{suffixLength}<br>\end{Bmatrix}$</p>
+<p>②  否则，表明编码需要的level_prefix大于或等于15。$levelSuffixSize &#x3D; level_prefix-3 \quad $（上述步骤2第2条）。解码规定了此时的levelCode为<br>$\begin{align*}<br>levelCode<br>&amp;&#x3D;\underbrace{ \left\lfloor 15, level_prefix \right\rfloor &lt;&lt; suffixLength  + level_suffix}<em>{step.4} \quad \underbrace{+1&lt;&lt;(level_prefix-3)-4096}</em>{step.6}\<br>&amp;&#x3D;15&lt;&lt;suffixLength + level_suffix + 1&lt;&lt;(level_prefix-3)-4096<br>\end{align*}$<br>在编码level端，levelCode与suffixLength已知，我们只需要按照递增顺序一个一个带入level_prefix，并且保证level_suffix在其所占用 的bit的范围内，即可得出合适的level_prefix与level_suffix。</p>
+<p>JM18.6代码如下<br>int writeSyntaxElement_Level_VLCN(SyntaxElement *se, int vlc, DataPartition *dp, int profile_idc)<br>{<br>  int level  &#x3D; se-&gt;value1;<br>  int sign   &#x3D; (level &lt; 0 ? 1 : 0);<br>  int levabs &#x3D; iabs(level) - 1;  </p>
+<p>  int shift &#x3D; vlc - 1;<br>  int escape &#x3D; (15 &lt;&lt; shift);    &#x2F;&#x2F;level_prefix &#x3D; 15</p>
+<p>  if (levabs &lt; escape)   &#x2F;&#x2F;① level_prefix &lt; 15<br>  {<br>    int sufmask   &#x3D; ~((0xffffffff) &lt;&lt; shift);<br>    int suffix    &#x3D; (levabs) &amp; sufmask;</p>
+<pre><code>se-&gt;len = ((levabs) &gt;&gt; shift) + 1 + vlc;
+se-&gt;inf = (2 &lt;&lt; shift) | (suffix &lt;&lt; 1) | sign;
+</code></pre>
+<p>  }<br>  else  &#x2F;&#x2F; ②<br>  {<br>    int iMask &#x3D; 4096;<br>    int levabsesc &#x3D; levabs - escape + 2048;  &#x2F;&#x2F;+2048 * 2 &#x3D; +4096 , on decode endpoint, would -4096<br>    int numPrefix &#x3D; 0;</p>
+<pre><code>if ((levabsesc) &gt;= 4096)  //level_prefix = 15 + numPrefix
+&#123;
+  numPrefix++;
+  while ((levabsesc) &gt;= (4096 &lt;&lt; numPrefix))
+  &#123;
+    numPrefix++;
+  &#125;
+&#125;
+
+iMask &lt;&lt;= numPrefix;
+se-&gt;inf = iMask | ((levabsesc &lt;&lt; 1) - iMask) | sign;
+</code></pre>
+<p>  &#x2F;*  caution : levabs &#x3D; iabs(level) - 1;  </p>
+<p>   * </p>
+<ul>
+<li>(levabsesc &lt;&lt; 1) - iMask</li>
+<li>&#x3D; ((levabs - escape + 2048) &lt;&lt; 1) - (4096 &lt;&lt; numPrefix)</li>
+<li>&#x3D; ((iabs(level) - 1 - escape) &lt;&lt; 1) + 4096 - (1 &lt;&lt; levelSuffixSize)</li>
+<li>&#x3D; ((iabs(level) - 1 - escape) &lt;&lt; 1) - ((1 &lt;&lt; levelSuffixSize) - 4096)</li>
+<li></li>
+<li>belonging to above,you can find the relationship from the spec<br>   *&#x2F;</li>
+</ul>
+<pre><code>/* Assert to make sure that the code fits in the VLC */
+/* make sure that we are in High Profile to represent level_prefix &gt; 15 */
+if (numPrefix &gt; 0 &amp;&amp;  !is_FREXT_profile( profile_idc ))
+&#123;
+  //error( &quot;level_prefix must be &lt;= 15 except in High Profile\n&quot;,  1000 );
+  se-&gt;len = 0x0000FFFF; // This can be some other big number
+  return (se-&gt;len);
+&#125;
+se-&gt;len = 28 + (numPrefix &lt;&lt; 1);
+</code></pre>
+<p>  }</p>
+<p>  symbol2vlc(se);</p>
+<p>  writeUVLC2buffer(se, dp-&gt;bitstream);</p>
+<p>  if(se-&gt;type !&#x3D; SE_HEADER)<br>    dp-&gt;bitstream-&gt;write_flag &#x3D; 1;</p>
+<p>#if TRACE<br>  if(dp-&gt;bitstream-&gt;trace_enabled)<br>    trace2out (se);<br>#endif</p>
+<p>  return (se-&gt;len);<br>}</p>
+<h4 id="3-更新suffixLength"><a href="#3-更新suffixLength" class="headerlink" title="3. 更新suffixLength"></a>3. 更新suffixLength</h4><p>上面我们说过，suffixLength贯穿整个宏块非零level的编码过程，它在一开始会被初始化，然后在每个level编码完成后进行更新。更新遵循两个规则：</p>
+<ul>
+<li>如果suffixLength为0，则更新为1。（上述步骤9）</li>
+<li>如果当前编码的level有$|level|&gt;( 3&lt;&lt; suffixLength -1 )$，并且$suffixLength&lt;6$，则suffixLength++。（上述步骤10）<br>CAVLC在编码非零level这部分，首先编码顺序就是从高频到低频进行，一般来说高频level会比较小，低频level较大，因此CAVLC中的做法就是令suffixLength初始化为0，或者1，后续基于上下文对suffixLength进行增加，这样做是为了出现频率更高的高频的level占用更小的bit，这也符合变长编码的思想。</li>
+</ul>
+<h1 id="四-对TotalZeros进行编码"><a href="#四-对TotalZeros进行编码" class="headerlink" title="四. 对TotalZeros进行编码"></a>四. 对TotalZeros进行编码</h1><p><strong>TotalZeros</strong>：  最后一个非零系数前零的总数目，如下图例子为TotalZeros &#x3D; 3，码值需要根据当前宏块的TotalCoeffs以及TotalZeros查表得到。<br>需要注意的是，在对Chroma DC进行CAVLC时，Chroma DC块可能为2x2块（4:2:0）或者2x4块（4:2:2），这些都是要查不同的表格的。<br><a target="_blank" rel="noopener" href="http://images2015.cnblogs.com/blog/421096/201603/421096-20160308175833725-1332040826.png"><img alt="" src="img/2016-03-08-cavlc/421096-20160308175834038-2023860359.png"></a></p>
+<h1 id="五-对RunBefore进行编码"><a href="#五-对RunBefore进行编码" class="headerlink" title="五. 对RunBefore进行编码"></a>五. 对RunBefore进行编码</h1><p><strong>RunBefore</strong>：  这个值是对于非零系数来说的，表示的是当前非零系数前面连续出现的0的个数<br><strong>ZeroLeft</strong>：  这个值也是对于非零系数来说的，表示的是当前非零系数前的0的总个数，在一开始这个值会被赋值为TotalZeros。当ZeroLeft为0的时候意味着后续非零系数的RunBefore都为0，编码结束。<br>我们根据RunBefore与ZeroLeft的值查表9-10得到码值。编码顺序也是逆序进行，编码次数最多为TotalCoeffs - 1。<br><a target="_blank" rel="noopener" href="http://images2015.cnblogs.com/blog/421096/201603/421096-20160308175834382-114848357.png"><img alt="" src="img/2016-03-08-cavlc/421096-20160308175834960-1067685338.png"></a><br>如上述例子<br>编码过程如下：<br>ZeroLeft &#x3D; 3，RunBefore &#x3D; 1，码值为10<br>ZeroLeft &#x3D; 2，RunBefore &#x3D; 0，码值为1<br>ZeroLeft &#x3D; 2，RunBefore &#x3D; 0，码值为1<br>ZeroLeft &#x3D; 2，RunBefore &#x3D; 2，码值为00<br>ZeroLeft &#x3D; 0，RunBefore &#x3D; 0，不需要码流表示</p>
+
+  <div class="guide-links">
+    
+    
+  </div>
+
+    <div class="footer">
+        <p>
+          <a target="_blank" rel="noopener" href="https://changkun.de">欧长坤</a> &copy; 2016-2025 版权所有，
+          采用<a rel="license noopener" target="_blank" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议许可</a>，代码使用 <a href="https://opensource.org/licenses/MIT" target="_blank">MIT</a> 协议开源。</a>
+        </p>
+        <p>
+            如果你认为本书对你起到了帮助，可以<a href="/modern-cpp/about/donate.html">资助作者</a>。
+        </p>
+      </div>
+
+
+
+</div>
+
+	</div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/smooth-scroll/10.2.1/js/smooth-scroll.min.js"></script>
+
+    <!-- main custom script for sidebars, version selects etc. -->
+    <script src="https://cdn.jsdelivr.net/npm/css.escape@1.5.1/css.escape.min.js"></script>
+    <script src="/modern-cpp/js/common.js"></script>
+
+    <!-- fastclick -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      FastClick.attach(document.body)
+    }, false)
+    </script>
+  </body>
+</html>

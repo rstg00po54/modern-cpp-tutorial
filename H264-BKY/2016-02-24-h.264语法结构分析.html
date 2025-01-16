@@ -1,0 +1,913 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>h.264语法结构分析 现代 C++ 教程: 高速上手 C++ 11/14/17/20 - Modern C++ Tutorial: C++ 11/14/17/20 On the Fly</title>
+    <meta charset="utf-8">
+    <meta name="description" content="Modern C++ Tutorial | C++ 11/14/17/20 On the Fly | 现代 C++ 教程 | 高速上手 C++11/14/17/20">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="shortcut icon" type="image/x-icon" href="/modern-cpp/assets/cover-2nd.png">
+    <meta name="msapplication-TileColor" content="#7e2d36">
+    <meta name="theme-color" content="#7e2d36">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-80889616-2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-80889616-2');
+    </script>
+
+    <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600|Roboto Mono' rel='stylesheet' type='text/css'>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- main page styles -->
+    
+<link rel="stylesheet" href="/modern-cpp/css/page.css">
+
+
+    <!-- this needs to be loaded before guide's inline scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script>window.PAGE_TYPE = "book-zh-cn"</script>
+    <script async src="//changkun.de/urlstat/client.js"></script>
+  <meta name="generator" content="Hexo 7.3.0"></head>
+  <body class="docs">
+	<!-- body开始 -->
+
+		<!-- mobile-bar 2-->
+      <div id="mobile-bar" data-bg-text="现代 C++ 教程" >
+        <a class="menu-button"></a>
+        <a class="logo" href="/modern-cpp/"></a>
+      </div>
+
+	<!-- include header -->
+    <div id="header">
+  <a id="logo" href="/">
+      <img src="/modern-cpp/assets/cover-2nd-logo.png">
+      <span>教程：高速上手</span>
+  </a>
+  <ul id="nav">
+      <li class="nav-dropdown-container resource">
+  <a class="nav-link">资源</a><span class="arrow"></span>
+  <ul class="nav-dropdown">
+    <li><ul>
+      <li><a class="nav-link" href="/modern-cpp/zh-cn/00-preface/" >正文</a></li>
+      <!-- TODO -->
+      <!-- <li><a class="nav-link" href="/modern-cpp/code/1/" >代码</a></li>
+      <li><a class="nav-link" href="/modern-cpp/exercises/1/" >习题</a></li>
+      <li><a class="nav-link" href="/modern-cpp/answers/1/" >答案</a></li> -->
+    </ul></li>
+  </ul>
+</li>
+
+<li class="nav-dropdown-container about">
+  <a class="nav-link">关于</a><span class="arrow"></span>
+  <ul class="nav-dropdown">
+      <li><ul>
+      <li><a class="nav-link" href="/modern-cpp/about/donate.html" >资助</a></li>
+      <li><a class="nav-link" href="/modern-cpp/about/copyright.html" >版权声明</a></li>
+      <li><a class="nav-link" href="/modern-cpp/about/ack.html" >致谢</a></li>
+      </ul></li>
+  </ul>
+</li>
+
+
+<li class="nav-dropdown-container about">
+  <a class="nav-link" target="_blank" rel="noopener" href="https://github.com/rstg00po54/modern-cpp-tutorial">GitHub</a>
+</li>
+
+
+  </ul>
+</div>
+
+    
+      <div id="main" class="fix-sidebar">
+		<!-- body 111 -->
+        
+
+
+
+  <div class="sidebar">
+  <div class="sidebar-inner">
+    <ul class="main-menu">
+        <li class="nav-dropdown-container resource">
+  <a class="nav-link">资源</a><span class="arrow"></span>
+  <ul class="nav-dropdown">
+    <li><ul>
+      <li><a class="nav-link" href="/modern-cpp/zh-cn/00-preface/" >正文</a></li>
+      <!-- TODO -->
+      <!-- <li><a class="nav-link" href="/modern-cpp/code/1/" >代码</a></li>
+      <li><a class="nav-link" href="/modern-cpp/exercises/1/" >习题</a></li>
+      <li><a class="nav-link" href="/modern-cpp/answers/1/" >答案</a></li> -->
+    </ul></li>
+  </ul>
+</li>
+
+<li class="nav-dropdown-container about">
+  <a class="nav-link">关于</a><span class="arrow"></span>
+  <ul class="nav-dropdown">
+      <li><ul>
+      <li><a class="nav-link" href="/modern-cpp/about/donate.html" >资助</a></li>
+      <li><a class="nav-link" href="/modern-cpp/about/copyright.html" >版权声明</a></li>
+      <li><a class="nav-link" href="/modern-cpp/about/ack.html" >致谢</a></li>
+      </ul></li>
+  </ul>
+</li>
+
+
+<li class="nav-dropdown-container about">
+  <a class="nav-link" target="_blank" rel="noopener" href="https://github.com/rstg00po54/modern-cpp-tutorial">GitHub</a>
+</li>
+
+
+    </ul>
+    <div class="list">
+      <h2>
+		
+          正文
+
+      </h2>
+      <ul class="menu-root">
+	  <!-- 引入外部的 JS 文件 -->
+  <!-- <script src="/modern-cpp/js/menu.js"></script> -->
+
+
+	<!-- 传递数据到 JavaScript -->
+	
+	
+	
+
+	
+		<li>
+		  <a href="/H264-BKY/2014-02-15-h.264%E7%9A%84poc%E8%AE%A1%E7%AE%97.html" class="sidebar-link">
+			h.264的POC计算
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2014-02-27-%E6%8C%87%E6%95%B0%E5%93%A5%E4%BC%A6%E5%B8%83%E7%BC%96%E7%A0%81.html" class="sidebar-link">
+			指数哥伦布编码
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2014-03-15-h.264%E5%8A%A0%E6%9D%83%E9%A2%84%E6%B5%8B.html" class="sidebar-link">
+			h.264加权预测
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2014-03-11-h.264%E7%A0%81%E7%8E%87%E6%8E%A7%E5%88%B6.html" class="sidebar-link">
+			h.264码率控制
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2014-04-23-h.264%E7%9B%B4%E6%8E%A5%E9%A2%84%E6%B5%8B.html" class="sidebar-link">
+			h.264直接预测
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2014-03-17-h.264-fmo.html" class="sidebar-link">
+			h.264 FMO
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2014-05-11-h.264%E5%8F%82%E8%80%83%E5%9B%BE%E5%83%8F%E5%88%97%E8%A1%A8%E3%80%81%E8%A7%A3%E7%A0%81%E5%9B%BE%E5%83%8F%E7%BC%93%E5%AD%98.html" class="sidebar-link">
+			h.264参考图像列表、解码图像缓存
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2014-06-06-h.264-mvp%E6%B1%82%E8%A7%A3%E8%BF%87%E7%A8%8B.html" class="sidebar-link">
+			h.264 mvp求解过程
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2014-06-16-umhexagons%E6%90%9C%E7%B4%A2%E8%BF%87%E7%A8%8B.html" class="sidebar-link">
+			UMHexagonS搜索过程
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2014-07-20-h.264%E5%85%A8%E6%90%9C%E7%B4%A2%E4%BB%A5%E5%8F%8A%E5%BF%AB%E9%80%9F%E5%85%A8%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95.html" class="sidebar-link">
+			h.264全搜索以及快速全搜索算法
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2014-06-18-h.264-%E7%8E%87%E5%A4%B1%E7%9C%9F%E4%BC%98%E5%8C%96.html" class="sidebar-link">
+			h.264 率失真优化
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2014-10-17-epzs%E6%90%9C%E7%B4%A2%E8%BF%87%E7%A8%8B.html" class="sidebar-link">
+			EPZS搜索过程
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2014-12-07-intra-chroma-prediction.html" class="sidebar-link">
+			Intra Chroma Prediction
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2014-12-28-intra-luma-prediction.html" class="sidebar-link">
+			Intra Luma Prediction
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2015-01-13-h.264-transfor.html" class="sidebar-link">
+			H.264 Transform
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2015-02-02-h.264-quantization.html" class="sidebar-link">
+			H.264 Quantization
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2015-04-06-quantization-method.html" class="sidebar-link">
+			Quantization Method
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2015-04-26-h.264-mode-decision.html" class="sidebar-link">
+			h.264 Mode Decision
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2015-05-17-h.264-bi-predictive-motion-searc.html" class="sidebar-link">
+			h.264 Bi-Predictive Motion Search
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2016-02-24-h.264%E8%AF%AD%E6%B3%95%E7%BB%93%E6%9E%84%E5%88%86%E6%9E%90.html" class="sidebar-link current">
+			h.264语法结构分析
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2016-02-29-h.264%E5%AE%8F%E5%9D%97%E4%B8%8E%E5%AD%90%E5%AE%8F%E5%9D%97%E7%B1%BB%E5%9E%8B.html" class="sidebar-link">
+			h.264宏块与子宏块类型
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2016-03-05-h.264-scanning-process-for-transform-coefficients.html" class="sidebar-link">
+			h.264 scanning process for transform coefficients
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2016-03-08-cavlc.html" class="sidebar-link">
+			CAVLC
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2016-03-22-cabac.html" class="sidebar-link">
+			CABAC
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2016-03-25-%E7%AE%97%E6%9C%AF%E7%BC%96%E7%A0%81jm%E5%AE%9E%E7%8E%B0.html" class="sidebar-link">
+			算术编码JM实现
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2016-04-27-h.264%E5%B9%B6%E8%A1%8C%E8%A7%A3%E7%A0%81%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90.html" class="sidebar-link">
+			h.264并行解码算法分析
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2016-05-17-h.264-%E5%8E%BB%E5%9D%97%E6%BB%A4%E6%B3%A2.html" class="sidebar-link">
+			h.264 去块滤波
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2016-08-11-h.264%E5%B9%B6%E8%A1%8C%E8%A7%A3%E7%A0%81%E7%AE%97%E6%B3%952d-wave%E5%AE%9E%E7%8E%B0(%E5%9F%BA%E4%BA%8E%E5%A4%9A%E6%A0%B8%E9%9D%9E%E5%85%B1%E4%BA%AB%E5%86%85%E5%AD%98%E7%B3%BB%E7%BB%9F).html" class="sidebar-link">
+			h.264并行解码算法2D-Wave实现（基于多核非共享内存系统）
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2016-09-18-h.264%E5%B9%B6%E8%A1%8C%E8%A7%A3%E7%A0%81%E7%AE%97%E6%B3%952d-wave%E5%AE%9E%E7%8E%B0(%E5%9F%BA%E4%BA%8E%E5%A4%9A%E6%A0%B8%E5%85%B1%E4%BA%AB%E5%86%85%E5%AD%98%E7%B3%BB%E7%BB%9F).html" class="sidebar-link">
+			h.264并行解码算法2D-Wave实现（基于多核共享内存系统）
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2016-09-30-h.264%E5%B9%B6%E8%A1%8C%E8%A7%A3%E7%A0%81%E7%AE%97%E6%B3%953d-wave%E5%AE%9E%E7%8E%B0(%E5%9F%BA%E4%BA%8E%E5%A4%9A%E6%A0%B8%E5%85%B1%E4%BA%AB%E5%86%85%E5%AD%98%E7%B3%BB%E7%BB%9F).html" class="sidebar-link">
+			h.264并行解码算法3D-Wave实现（基于多核共享内存系统）
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2017-04-04-h.264%E5%B9%B6%E8%A1%8C%E7%86%B5%E8%A7%A3%E7%A0%81.html" class="sidebar-link">
+			h.264并行熵解码
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2017-06-15-cabac%E6%80%BB%E7%BB%93%E4%B8%8E%E8%A1%A5%E5%85%85%E8%AE%A8%E8%AE%BA.html" class="sidebar-link">
+			CABAC总结与补充讨论
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2019-01-04-%5Bffmpeg%5D-h264%E5%B9%B6%E8%A1%8C%E8%A7%A3%E7%A0%81.html" class="sidebar-link">
+			ffmpeg h264并行解码
+		  </a>
+		</li>
+
+		<li>
+		  <a href="/H264-BKY/2019-01-24-%5Bffmpeg%5D-h.264%E8%A7%A3%E7%A0%81%E6%89%80%E7%94%A8%E7%9A%84%E4%B8%BB%E8%A6%81%E7%BC%93%E5%86%B2%E5%8C%BA%E4%BB%8B%E7%BB%8D.html" class="sidebar-link">
+			ffmpeg h.264解码所用的主要缓冲区介绍
+		  </a>
+		</li>
+
+
+</ul>
+
+	  
+    </div>
+  </div>
+</div>
+
+<link rel="stylesheet" href="../icon/iconfont.css">
+<style>
+
+/* body {
+            background: #e4e9f5;
+        } */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            list-style: none;
+            text-decoration: none;
+        }
+
+        section {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font: 900 100px '';
+            color: #ffa21759;
+            background: rgb(34, 37, 39);
+        }
+
+        .shell {
+            position: fixed;
+            width: 60px;
+			left: 0;
+            height: 100%;
+            background: #000000;
+            z-index: 9999;
+            transition: width 0.5s;
+            /* padding-left: 10px; */
+            overflow: hidden;
+        }
+/* 悬停改变宽度 */
+        .shell:hover {
+            width: 300px;
+        }
+
+        .imageBox {
+            position: relative;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+
+        .imageBox img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .shell ul {
+            position: relative;
+            height: 100vh;
+        }
+
+        .shell ul li {
+            position: relative;
+            padding: 5px;
+        }
+
+        .active {
+            background: #e4e9f5;
+            border-top-left-radius: 50px;
+            border-bottom-left-radius: 50px;
+        }
+
+        .active::before {
+            content: "";
+            position: absolute;
+            top: -30px;
+            right: 0;
+            width: 30px;
+            height: 30px;
+            border-bottom-right-radius: 25px;
+            box-shadow: 5px 5px 0 5px #e4e9f5;
+            background: transparent;
+        }
+
+        .active::after {
+            content: "";
+            position: absolute;
+            bottom: -30px;
+            right: 0;
+            width: 30px;
+            height: 30px;
+            border-top-right-radius: 25px;
+            box-shadow: 5px -5px 0 5px #e4e9f5;
+            background: transparent;
+        }
+
+        #shelllogo {
+            margin: 40px 0 100px 0;
+        }
+
+        .shell ul li a {
+            position: relative;
+            display: flex;
+            white-space: nowrap;
+        }
+
+        .icon {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-width: 40px;
+            /* padding-left: 10px; */
+            height: 70px;
+            color: #333;
+            transition: 0.5s;
+            color: rgb(255, 255, 255);
+        }
+
+        .icon i {
+            font-size: 30px;
+            z-index: 999;
+        }
+
+        .text {
+            position: relative;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            font-size: 20px;
+            color: #ffad32c1;
+            padding-left: 15px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: 0.5s;
+        }
+
+        .shell ul li:hover a .icon,
+        .shell ul li:hover a .text {
+            color: #ffa117;
+        }
+
+        .active a .icon::before {
+            content: "";
+            position: absolute;
+            inset: 5px;
+            width: 60px;
+            background: #000000;
+            /* 圆形 */
+            border-radius: 50%;
+            transition: 0.5s;
+            border: 7px solid #ffa117;
+            box-sizing: border-box;
+        }
+</style>
+
+
+<div class="shell">
+	<ul class="nav">
+		<li class="active" id="shelllogo">
+			<a href="#">
+				<div class="icon">
+					<div class="imageBox">
+						<img src="../icon/cat.jpg" alt="">
+					</div>
+				</div>
+				<div class="text">前端小窝</div>
+			</a>
+		</li>
+		<li>
+			<a href="#home">
+				<div class="icon">
+					<i class="iconfont icon-cangku"></i>
+				</div>
+				<div class="text">Home</div>
+			</a>
+		</li>
+		<li>
+			<a href="#theme">
+				<div class="icon">
+					<!-- 调色板 -->
+					<i class="iconfont icon-tiaoseban"></i>
+				</div>
+				<div class="text">Theme</div>
+			</a>
+		</li>
+		<li>
+			<a href="#wallet">
+				<div class="icon">
+					<!-- 钱包 -->
+					<i class="iconfont icon-qianbao"></i>
+				</div>
+				<div class="text">Wallet</div>
+			</a>
+		</li>
+		<li>
+			<a href="#picture">
+				<div class="icon">
+					<!-- 图片 -->
+					<i class="iconfont icon-tupian"></i>
+				</div>
+				<div class="text">picture</div>
+			</a>
+		</li>
+		<li>
+			<a href="#code">
+				<div class="icon">
+					<!-- 二维码 -->
+					<i class="iconfont icon-erweima"></i>
+				</div>
+				<div class="text">QR code</div>
+			</a>
+		</li>
+		<li>
+			<a href="#authentication">
+				<div class="icon">
+					<!-- 盾牌保险认证 -->
+					<i class="iconfont icon-dunpaibaoxianrenzheng"></i>
+				</div>
+				<div class="text">auth</div>
+			</a>
+		</li>
+		<li>
+			<a href="#me">
+				<div class="icon">
+					<div class="imageBox">
+						<img src="./cat.jpg" alt="">
+					</div>
+				</div>
+				<div class="text">ME</div>
+			</a>
+		</li>
+	</ul>
+</div>
+
+<div class="content book-zh-cn with-sidebar 2016-02-24-h.264语法结构分析-guide">
+  <h1 id="NAL-Unit-Stream"><a href="#NAL-Unit-Stream" class="headerlink" title="NAL Unit Stream"></a>NAL Unit Stream</h1><p>Network Abstraction Layer，简称NAL。<br>h.264把原始的yuv文件编码成码流文件，生成的码流文件就是NAL单元流（NAL unit Stream）。而NAL单元流，就是NAL单元组成的。<br>标准的Annex B规定了NAL单元组成NAL单元流的方式，下面描述了如何将一个NAL单元打包起来，而多个NAL单元进行组合则形成了NAL单元流。<br>byte_stream_nal_unit( NumBytesInNALunit ) { C Descriptor<br>  while( next_bits( 24 ) !&#x3D; 0x000001 &amp;&amp;<br>    next_bits( 32 ) !&#x3D; 0x00000001 )<br>    leading_zero_8bits &#x2F;* equal to 0x00 <em>&#x2F; f(8)<br>  if( next_bits( 24 ) !&#x3D; 0x000001 )<br>    zero_byte &#x2F;</em> equal to 0x00 <em>&#x2F; f(8)<br>  start_code_prefix_one_3bytes &#x2F;</em> equal to 0x000001 <em>&#x2F; f(24)<br>  nal_unit( NumBytesInNALunit )<br>  while( more_data_in_byte_stream( ) &amp;&amp;<br>    next_bits( 24 ) !&#x3D; 0x000001 &amp;&amp;<br>    next_bits( 32 ) !&#x3D; 0x00000001 )<br>    trailing_zero_8bits &#x2F;</em> equal to 0x00 *&#x2F; f(8)<br>}<br><strong>语法元素</strong></p>
+<ul>
+<li><strong>leading_zero_8bits</strong>0x00，只有可能出现在NAL单元流的头部，但是一般编码出来的h264文件都不会包含这部分。</li>
+<li><strong>zero_byte</strong>0x00，如果当前的NAL单元为sps、pps或者一个访问单元（access unit）的第一个NAL单元，这个字节就会存在。访问单元代表一张编码图像，不包含sps、pps等外部数据，但是一幅编码图像有可能分成几个slice，甚至再细分成data partition，因此访问单元的第一个NAL单元就会是该图像的第一个slice或者slice data partition A。</li>
+<li><strong>start_code_prefix_one_3bytes</strong>0x000001，固定存在的NAL单元起始码，用来指示下面为一个NAL单元。</li>
+<li>**nal_unit( NumBytesInNALunit )**NAL单元</li>
+<li><strong>trailing_zero_8bits</strong>0x00，可能出现的NAL单元后的补零，但是一般编码出来的h264文件都没有包含这部分。<br><a target="_blank" rel="noopener" href="http://images2015.cnblogs.com/blog/421096/201602/421096-20160224230053911-66745100.png"><img alt="" src="img/2016-02-24-h.264语法结构分析/421096-20160224230054396-283565855.png"></a></li>
+</ul>
+<h1 id="NAL-Unit"><a href="#NAL-Unit" class="headerlink" title="NAL Unit"></a>NAL Unit</h1><p>NAL单元是对RBSP进行打包生成的，NAL单元有如下语法<br>nal_unit( NumBytesInNALunit ) { C Descriptor<br>  forbidden_zero_bit All f(1)<br>  nal_ref_idc All u(2)<br>  nal_unit_type All u(5)<br>  NumBytesInRBSP &#x3D; 0<br>  nalUnitHeaderBytes &#x3D; 1<br>  if( nal_unit_type &#x3D; &#x3D; 14 | | nal_unit_type &#x3D; &#x3D; 20 | |<br>    nal_unit_type &#x3D; &#x3D; 21 ) {<br>    if( nal_unit_type ! &#x3D; 21 )<br>      svc_extension_flag All u(1)<br>    else<br>      avc_3d_extension_flag All u(1)<br>    if( svc_extension_flag ) {<br>      nal_unit_header_svc_extension( ) &#x2F;* specified in Annex G <em>&#x2F; All<br>      nalUnitHeaderBytes +&#x3D; 3<br>    } else if( avc_3d_extension_flag ) {<br>      nal_unit_header_3davc_extension( ) &#x2F;</em> specified in Annex J <em>&#x2F;<br>      nalUnitHeaderBytes +&#x3D; 2<br>    } else {<br>      nal_unit_header_mvc_extension( ) &#x2F;</em> specified in Annex H <em>&#x2F; All<br>      nalUnitHeaderBytes +&#x3D; 3<br>    }<br>  }<br>  for( i &#x3D; nalUnitHeaderBytes; i &lt; NumBytesInNALunit; i++ ) {<br>    if( i + 2 &lt; NumBytesInNALunit &amp;&amp; next_bits( 24 ) &#x3D; &#x3D; 0x000003 ) {<br>      rbsp_byte[ NumBytesInRBSP++ ] All b(8)<br>      rbsp_byte[ NumBytesInRBSP++ ] All b(8)<br>      i +&#x3D; 2<br>      emulation_prevention_three_byte &#x2F;</em> equal to 0x03 *&#x2F; All f(8)<br>    } else<br>      rbsp_byte[ NumBytesInRBSP++ ] All b(8)<br>  }<br>}</p>
+<p><strong>语法元素</strong></p>
+<ul>
+<li><strong>forbidden_zero_bit</strong>0，一个bit</li>
+<li><strong>nal_ref_idc</strong>2个bit，用来指示当前NAL单元的优先级。0的优先级最低，如果当前NAL单元内是非参考图像的slice或者slice data partition等不是那么重要的数据，那么这个值为0；如果当前NAL单元内是sps、pps、参考图像的slice或者slice data partition等重要数据，那么这个值不为0</li>
+<li><strong>nal_unit_type</strong>5个bit，用来指示当前NAL单元中包含的RBSP的结构，这些不同结构的RBSP由不同的RBSP语法生成，下一节我们将讨论这些RBSP语法。</li>
+<li><strong>svc_extension_flag</strong>1个bit，Scalable Video Coding，主要分为Temporal，Spatial，Quality三种不同的scalable coding，分别对应同一码流内可以包含具有不同帧率、不同分辨率、不同码率的分层编码方式。特定的NAL type中才会出现这个位，这里不展开讨论</li>
+<li><strong>avc_3d_extension_flag</strong>1个bit，表示3D编码，特定的NAL type中才会出现这个位，这里不作讨论</li>
+<li><strong>rbsp_byte</strong>表示被打包的RBSP字节</li>
+<li><strong>emulation_prevention_three_byte</strong>0x03，用于防止竞争。前面讨论过，NAL单元的头部会出现0x000001或者0x00000001的情况，那如果RBSP中也出现这几个字节就会把他们错当成NAL单元的头部了，为了防止这种情况，当RBSP中出现连续两个字节为零（即0x0000）时，会在后面插入一个0x03。则有<br>0x000000 &#x3D;&gt;  0x00000300<br>0x000001 &#x3D;&gt;  0x00000301<br>0x000002 &#x3D;&gt;  0x00000302<br>0x000003 &#x3D;&gt;  0x00000303<br>……<br><a target="_blank" rel="noopener" href="http://images2015.cnblogs.com/blog/421096/201602/421096-20160224230054786-690479736.png"><img alt="" src="img/2016-02-24-h.264语法结构分析/421096-20160224230055115-971879741.png"></a></li>
+</ul>
+<h1 id="RBSP"><a href="#RBSP" class="headerlink" title="RBSP"></a>RBSP</h1><p>Raw Byte Sequence Payload，原始字节序列载荷。<br>跟据nal_unit_type可以分成以下表格</p>
+<p>第一列代表当前NAL的类型；第二列是该类型对应的描述以及RBSP语法结构名称；第三列列出了当前NAL类型中可能出现的语法元素种类，（Category）种类在所有语法结构中的语法元素后面都有标明。</p>
+<h4 id="RBSP尾部"><a href="#RBSP尾部" class="headerlink" title="RBSP尾部"></a>RBSP尾部</h4><p>标准中描述了很多种的RBSP结构并且通过语法表现出来，RBSP语法主要规定了该结构由什么成员组成，各个成员如何组合，成员会占用几个bit。不过虽然RBSP结构有很多种，但是他们也有一个共同点：都有一个RBSP尾部。<br>RBSP尾部的语法如下：<br>rbsp_trailing_bits( ) { C Descriptor<br>  rbsp_stop_one_bit &#x2F;* equal to 1 <em>&#x2F; All f(1)<br>  while( !byte_aligned( ) )<br>    rbsp_alignment_zero_bit &#x2F;</em> equal to 0 *&#x2F; All f(1)<br>}<br><strong>语法元素</strong></p>
+<ul>
+<li><strong>rbsp_stop_one_bit</strong>1位的1</li>
+<li><strong>rbsp_alignment_zero_bit</strong>字节补零，目的是为了进行字节对齐</li>
+</ul>
+<p>有一种特殊情况：如果采用的熵编码方式为CABAC，而且当前是实际图像内容相关的RBSP（名称包含slice的RBSP结构），那么会在RBSP尾部的后面添加1个或多个0x0000。语法表示如下：<br>rbsp_slice_trailing_bits( ) { C Descriptor<br>  rbsp_trailing_bits( ) All<br>  if( entropy_coding_mode_flag )<br>    while( more_rbsp_trailing_data( ) )<br>      cabac_zero_word &#x2F;* equal to 0x0000 *&#x2F; All f(16)<br>}<br><strong>语法元素</strong></p>
+<ul>
+<li><strong>cabac_zero_word</strong>0x0000<br><a target="_blank" rel="noopener" href="http://images2015.cnblogs.com/blog/421096/201602/421096-20160224230055521-1279468398.png"><img alt="" src="img/2016-02-24-h.264语法结构分析/421096-20160224230055943-545443387.png"></a></li>
+</ul>
+<p>RBSP中除了rbsp_trailing_bits以及rbsp_slice_trailing_bits，其余部分被统称为SODB（String Of Data Bits）。</p>
+<h4 id="seq-parameter-set-rbsp"><a href="#seq-parameter-set-rbsp" class="headerlink" title="seq_parameter_set_rbsp"></a>seq_parameter_set_rbsp</h4><p>这是SPS RBSP的名称，它的结构如下<br>seq_parameter_set_rbsp( ) { C Descriptor<br>  seq_parameter_set_data( ) 0<br>  rbsp_trailing_bits( ) 0<br>}<br>如前面所说，RBSP都有一个rbsp_trailing_bits的尾部。而SPS的结构被包含在了seq_parameter_set_data里面<br>seq_parameter_set_data( ) { C Descriptor<br>  profile_idc 0 u(8)<br>  constraint_set0_flag 0 u(1)<br>  constraint_set1_flag 0 u(1)<br>  constraint_set2_flag 0 u(1)<br>  constraint_set3_flag 0 u(1)<br>  constraint_set4_flag 0 u(1)<br>  constraint_set5_flag 0 u(1)<br>  reserved_zero_2bits &#x2F;* equal to 0 *&#x2F; 0 u(2)<br>  level_idc 0 u(8)<br>  seq_parameter_set_id 0 ue(v)<br>  if( profile_idc &#x3D; &#x3D; 100 | | profile_idc &#x3D; &#x3D; 110 | |<br>    profile_idc &#x3D; &#x3D; 122 | | profile_idc &#x3D; &#x3D; 244 | | profile_idc &#x3D; &#x3D; 44 | |<br>    profile_idc &#x3D; &#x3D; 83 | | profile_idc &#x3D; &#x3D; 86 | | profile_idc &#x3D; &#x3D; 118 | |<br>    profile_idc &#x3D; &#x3D; 128 | | profile_idc &#x3D; &#x3D; 138 | | profile_idc &#x3D; &#x3D; 139 | |<br>    profile_idc &#x3D; &#x3D; 134 ) {<br>    chroma_format_idc 0 ue(v)<br>    if( chroma_format_idc &#x3D; &#x3D; 3 )<br>      separate_colour_plane_flag 0 u(1)<br>    bit_depth_luma_minus8 0 ue(v)<br>    bit_depth_chroma_minus8 0 ue(v)<br>    qpprime_y_zero_transform_bypass_flag 0 u(1)<br>    seq_scaling_matrix_present_flag 0 u(1)<br>    if( seq_scaling_matrix_present_flag )<br>      for( i &#x3D; 0; i &lt; ( ( chroma_format_idc !&#x3D; 3 ) ? 8 : 12 ); i++ ) {<br>        seq_scaling_list_present_flag[ i ] 0 u(1)<br>        if( seq_scaling_list_present_flag[ i ] )<br>        if( i &lt; 6 )<br>          scaling_list( ScalingList4x4[ i ], 16,<br>          UseDefaultScalingMatrix4x4Flag[ i ]) 0<br>        else<br>          scaling_list( ScalingList8x8[ i − 6 ], 64,<br>          UseDefaultScalingMatrix8x8Flag[ i − 6 ] ) 0<br>      }<br>  }<br>  log2_max_frame_num_minus4 0 ue(v)<br>  pic_order_cnt_type 0 ue(v)<br>  if( pic_order_cnt_type &#x3D; &#x3D; 0 )<br>    log2_max_pic_order_cnt_lsb_minus4 0 ue(v)<br>  else if( pic_order_cnt_type &#x3D; &#x3D; 1 ) {<br>    delta_pic_order_always_zero_flag 0 u(1)<br>    offset_for_non_ref_pic 0 se(v)<br>    offset_for_top_to_bottom_field 0 se(v)<br>    num_ref_frames_in_pic_order_cnt_cycle 0 ue(v)<br>    for( i &#x3D; 0; i &lt; num_ref_frames_in_pic_order_cnt_cycle; i++ )<br>      offset_for_ref_frame[ i ] 0 se(v)<br>  }<br>  max_num_ref_frames<br>  gaps_in_frame_num_value_allowed_flag 0 u(1)<br>  pic_width_in_mbs_minus1 0 ue(v)<br>  pic_height_in_map_units_minus1 0 ue(v)<br>  frame_mbs_only_flag 0 u(1)<br>  if( !frame_mbs_only_flag )<br>    mb_adaptive_frame_field_flag 0 u(1)<br>  direct_8x8_inference_flag 0 u(1)<br>  frame_cropping_flag 0 u(1)<br>  if( frame_cropping_flag ) {<br>    frame_crop_left_offset 0 ue(v)<br>    frame_crop_right_offset 0 ue(v)<br>    frame_crop_top_offset 0 ue(v)<br>    frame_crop_bottom_offset 0 ue(v)<br>  }<br>  vui_parameters_present_flag 0 u(1)<br>  if( vui_parameters_present_flag )<br>    vui_parameters( ) 0<br>}</p>
+<p><strong>语法元素</strong></p>
+<ul>
+<li><strong>profile_idc</strong>本视频编码时遵循的profile，profile分为Baseline，Main，Extended等，主要用来规定编码时是否采用某些特性，比如说Baseline profile就规定了只能使用I、P slice进行编码，关于profile的说明可以去查看标准的Annex A。</li>
+<li><strong>constraint_set0_flag</strong>强制使用Baseline profile进行编码</li>
+<li><strong>constraint_set1_flag</strong>强制使用Main profile进行编码</li>
+<li><strong>constraint_set2_flag</strong>强制使用Extended profile进行编码</li>
+<li>…</li>
+<li><strong>reserved_zero_2bits</strong>两个0bit的保留位</li>
+<li><strong>level_idc</strong>本视频遵循的level，level主要规定了每秒最多能处理多少个宏块，最大的帧大小，最大的解码缓存，最大比特率等这些性能相关的东西，如果是硬解码，则比较容易出现由于视频level太高而不能解码的情况。</li>
+<li><strong>seq_parameter_set_id</strong>本SPS的ID，这个ID主要是给PPS用的。</li>
+<li><strong>log2_max_frame_num_minus4</strong></li>
+<li><strong>pic_order_cnt_type</strong></li>
+<li><strong>log2_max_pic_order_cnt_lsb_minus4</strong></li>
+<li><strong>delta_pic_order_always_zero_flag</strong></li>
+<li><strong>offset_for_non_ref_pic</strong></li>
+<li><strong>offset_for_top_to_bottom_field</strong></li>
+<li><strong>num_ref_frames_in_pic_order_cnt_cycle</strong></li>
+<li><strong>offset_for_ref_frame</strong>以上这几个参数的目的都是进行POC计算，请参考<a target="_blank" rel="noopener" href="http://www.cnblogs.com/TaigaCon/p/3551001.html">h.264的POC计算</a></li>
+<li><strong>max_num_ref_frames</strong>参考帧最多能有多少个</li>
+<li><strong>gaps_in_frame_num_value_allowed_flag</strong>由于码流在传输过程中可能出现丢包的情况，从而导致中间有帧缺失，如果制定了这个标记，则会在解码时对帧丢失的情况进行调整，否则就当作意外丢失处理。</li>
+<li><strong>pic_width_in_mbs_minus1</strong>图片宽度（宏块为单位）-1</li>
+<li><strong>pic_height_in_map_units_minus1</strong>图片高度（宏块为单位）-1</li>
+<li><strong>frame_mbs_only_flag</strong>是否只进行帧编码</li>
+<li><strong>mb_adaptive_frame_field_flag</strong>是否进行帧场自适应编码</li>
+<li><strong>direct_8x8_inference_flag</strong>在进行B Direct预测时，是否子宏块（8x8块）中的4个4x4块共用一个4x4的co-located，请参考<a target="_blank" rel="noopener" href="http://www.cnblogs.com/TaigaCon/p/3677540.html">h.264直接预测</a>中的direct_8x8_inference_flag关键字</li>
+<li><strong>frame_cropping_flag</strong>是否需要对解码后的图片进行修剪</li>
+<li><strong>frame_crop_left_offset</strong></li>
+<li><strong>frame_crop_right_offset</strong></li>
+<li><strong>frame_crop_top_offset</strong></li>
+<li><strong>frame_crop_bottom_offset</strong>分别指示修剪的左右上下</li>
+<li><strong>vui_parameters_present_flag</strong>SPS是否包含vui参数</li>
+<li><strong>vui_parameters</strong>video usability information，在标准的Annex E中有描述，主要包含了视频的比例调整，overscan，视频格式，timing，比特率等信息。</li>
+</ul>
+<h4 id="pic-parameter-set-rbsp"><a href="#pic-parameter-set-rbsp" class="headerlink" title="pic_parameter_set_rbsp"></a>pic_parameter_set_rbsp</h4><p>如前面所说，RBSP都有一个rbsp_trailing_bits的尾部。PPS RBSP结构如下<br>pic_parameter_set_rbsp( ) { C Descriptor<br>  pic_parameter_set_id 1 ue(v)<br>  seq_parameter_set_id 1 ue(v)<br>  entropy_coding_mode_flag 1 u(1)<br>  bottom_field_pic_order_in_frame_present_flag 1 u(1)<br>  num_slice_groups_minus1 1 ue(v)<br>  if( num_slice_groups_minus1 &gt; 0 ) {<br>    slice_group_map_type 1 ue(v)<br>    if( slice_group_map_type &#x3D; &#x3D; 0 )<br>      for( iGroup &#x3D; 0; iGroup &lt;&#x3D; num_slice_groups_minus1; iGroup++ )<br>        run_length_minus1[ iGroup ] 1 ue(v)<br>    else if( slice_group_map_type &#x3D; &#x3D; 2 )<br>      for( iGroup &#x3D; 0; iGroup &lt; num_slice_groups_minus1; iGroup++ ) {<br>        top_left[ iGroup ] 1 ue(v)<br>        bottom_right[ iGroup ] 1 ue(v)<br>      }<br>    else if( slice_group_map_type &#x3D; &#x3D; 3 | |<br>      slice_group_map_type &#x3D; &#x3D; 4 | |<br>      slice_group_map_type &#x3D; &#x3D; 5 ) {<br>      slice_group_change_direction_flag 1 u(1)<br>      slice_group_change_rate_minus1 1 ue(v)<br>    } else if( slice_group_map_type &#x3D; &#x3D; 6 ) {<br>      pic_size_in_map_units_minus1 1 ue(v)<br>      for( i &#x3D; 0; i &lt;&#x3D; pic_size_in_map_units_minus1; i++ )<br>        slice_group_id[ i ] 1 u(v)<br>    }<br>  }<br>  num_ref_idx_l0_default_active_minus1 1 ue(v)<br>  num_ref_idx_l1_default_active_minus1 1 ue(v)<br>  weighted_pred_flag 1 u(1)<br>  weighted_bipred_idc 1 u(2)<br>  pic_init_qp_minus26 &#x2F;* relative to 26 <em>&#x2F; 1 se(v)<br>  pic_init_qs_minus26 &#x2F;</em> relative to 26 *&#x2F; 1 se(v)<br>  chroma_qp_index_offset 1 se(v)<br>  deblocking_filter_control_present_flag 1 u(1)<br>  constrained_intra_pred_flag 1 u(1)<br>  redundant_pic_cnt_present_flag 1 u(1)<br>  if( more_rbsp_data( ) ) {<br>    transform_8x8_mode_flag 1 u(1)<br>    pic_scaling_matrix_present_flag 1 u(1)<br>    if( pic_scaling_matrix_present_flag )<br>      for( i &#x3D; 0; i &lt; 6 +<br>        ( ( chroma_format_idc !&#x3D; 3 ) ? 2 : 6 ) * transform_8x8_mode_flag;<br>        i++ ) {<br>        pic_scaling_list_present_flag[ i ] 1 u(1)<br>        if( pic_scaling_list_present_flag[ i ] )<br>          if( i &lt; 6 )<br>            scaling_list( ScalingList4x4[ i ], 16,<br>            UseDefaultScalingMatrix4x4Flag[ i ] ) 1<br>          else<br>            scaling_list( ScalingList8x8[ i − 6 ], 64,<br>            UseDefaultScalingMatrix8x8Flag[ i − 6 ] ) 1<br>      }<br>    second_chroma_qp_index_offset 1 se(v)<br>  }<br>  rbsp_trailing_bits( ) 1<br>}</p>
+<p><strong>语法元素</strong></p>
+<ul>
+<li><p><strong>pic_parameter_set_id</strong>当前PPS的ID，供slice RBSP使用</p>
+</li>
+<li><p><strong>seq_parameter_set_id</strong>当前PPS所属的SPS的ID</p>
+</li>
+<li><p><strong>entropy_coding_mode_flag</strong>为0时表明采用CAVLC编码，为1时采用CABAC编码</p>
+</li>
+<li><p><strong>bottom_field_pic_order_in_frame_present_flag</strong>用于POC计算，请参考<a target="_blank" rel="noopener" href="http://www.cnblogs.com/TaigaCon/p/3551001.html">h.264的POC计算</a>中的bottom_field_flag</p>
+</li>
+<li><p><strong>num_slice_groups_minus1</strong>进行图像编码时，分成几个slice group，关于slice group请参考<a target="_blank" rel="noopener" href="http://www.cnblogs.com/TaigaCon/p/3605762.html">h.264 FMO</a></p>
+</li>
+<li><p><strong>slice_group_map_type</strong>如果num_slice_groups_minus1&gt;0表明会分成多个slice group，此时会采用slice_group_map_type来规定宏块的组合方式，这部分请参考<a target="_blank" rel="noopener" href="http://www.cnblogs.com/TaigaCon/p/3605762.html">h.264 FMO</a></p>
+</li>
+<li><p><strong>num_ref_idx_l0_default_active_minus1</strong></p>
+</li>
+<li><p><strong>num_ref_idx_l1_default_active_minus1</strong>分别指示前向参考图像以及后向参考图像的个数，请参考<a target="_blank" rel="noopener" href="http://www.cnblogs.com/TaigaCon/p/3715276.html">h.264参考图像列表、解码图像缓存</a>-&gt;参考图像列表-&gt;长度</p>
+</li>
+<li><p><strong>weighted_pred_flag</strong>用于指示P，SP slice是否进行亮度的加权预测，请参考<a target="_blank" rel="noopener" href="http://www.cnblogs.com/TaigaCon/p/3602548.html">h.264加权预测</a></p>
+</li>
+<li><p><strong>weighted_bipred_idc</strong>用于指示B slice的加权预测，0：否  1：显式加权预测  2：隐式加权预测，请参考<a target="_blank" rel="noopener" href="http://www.cnblogs.com/TaigaCon/p/3602548.html">h.264加权预测</a></p>
+</li>
+<li><p><strong>pic_init_qp_minus26</strong>用于计算初始QP（整个视频QP的基准值），关于QP，请参考<a target="_blank" rel="noopener" href="http://www.cnblogs.com/TaigaCon/p/4266686.html">H.264 Quantization</a></p>
+</li>
+<li><p><strong>pic_init_qs_minus26</strong>用于计算SP，SI帧的初始QP</p>
+</li>
+<li><p><strong>chroma_qp_index_offset</strong>色度宏块Cb与亮度宏块Y的QP差值</p>
+</li>
+<li><p><strong>deblocking_filter_control_present_flag</strong>是否进行<a target="_blank" rel="noopener" href="https://www.cnblogs.com/TaigaCon/p/5500110.html">deblocking</a></p>
+</li>
+<li><p><strong>constrained_intra_pred_flag</strong>0：当宏块进行intra编码时，尽管周边宏块为inter编码，也能用于当前宏块的intra预测。1：当宏块进行intra编码时，只有为intra编码的周边宏块才能用于当前宏块的intra预测，请参考<a target="_blank" rel="noopener" href="http://www.cnblogs.com/TaigaCon/p/4190806.html">Intra Luma Prediction</a></p>
+</li>
+<li><p><strong>redundant_pic_cnt_present_flag</strong>如果当前视频中冗余图像的话（SI，SP），那么这个flag应该为1</p>
+</li>
+<li><p><strong>transform_8x8_mode_flag</strong>用于指示luma宏块是否以8x8的方式进行DCT变换</p>
+<ul>
+<li>1：当前luma宏块进行8x8 DCT</li>
+<li>0：当前luma宏块进行4x4 DCT<br>这个标记不会作用到chroma宏块，除非序列格式为4:4:4。也就是说如果序列格式为4:2:0或者4:2:2，那么无论transform_8x8_mode_flag是什么，chroma宏块都是采用4x4 DCT。而如果序列格式为4:4:4，chroma宏块采用与luma宏块相同的DCT。如果码流中没有出现这个标记，那么这个标记的值默认为0。</li>
+</ul>
+</li>
+<li><p><strong>pic_scaling_matrix_present_flag</strong>scaling list相关</p>
+</li>
+<li><p><strong>second_chroma_qp_index_offset</strong>色度宏块Cr与亮度宏块Y的QP差值</p>
+</li>
+</ul>
+<h4 id="slice-layer-without-partitioning-rbsp"><a href="#slice-layer-without-partitioning-rbsp" class="headerlink" title="slice_layer_without_partitioning_rbsp"></a>slice_layer_without_partitioning_rbsp</h4><p>如果当前slice不采用slice data partition的RBSP结构的话，就会是这个RBSP结构，编码时一般都会采用的这个RBSP结构。<br>我们知道编码是以slice为单位的，这个结构内包含的就是视频中编码的主要内容，视频图像进行编码后就会包含在这个结构内，也就是说编码后的码流中，大多数都是以这个结构的RBSP打包成的NAL unit。<br>语法结构如下<br>slice_layer_without_partitioning_rbsp( ) { C Descriptor<br>  slice_header( ) 2<br>  slice_data( ) &#x2F;* all categories of slice_data( ) syntax *&#x2F; 2 | 3 | 4<br>  rbsp_slice_trailing_bits( ) 2<br>}<br>其中分成slice_header，slice_data两部分，最后是RBSP尾部。</p>
+<h5 id="slice-header"><a href="#slice-header" class="headerlink" title="slice_header"></a><strong>slice_header</strong></h5><p>slice_header就是slice的头部，其中包含的是本slice的相关参数，语法结构如下<br>slice_header( ) { C Descriptor<br>  first_mb_in_slice 2 ue(v)<br>  slice_type 2 ue(v)<br>  pic_parameter_set_id 2 ue(v)<br>  if( separate_colour_plane_flag &#x3D; &#x3D; 1 )<br>    colour_plane_id 2 u(2)<br>  frame_num 2 u(v)<br>  if( !frame_mbs_only_flag ) {<br>    field_pic_flag 2 u(1)<br>    if( field_pic_flag )<br>      bottom_field_flag 2 u(1)<br>  }<br>  if( IdrPicFlag )<br>    idr_pic_id 2 ue(v)<br>  if( pic_order_cnt_type &#x3D; &#x3D; 0 ) {<br>    pic_order_cnt_lsb 2 u(v)<br>    if( bottom_field_pic_order_in_frame_present_flag &amp;&amp; !field_pic_flag )<br>      delta_pic_order_cnt_bottom 2 se(v)<br>  }<br>  if( pic_order_cnt_type &#x3D; &#x3D; 1 &amp;&amp; !delta_pic_order_always_zero_flag ) {<br>    delta_pic_order_cnt[ 0 ] 2 se(v)<br>    if( bottom_field_pic_order_in_frame_present_flag &amp;&amp; !field_pic_flag )<br>      delta_pic_order_cnt[ 1 ] 2 se(v)<br>  }<br>  if( redundant_pic_cnt_present_flag )<br>    redundant_pic_cnt 2 ue(v)<br>  if( slice_type &#x3D; &#x3D; B )<br>    direct_spatial_mv_pred_flag 2 u(1)<br>  if( slice_type &#x3D; &#x3D; P | | slice_type &#x3D; &#x3D; SP | | slice_type &#x3D; &#x3D; B ) {<br>    num_ref_idx_active_override_flag 2 u(1)<br>    if( num_ref_idx_active_override_flag ) {<br>      num_ref_idx_l0_active_minus1 2 ue(v)<br>      if( slice_type &#x3D; &#x3D; B )<br>        num_ref_idx_l1_active_minus1 2 ue(v)<br>    }<br>  }<br>  if( nal_unit_type &#x3D; &#x3D; 20 | | nal_unit_type &#x3D; &#x3D; 21 )<br>    ref_pic_list_mvc_modification( ) &#x2F;* specified in Annex H *&#x2F; 2<br>  else<br>    ref_pic_list_modification( ) 2<br>  if( ( weighted_pred_flag &amp;&amp; ( slice_type &#x3D; &#x3D; P | | slice_type &#x3D; &#x3D; SP ) ) | |<br>    ( weighted_bipred_idc &#x3D; &#x3D; 1 &amp;&amp; slice_type &#x3D; &#x3D; B ) )<br>    pred_weight_table( ) 2<br>  if( nal_ref_idc !&#x3D; 0 )<br>    dec_ref_pic_marking( ) 2<br>  if( entropy_coding_mode_flag &amp;&amp; slice_type !&#x3D; I &amp;&amp; slice_type !&#x3D; SI )<br>    cabac_init_idc 2 ue(v)<br>  slice_qp_delta 2 se(v)<br>  if( slice_type &#x3D; &#x3D; SP | | slice_type &#x3D; &#x3D; SI ) {<br>    if( slice_type &#x3D; &#x3D; SP )<br>      sp_for_switch_flag 2 u(1)<br>    slice_qs_delta 2 se(v)<br>  }<br>  if( deblocking_filter_control_present_flag ) {<br>    disable_deblocking_filter_idc 2 ue(v)<br>    if( disable_deblocking_filter_idc !&#x3D; 1 ) {<br>      slice_alpha_c0_offset_div2 2 se(v)<br>      slice_beta_offset_div2 2 se(v)<br>    }<br>  }<br>  if( num_slice_groups_minus1 &gt; 0 &amp;&amp;<br>    slice_group_map_type &gt;&#x3D; 3 &amp;&amp; slice_group_map_type &lt;&#x3D; 5)<br>    slice_group_change_cycle 2 u(v)<br>}</p>
+<p><strong>语法元素</strong></p>
+<ul>
+<li><p><strong>first_mb_in_slice</strong>当前slice的第一个宏块在图像中的位置</p>
+</li>
+<li><p><strong>slice_type</strong>指示当前slice的类型，如下表。当slice_type为5~9的时候，就表明要求当前图像的其他slice为slice_type%5，也就是要求当前图像slice_type一致</p>
+</li>
+<li><p><strong>pic_parameter_set_id</strong>当前slice所属的PPS的ID</p>
+</li>
+<li><p><strong>frame_num</strong>用于POC计算，请参考<a target="_blank" rel="noopener" href="http://www.cnblogs.com/TaigaCon/p/3551001.html">h.264的POC计算</a>中的frame_num</p>
+</li>
+<li><p><strong>field_pic_flag</strong>当前slice是否进行的是场编码</p>
+</li>
+<li><p><strong>bottom_field_flag</strong>当前slice是否在底场（bottom field）</p>
+</li>
+<li><p><strong>idr_pic_id</strong>指示IDR图片的ID</p>
+</li>
+<li><p><strong>pic_order_cnt_lsb</strong></p>
+</li>
+<li><p><strong>delta_pic_order_cnt_bottom</strong></p>
+</li>
+<li><p><strong>delta_pic_order_cnt</strong>以上三个都是用于计算POC，请参考<a target="_blank" rel="noopener" href="http://www.cnblogs.com/TaigaCon/p/3551001.html">h.264的POC计算</a></p>
+</li>
+<li><p><strong>redundant_pic_cnt</strong>冗余图像编码相关</p>
+</li>
+<li><p><strong>direct_spatial_mv_pred_flag</strong>1：B帧direct编码采用空域预测方式，0：B帧direct编码采用时域预测方式，请参考<a target="_blank" rel="noopener" href="http://www.cnblogs.com/TaigaCon/p/3677540.html">h.264直接预测</a></p>
+</li>
+<li><p><strong>num_ref_idx_active_override_flag</strong>当前slice的参考图像列表是否采用以下两个长度而不用PPS规定的长度</p>
+</li>
+<li><p><strong>num_ref_idx_l0_active_minus1</strong>前向参考图像列表长度</p>
+</li>
+<li><p><strong>num_ref_idx_l1_active_minus1</strong>后续参考图像列表长度</p>
+</li>
+<li><p><strong>ref_pic_list_modification</strong>参考图像列表重排序的参数结构语法，请结合标准并参考<a target="_blank" rel="noopener" href="http://www.cnblogs.com/TaigaCon/p/3715276.html">h.264参考图像列表、解码图像缓存</a>-&gt;参考图像列表-&gt;参考图像列表重排序</p>
+</li>
+<li><p><strong>pred_weight_table</strong>加权预测的参数结构语法，请结合标准并参考<a target="_blank" rel="noopener" href="http://www.cnblogs.com/TaigaCon/p/3602548.html">h.264加权预测</a></p>
+</li>
+<li><p><strong>dec_ref_pic_marking</strong>解码图像标记的参数结构语法，请结合标准并参考<a target="_blank" rel="noopener" href="http://www.cnblogs.com/TaigaCon/p/3715276.html">h.264参考图像列表、解码图像缓存</a>-&gt;解码图像缓存-&gt;解码图像标记过程</p>
+</li>
+<li><p><strong>cabac_init_idc</strong>cabac中m、n表的索引</p>
+</li>
+<li><p><strong>slice_qp_delta</strong>pic_init_qp_minus26 + 26 + slice_qp_delta将成为当前slice的初始QP</p>
+</li>
+<li><p><strong>disable_deblocking_filter_idc</strong></p>
+</li>
+<li><p><strong>slice_alpha_c0_offset_div2</strong></p>
+</li>
+<li><p><strong>slice_beta_offset_div2</strong>以上三个是<a target="_blank" rel="noopener" href="https://www.cnblogs.com/TaigaCon/p/5500110.html">deblocking</a>的相关参数</p>
+</li>
+</ul>
+<h5 id="slice-data"><a href="#slice-data" class="headerlink" title="slice_data"></a><strong>slice_data</strong></h5><p>slice_data是slice的主体部分，当前slice内的宏块编码后的信息都在其中。<br>语法结构如下<br>slice_data( ) { C Descriptor<br>  if( entropy_coding_mode_flag )<br>    while( !byte_aligned( ) )<br>      cabac_alignment_one_bit 2 f(1)<br>  CurrMbAddr &#x3D; first_mb_in_slice * ( 1 + MbaffFrameFlag )<br>  moreDataFlag &#x3D; 1<br>  prevMbSkipped &#x3D; 0<br>  do {<br>    if( slice_type !&#x3D; I &amp;&amp; slice_type !&#x3D; SI )<br>      if( !entropy_coding_mode_flag ) {<br>        mb_skip_run 2 ue(v)<br>        prevMbSkipped &#x3D; ( mb_skip_run &gt; 0 )<br>        for( i&#x3D;0; i&lt;mb_skip_run; i++ )<br>        CurrMbAddr &#x3D; NextMbAddress( CurrMbAddr )<br>        if( mb_skip_run &gt; 0 )<br>        moreDataFlag &#x3D; more_rbsp_data( )<br>      } else {<br>        mb_skip_flag 2 ae(v)<br>        moreDataFlag &#x3D; !mb_skip_flag<br>      }<br>    if( moreDataFlag ) {<br>      if( MbaffFrameFlag &amp;&amp; ( CurrMbAddr % 2 &#x3D; &#x3D; 0 | |<br>      ( CurrMbAddr % 2 &#x3D; &#x3D; 1 &amp;&amp; prevMbSkipped ) ) )<br>        mb_field_decoding_flag 2 u(1) | ae(v)<br>      macroblock_layer( ) 2 | 3 | 4<br>    }<br>    if( !entropy_coding_mode_flag )<br>      moreDataFlag &#x3D; more_rbsp_data( )<br>    else {<br>      if( slice_type !&#x3D; I &amp;&amp; slice_type !&#x3D; SI )<br>        prevMbSkipped &#x3D; mb_skip_flag<br>      if( MbaffFrameFlag &amp;&amp; CurrMbAddr % 2 &#x3D; &#x3D; 0 )<br>        moreDataFlag &#x3D; 1<br>      else {<br>        end_of_slice_flag 2 ae(v)<br>        moreDataFlag &#x3D; !end_of_slice_flag<br>      }<br>    }<br>    CurrMbAddr &#x3D; NextMbAddress( CurrMbAddr )<br>  } while( moreDataFlag )<br>}</p>
+<p><strong>可以注意到slice_data内头部的对齐外，它由宏块信息循环组合而成。</strong><br><a target="_blank" rel="noopener" href="http://images2015.cnblogs.com/blog/421096/201602/421096-20160224230056286-2058608473.png"><img alt="" src="img/2016-02-24-h.264语法结构分析/421096-20160224230056615-1305850059.png"></a></p>
+<p><strong>语法元素</strong></p>
+<ul>
+<li><strong>cabac_alignment_one_bit</strong>如果是cabac，需要slice_data的头部8bit对齐，因此可能需要插入1</li>
+<li><strong>mb_skip_run</strong>如果当前采用的是CAVLC编码方式，则会采用这个语法元素来表达skip宏块（P_Skip，B_Skip），mb_skip_run代表的是当前这个宏块以及它的后面共有多少个跳过宏块，并且后面的skip宏块都不会被编码。</li>
+<li><strong>mb_skip_flag</strong>如果当前采用的是CABAC编码方式，则会采用这个语法元素来表达skip宏块（P_Skip，B_Skip），跟mb_skip_run不同的是，每个skip宏块都有一个mb_skip_flag</li>
+<li><strong>macroblock_layer</strong>如果不是为skip宏块的话，则表明本宏块有编码的数据，因此会进去macroblock_layer</li>
+<li><strong>end_of_slice_flag</strong>如果采用的是CABAC编码方式，还会用这个标记来表达当前宏块是否为这个slice的最后一个宏块</li>
+</ul>
+<h5 id="macroblock-layer"><a href="#macroblock-layer" class="headerlink" title="macroblock_layer"></a><strong>macroblock_layer</strong></h5><p>如前面所说，这里面的是宏块编码数据，语法结构如下<br>macroblock_layer( ) { C Descriptor<br>  mb_type 2 ue(v) | ae(v)<br>  if( mb_type &#x3D; &#x3D; I_PCM ) {<br>    while( !byte_aligned( ) )<br>      pcm_alignment_zero_bit 3 f(1)<br>    for( i &#x3D; 0; i &lt; 256; i++ )<br>      pcm_sample_luma[ i ] 3 u(v)<br>    for( i &#x3D; 0; i &lt; 2 * MbWidthC * MbHeightC; i++ )<br>      pcm_sample_chroma[ i ] 3 u(v)<br>  } else {<br>    noSubMbPartSizeLessThan8x8Flag &#x3D; 1<br>    if( mb_type !&#x3D; I_NxN &amp;&amp;<br>      MbPartPredMode( mb_type, 0 ) !&#x3D; Intra_16x16 &amp;&amp;<br>      NumMbPart( mb_type ) &#x3D; &#x3D; 4 ) {<br>      sub_mb_pred( mb_type ) 2<br>      for( mbPartIdx &#x3D; 0; mbPartIdx &lt; 4; mbPartIdx++ )<br>        if( sub_mb_type[ mbPartIdx ] !&#x3D; B_Direct_8x8 ) {<br>          if( NumSubMbPart( sub_mb_type[ mbPartIdx ] ) &gt; 1 )<br>            noSubMbPartSizeLessThan8x8Flag &#x3D; 0<br>        } else if( !direct_8x8_inference_flag )<br>          noSubMbPartSizeLessThan8x8Flag &#x3D; 0<br>    } else {<br>      if( transform_8x8_mode_flag &amp;&amp; mb_type &#x3D; &#x3D; I_NxN )<br>        transform_size_8x8_flag 2 u(1) | ae(v)<br>      mb_pred( mb_type ) 2<br>    }<br>    if( MbPartPredMode( mb_type, 0 ) !&#x3D; Intra_16x16 ) {<br>      coded_block_pattern 2 me(v) | ae(v)<br>      if( CodedBlockPatternLuma &gt; 0 &amp;&amp;<br>      transform_8x8_mode_flag &amp;&amp; mb_type !&#x3D; I_NxN &amp;&amp;<br>      noSubMbPartSizeLessThan8x8Flag &amp;&amp;<br>      ( mb_type !&#x3D; B_Direct_16x16 | | direct_8x8_inference_flag ) )<br>      transform_size_8x8_flag 2 u(1) | ae(v)<br>    }<br>    if( CodedBlockPatternLuma &gt; 0 | | CodedBlockPatternChroma &gt; 0 | |<br>      MbPartPredMode( mb_type, 0 ) &#x3D; &#x3D; Intra_16x16 ) {<br>      mb_qp_delta 2 se(v) | ae(v)<br>      residual( 0, 15 ) 3 | 4<br>    }<br>  }<br>}</p>
+<p><strong>语法元素</strong></p>
+<ul>
+<li><p><strong>mb_type</strong>当前宏块的类型，对于不同的slice（I,P,B），同一个值会表示不同的类型。而且这个类型不仅仅表达宏块的预测模式，分割方式，还有其他的一些信息，请参考<a target="_blank" rel="noopener" href="http://www.cnblogs.com/TaigaCon/p/5229392.html">h.264宏块与子宏块类型</a></p>
+</li>
+<li><p><strong>pcm_alignment_zero_bit</strong>在PCM情况下会要求进行字节对齐</p>
+</li>
+<li><p><strong>pcm_sample_luma</strong>亮度的PCM，一共有16x16个</p>
+</li>
+<li><p><strong>pcm_sample_chroma</strong>色度的PCM，根据yuv的格式不同会有不同的个数，一般的4:2:0格式有8x8x2个</p>
+</li>
+<li><p><strong>sub_mb_pred</strong>子宏块预测的语法结构，子宏块为8x8大小的宏块，也就是说一个宏块有4个子宏块，在这个语法结构的内部会进行4次子宏块预测</p>
+</li>
+<li><p><strong>transform_size_8x8_flag</strong>宏块所采用的变换方法0：4x4DCT；1：8x8DCT。变换方法请参考<a target="_blank" rel="noopener" href="http://www.cnblogs.com/TaigaCon/p/4220290.html">H.264 Transform</a>。按照上述语法描述，只有满足了以下条件码流中才会出现这个语法元素，如果该语法元素没出现在码流中则默认为0。</p>
+<ul>
+<li>Intra：总开关transform_8x8_mode_flag为1，并且宏块类型为I_NxN（参考<a target="_blank" rel="noopener" href="http://www.cnblogs.com/TaigaCon/p/5229392.html">h.264宏块与子宏块类型</a>，如果是I_8x8则为1，如果是I_4x4则为0）。</li>
+<li>Inter：总开关transform_8x8_mode_flag为1，并且宏块的预测模式块不小于8x8。另外如果宏块采用了直接预测方式，并且预测模式为B_Direct_16x16，则需要direct_8x8_inference_flag为1。（此时码流中transform_size_8x8_flag的值为0或者1，是在编码端由算法自行决定的）。</li>
+<li>Intra_16x16以及I_PCM的情况下码流中不存在该语法元素。</li>
+</ul>
+</li>
+<li><p><strong>mb_pred</strong>宏块预测的语法结构，宏块预测与子宏块预测的语法结构是相斥的，一个宏块的组成结构要么采用的是宏块预测的结构，要么4个子宏块都是子宏块的预测结构</p>
+</li>
+<li><p><strong>coded_block_pattern</strong>简称CBP，用来反映该宏块编码中残差情况的语法元素。CBP共有6位，其中前面2位代表UV分量，描述如下表所示；后面4位是Y分量，分别代表宏块内的4个8x8子宏块，如果任意一位为0，表明对应的8x8块中所有变换系数level（transform coefficient levels 也就是对像素残差进行变换、量化后的矩阵内的值，以后统称level）全部都是0，否则表明对应的8x8块中的变换系数level不全为0。另外需要注意的是，如果当前宏块的预测模式是Intra_16x16，则不会存在这个元素，此时CBP会由mb_type来表示，请参考<a target="_blank" rel="noopener" href="http://www.cnblogs.com/TaigaCon/p/5229392.html">h.264宏块与子宏块类型</a>。CBP的主要作用是加快解码速度，当一个块的残差都为0时，就不用对这个块进行残差解码了。</p>
+</li>
+<li><p><strong>mb_qp_delta</strong>用来计算当前宏块的QP，QP&#x3D;pic_init_qp_minus26 + 26 + slice_qp_delta + mb_qp_delta</p>
+</li>
+<li><p><strong>residual</strong>像素残差编码的语法结构。</p>
+</li>
+</ul>
+<p>按照macroblock_layer的语法结构上看，宏块能粗略分成三种结构：PCM、sub_mb_pred（子宏块预测）、mb_pred（宏块预测）。另外，虽然skip宏块并不在macroblock内描述，它也是宏块的一种结构。<br><a target="_blank" rel="noopener" href="http://images2015.cnblogs.com/blog/421096/201602/421096-20160224230056990-1920471548.png"><img alt="" src="img/2016-02-24-h.264语法结构分析/421096-20160224230057302-2078207387.png"></a></p>
+<h5 id="mb-perd"><a href="#mb-perd" class="headerlink" title="mb_perd"></a><strong>mb_perd</strong></h5><p>语法结构如下<br>mb_pred( mb_type ) { C Descriptor<br>  if( MbPartPredMode( mb_type, 0 ) &#x3D; &#x3D; Intra_4x4 | |<br>    MbPartPredMode( mb_type, 0 ) &#x3D; &#x3D; Intra_8x8 | |<br>    MbPartPredMode( mb_type, 0 ) &#x3D; &#x3D; Intra_16x16 ) {<br>    if( MbPartPredMode( mb_type, 0 ) &#x3D; &#x3D; Intra_4x4 )<br>      for( luma4x4BlkIdx&#x3D;0; luma4x4BlkIdx&lt;16; luma4x4BlkIdx++ ) {<br>        prev_intra4x4_pred_mode_flag[ luma4x4BlkIdx ] 2 u(1) | ae(v)<br>        if( !prev_intra4x4_pred_mode_flag[ luma4x4BlkIdx ] )<br>        rem_intra4x4_pred_mode[ luma4x4BlkIdx ] 2 u(3) | ae(v)<br>      }<br>    if( MbPartPredMode( mb_type, 0 ) &#x3D; &#x3D; Intra_8x8 )<br>      for( luma8x8BlkIdx&#x3D;0; luma8x8BlkIdx&lt;4; luma8x8BlkIdx++ ) {<br>        prev_intra8x8_pred_mode_flag[ luma8x8BlkIdx ] 2 u(1) | ae(v)<br>        if( !prev_intra8x8_pred_mode_flag[ luma8x8BlkIdx ] )<br>          rem_intra8x8_pred_mode[ luma8x8BlkIdx ] 2 u(3) | ae(v)<br>      }<br>    if( ChromaArrayType &#x3D; &#x3D; 1 | | ChromaArrayType &#x3D; &#x3D; 2 )<br>      intra_chroma_pred_mode 2 ue(v) | ae(v)<br>  } else if( MbPartPredMode( mb_type, 0 ) !&#x3D; Direct ) {<br>    for( mbPartIdx &#x3D; 0; mbPartIdx &lt; NumMbPart( mb_type ); mbPartIdx++)<br>      if( ( num_ref_idx_l0_active_minus1 &gt; 0 | |<br>        mb_field_decoding_flag !&#x3D; field_pic_flag ) &amp;&amp;<br>        MbPartPredMode( mb_type, mbPartIdx ) !&#x3D; Pred_L1 )<br>        ref_idx_l0[ mbPartIdx ] 2 te(v) | ae(v)<br>    for( mbPartIdx &#x3D; 0; mbPartIdx &lt; NumMbPart( mb_type ); mbPartIdx++)<br>      if( ( num_ref_idx_l1_active_minus1 &gt; 0 | |<br>        mb_field_decoding_flag !&#x3D; field_pic_flag ) &amp;&amp;<br>        MbPartPredMode( mb_type, mbPartIdx ) !&#x3D; Pred_L0 )<br>        ref_idx_l1[ mbPartIdx ] 2 te(v) | ae(v)<br>    for( mbPartIdx &#x3D; 0; mbPartIdx &lt; NumMbPart( mb_type ); mbPartIdx++)<br>      if( MbPartPredMode ( mb_type, mbPartIdx ) !&#x3D; Pred_L1 )<br>        for( compIdx &#x3D; 0; compIdx &lt; 2; compIdx++ )<br>          mvd_l0[ mbPartIdx ][ 0 ][ compIdx ] 2 se(v) | ae(v)<br>    for( mbPartIdx &#x3D; 0; mbPartIdx &lt; NumMbPart( mb_type ); mbPartIdx++)<br>      if( MbPartPredMode( mb_type, mbPartIdx ) !&#x3D; Pred_L0 )<br>        for( compIdx &#x3D; 0; compIdx &lt; 2; compIdx++ )<br>          mvd_l1[ mbPartIdx ][ 0 ][ compIdx ] 2 se(v) | ae(v)<br>  }<br>}</p>
+<p><strong>语法元素</strong></p>
+<ul>
+<li><strong>prev_intra4x4_pred_mode_flag</strong>如果当前宏块采用的是intra4x4的预测方式，则会存在这个语法元素，它的含义请参考<a target="_blank" rel="noopener" href="http://www.cnblogs.com/TaigaCon/p/4190806.html">Intra Luma Prediction</a></li>
+<li><strong>rem_intra4x4_pred_mode</strong>如果当前宏块采用的是intra4x4的预测方式，则可能会存在这个语法元素，它的含义请参考<a target="_blank" rel="noopener" href="http://www.cnblogs.com/TaigaCon/p/4190806.html">Intra Luma Prediction</a></li>
+<li><strong>prev_intra8x8_pred_mode_flag</strong>如果当前宏块采用的是intra8x8的预测方式，则会存在这个语法元素，它的含义请参考<a target="_blank" rel="noopener" href="http://www.cnblogs.com/TaigaCon/p/4190806.html">Intra Luma Prediction</a></li>
+<li><strong>rem_intra8x8_pred_mode</strong>如果当前宏块采用的是intra8x8的预测方式，则可能会存在这个语法元素，它的含义请参考<a target="_blank" rel="noopener" href="http://www.cnblogs.com/TaigaCon/p/4190806.html">Intra Luma Prediction</a></li>
+<li><strong>intra_chroma_pred_mode</strong>intra chroma的预测模式，只有当前宏块的Luma部分采用intra预测时才会存在这个语法元素，它的含义请参考<a target="_blank" rel="noopener" href="http://www.cnblogs.com/TaigaCon/p/4149938.html">Intra Chroma Prediction</a></li>
+<li><strong>ref_idx_l0</strong>前向参考图像索引。如果当前宏块为inter预测，并且他的预测方式并非后向预测（即可能为前向预测或双向预测），则会存在这个语法元素</li>
+<li><strong>ref_idx_l1</strong>后向参考图像索引。如果当前宏块为inter预测，并且他的预测方式并非前向预测（即可能为后向预测或双向预测），则会存在这个语法元素</li>
+<li><strong>mvd_l0</strong>前向向量残差。如果当前宏块为inter预测，并且他的预测方式并非后向预测（即可能为前向预测或双向预测），则会存在这个语法元素</li>
+<li><strong>mvd_l1</strong>后向向量残差。如果当前宏块为inter预测，并且他的预测方式并非前向预测（即可能为后向预测或双向预测），则会存在这个语法元素</li>
+</ul>
+<p>下图分别是几个mb_pred结构的例子</p>
+<ul>
+<li>在intra16x16的宏块模式下，intra16x16的宏块信息是被包含在mb_type里面的，因此mb_pred结构内只有chroma相关的信息</li>
+<li>在intra8x8的宏块模式下，共有四个子宏块，因此分成4个部分</li>
+<li>在intra4x4的宏块模式下，共有16个4x4块，因此分成16部分</li>
+<li>如果是Pslice的inter宏块，并且宏块采用16x8的分割方式，那么宏块会被分割成两部分，因此会有两个refIdx以及两个mvd</li>
+<li>如果是Bslice的inter宏块，并且宏块采用16x16的分割方式，那么宏块不会被分割，如果这个没被宏块采用的是双向预测方式，那么会有前、后向的refIdx以及mvd</li>
+<li>如果是Bslice的inter宏块，并且宏块采用8x16的分割方式，那么宏块会被分割成两部分，如果第一部分采用的是前向预测方式，第二部分采用的是双向预测方式，那么mb_pred内会有两个前向、一个后向refIdx以及mvd<br><a target="_blank" rel="noopener" href="http://images2015.cnblogs.com/blog/421096/201608/421096-20160815164330156-873923396.png"><img alt="" src="img/2016-02-24-h.264语法结构分析/421096-20160815164330828-1469117667.png"></a></li>
+</ul>
+<h5 id="sub-mb-pred"><a href="#sub-mb-pred" class="headerlink" title="sub_mb_pred"></a><strong>sub_mb_pred</strong></h5><p>语法结构如下<br>sub_mb_pred( mb_type ) { C Descriptor<br>  for( mbPartIdx &#x3D; 0; mbPartIdx &lt; 4; mbPartIdx++ )<br>    sub_mb_type[ mbPartIdx ] 2 ue(v) | ae(v)<br>  for( mbPartIdx &#x3D; 0; mbPartIdx &lt; 4; mbPartIdx++ )<br>    if( ( num_ref_idx_l0_active_minus1 &gt; 0 | |<br>      mb_field_decoding_flag !&#x3D; field_pic_flag ) &amp;&amp;<br>      mb_type !&#x3D; P_8x8ref0 &amp;&amp;<br>      sub_mb_type[ mbPartIdx ] !&#x3D; B_Direct_8x8 &amp;&amp;<br>      SubMbPredMode( sub_mb_type[ mbPartIdx ] ) !&#x3D; Pred_L1 )<br>      ref_idx_l0[ mbPartIdx ] 2 te(v) | ae(v)<br>  for( mbPartIdx &#x3D; 0; mbPartIdx &lt; 4; mbPartIdx++ )<br>    if( ( num_ref_idx_l1_active_minus1 &gt; 0 | |<br>      mb_field_decoding_flag !&#x3D; field_pic_flag ) &amp;&amp;<br>      sub_mb_type[ mbPartIdx ] !&#x3D; B_Direct_8x8 &amp;&amp;<br>      SubMbPredMode( sub_mb_type[ mbPartIdx ] ) !&#x3D; Pred_L0 )<br>      ref_idx_l1[ mbPartIdx ] 2 te(v) | ae(v)<br>  for( mbPartIdx &#x3D; 0; mbPartIdx &lt; 4; mbPartIdx++ )<br>    if( sub_mb_type[ mbPartIdx ] !&#x3D; B_Direct_8x8 &amp;&amp;<br>      SubMbPredMode( sub_mb_type[ mbPartIdx ] ) !&#x3D; Pred_L1 )<br>      for( subMbPartIdx &#x3D; 0;<br>        subMbPartIdx &lt; NumSubMbPart( sub_mb_type[ mbPartIdx ] );<br>        subMbPartIdx++)<br>        for( compIdx &#x3D; 0; compIdx &lt; 2; compIdx++ )<br>          mvd_l0[ mbPartIdx ][ subMbPartIdx ][ compIdx ] 2 se(v) | ae(v)<br>  for( mbPartIdx &#x3D; 0; mbPartIdx &lt; 4; mbPartIdx++ )<br>    if( sub_mb_type[ mbPartIdx ] !&#x3D; B_Direct_8x8 &amp;&amp;<br>      SubMbPredMode( sub_mb_type[ mbPartIdx ] ) !&#x3D; Pred_L0 )<br>      for( subMbPartIdx &#x3D; 0;<br>        subMbPartIdx &lt; NumSubMbPart( sub_mb_type[ mbPartIdx ] );<br>        subMbPartIdx++)<br>        for( compIdx &#x3D; 0; compIdx &lt; 2; compIdx++ )<br>          mvd_l1[ mbPartIdx ][ subMbPartIdx ][ compIdx ] 2 se(v) | ae(v)<br>}</p>
+<p><strong>语法元素</strong></p>
+<ul>
+<li><strong>sub_mb_type</strong>子宏块模式，子宏块大小为8x8，因此一个宏块内有4个子宏块，也就会有4种子宏块模式，具体请参考<a target="_blank" rel="noopener" href="http://www.cnblogs.com/TaigaCon/p/5229392.html">h.264宏块与子宏块类型</a></li>
+<li><strong>ref_idx_l0</strong></li>
+<li><strong>ref_idx_l1</strong>描述同mb_pred，不过需要注意的一点是，由于在8x8的子宏块中，分块（2个8x4块，4个4x4块等）是共用参考图像的，也就是说整个宏块最多也就只包含四个ref_idx</li>
+<li><strong>mvd_l0</strong></li>
+<li><strong>mvd_l1</strong>描述同mb_pred</li>
+</ul>
+<p>下面是一个sub_mb_pred语法结构的例子。假设处于Bslice，左边的表格分别代表四个子宏块的模式。在该sub_mb_pred结构中</p>
+<ul>
+<li>头部保存的是4个子宏块各自的子宏块类型</li>
+<li>接下来是前向refIdx，第一个子宏块的预测方式为Bi，因此有前向refIdx；第二个子宏块的预测方式为L0，也有前向refIdx；第三个子宏块为直接预测，没有refIdx；第四个子宏块为L0,有前向refIdx</li>
+<li>然后是后向refIdx，只有第一个子宏块的Bi会包含后向refIdx</li>
+<li>然后是前向mvd，第一个子宏块分割方式为4x8，分割成两个部分，因此有两个前向mvd；第二个子宏块分割方式为8x8，即不分割，因此只有一个前向mvd；第三个子宏块为直接预测，没有mvd；第四个子宏块分割方式为8x4，分割成两个部分，因此有两个前向mvd</li>
+<li>最后是后向mvd，例子中只有第一个子宏块，也就是采用Bi预测的会有后向mvd，由于第一个子宏块被分割成两部分，因此有两个后向mvd<br>图例中，结构上面的数字代表了该语法元素所属的子宏块。<br><a target="_blank" rel="noopener" href="http://images2015.cnblogs.com/blog/421096/201608/421096-20160815164331359-954593526.png"><img alt="" src="img/2016-02-24-h.264语法结构分析/421096-20160815164332000-1555405610.png"></a></li>
+</ul>
+<h5 id="residual，residual-luma"><a href="#residual，residual-luma" class="headerlink" title="residual，residual_luma"></a><strong>residual，residual_luma</strong></h5><p>像素残差进行变换、量化后的系数的语法结构。<br>residual( startIdx, endIdx ) { C Descriptor<br>  if( !entropy_coding_mode_flag )<br>    residual_block &#x3D; residual_block_cavlc<br>  else<br>    residual_block &#x3D; residual_block_cabac<br>  residual_luma( i16x16DClevel, i16x16AClevel, level4x4, level8x8,<br>  startIdx, endIdx ) 3 | 4<br>  Intra16x16DCLevel &#x3D; i16x16DClevel<br>  Intra16x16ACLevel &#x3D; i16x16AClevel<br>  LumaLevel4x4 &#x3D; level4x4<br>  LumaLevel8x8 &#x3D; level8x8<br>  if( ChromaArrayType &#x3D; &#x3D; 1 | | ChromaArrayType &#x3D; &#x3D; 2 ) {<br>    NumC8x8 &#x3D; 4 &#x2F; ( SubWidthC * SubHeightC )<br>    for( iCbCr &#x3D; 0; iCbCr &lt; 2; iCbCr++ )<br>      if( ( CodedBlockPatternChroma &amp; 3 ) &amp;&amp; startIdx &#x3D; &#x3D; 0 )<br>        &#x2F;* chroma DC residual present <em>&#x2F;<br>        residual_block( ChromaDCLevel[ iCbCr ], 0, 4 * NumC8x8 − 1,<br>        4 * NumC8x8 ) 3 | 4<br>      else<br>        for( i &#x3D; 0; i &lt; 4 * NumC8x8; i++ )<br>          ChromaDCLevel[ iCbCr ][ i ] &#x3D; 0<br>    for( iCbCr &#x3D; 0; iCbCr &lt; 2; iCbCr++ )<br>      for( i8x8 &#x3D; 0; i8x8 &lt; NumC8x8; i8x8++ )<br>        for( i4x4 &#x3D; 0; i4x4 &lt; 4; i4x4++ )<br>          if( CodedBlockPatternChroma &amp; 2 )<br>            &#x2F;</em> chroma AC residual present <em>&#x2F;<br>            residual_block( ChromaACLevel[ iCbCr ][ i8x8</em>4+i4x4 ],<br>            Max( 0, startIdx − 1 ), endIdx − 1, 15) 3 | 4<br>          else<br>            for( i &#x3D; 0; i &lt; 15; i++ )<br>              ChromaACLevel[ iCbCr ][ i8x8*4+i4x4 ][ i ] &#x3D; 0<br>  } else if( ChromaArrayType &#x3D; &#x3D; 3 ) {<br>    residual_luma( i16x16DClevel, i16x16AClevel, level4x4, level8x8,<br>    startIdx, endIdx ) 3 | 4<br>    CbIntra16x16DCLevel &#x3D; i16x16DClevel<br>    CbIntra16x16ACLevel &#x3D; i16x16AClevel<br>    CbLevel4x4 &#x3D; level4x4<br>    CbLevel8x8 &#x3D; level8x8<br>    residual_luma( i16x16DClevel, i16x16AClevel, level4x4, level8x8,<br>    startIdx, endIdx ) 3 | 4<br>    CrIntra16x16DCLevel &#x3D; i16x16DClevel<br>    CrIntra16x16ACLevel &#x3D; i16x16AClevel<br>    CrLevel4x4 &#x3D; level4x4<br>    CrLevel8x8 &#x3D; level8x8<br>  }<br>}</p>
+<p>residual内部首先会根据entropy_coding_mode_flag来选择CAVLC或者CABAC的熵编码方式，然后在下面进行level的处理。level处理部分先包含了residual_luma，也就是先进行luma level的处理，然后用residual_block对chroma level进行处理。<br>chroma level一般采用的yuv格式都是4:2:0，也就是ChromaArrayType&#x3D;1。</p>
+<p>residual_luma( i16x16DClevel, i16x16AClevel, level4x4, level8x8,<br>  startIdx, endIdx ) { C Descriptor<br>  if( startIdx &#x3D; &#x3D; 0 &amp;&amp; MbPartPredMode( mb_type, 0 ) &#x3D; &#x3D; Intra_16x16 )<br>    residual_block( i16x16DClevel, 0, 15, 16 ) 3<br>  for( i8x8 &#x3D; 0; i8x8 &lt; 4; i8x8++ )<br>    if( !transform_size_8x8_flag | | !entropy_coding_mode_flag )<br>      for( i4x4 &#x3D; 0; i4x4 &lt; 4; i4x4++ ) {<br>        if( CodedBlockPatternLuma &amp; ( 1 &lt;&lt; i8x8 ) )<br>          if( MbPartPredMode( mb_type, 0 ) &#x3D; &#x3D; Intra_16x16 )<br>            residual_block( i16x16AClevel[i8x8*4+ i4x4],<br>            Max( 0, startIdx − 1 ), endIdx − 1, 15) 3<br>          else<br>            residual_block( level4x4[ i8x8 * 4 + i4x4 ],<br>            startIdx, endIdx, 16) 3 | 4<br>        else if( MbPartPredMode( mb_type, 0 ) &#x3D; &#x3D; Intra_16x16 )<br>          for( i &#x3D; 0; i &lt; 15; i++ )<br>            i16x16AClevel[ i8x8 * 4 + i4x4 ][ i ] &#x3D; 0<br>        else<br>          for( i &#x3D; 0; i &lt; 16; i++ )<br>            level4x4[ i8x8 * 4 + i4x4 ][ i ] &#x3D; 0<br>        if( !entropy_coding_mode_flag &amp;&amp; transform_size_8x8_flag )<br>          for( i &#x3D; 0; i &lt; 16; i++ )<br>            level8x8[ i8x8 ][ 4 * i + i4x4 ] &#x3D; level4x4[ i8x8 * 4 + i4x4 ][ i ]<br>      }<br>    else if( CodedBlockPatternLuma &amp; ( 1 &lt;&lt; i8x8 ) )<br>      residual_block( level8x8[ i8x8 ], 4 * startIdx, 4 * endIdx + 3, 64 ) 3 | 4<br>    else<br>      for( i &#x3D; 0; i &lt; 64; i++ )<br>        level8x8[ i8x8 ][ i ] &#x3D; 0<br>}</p>
+<p><strong>语法元素</strong></p>
+<ul>
+<li><p><strong>residual_luma</strong>亮度残差变换量化后的语法结构，各参数说明如下</p>
+<ul>
+<li><strong>i16x16DClevel</strong>如果是intra16x16的宏块模式，会分开AC与DC单独编码，DC level会从residual_block内取出，并存在<strong>i16x16DClevel</strong>数组内</li>
+<li><strong>i16x16AClevel</strong>如果是intra16x16的宏块模式，会分开AC与DC单独编码，AC level会从residual_block内取出，并存在<strong>i16x16AClevel</strong>数组内</li>
+<li><strong>level4x4</strong>不是intra16x16的情况下，如果DCT变换采用的是4x4的方式，宏块的level会从residual_block内取出，并存在<strong>level4x4</strong>数组内</li>
+<li><strong>level8x8</strong>不是intra16x16的情况下，如果DCT变换采用的是8x8的方式，宏块的level会从residual_block内取出，并存在<strong>level8x8</strong>数组内</li>
+<li><strong>startIdx</strong>需要进行熵编码的数组起始位置的索引</li>
+<li><strong>endIdx</strong>需要进行熵编码的数组结束位置的索引</li>
+</ul>
+</li>
+<li><p><strong>residual_block</strong>这并不是完整的熵编码，而是熵编码参数的语法结构，以后分析熵编码再进行分析</p>
+</li>
+</ul>
+<p>luma level分为几种，如上面的数组i16x16DClevel, i16x16AClevel, level4x4, level8x8，在解码过程中，这些数组后续会被用于逆量化、逆变换，residual_luma的目的是从residual_block内取出level，并填充到这些数组当中。<br>我们来完整分析一下residual_luma的工作过程</p>
+<ul>
+<li>如果当前宏块是Intra_16x16的预测模式，并且为亮度残差语法结构的开头，那么会从residual_block中获取16个DC level，存储到i16x16DClevel数组内</li>
+<li>接下来会以子宏块为单位进行，一个宏块内有4个8x8大小的子宏块<ul>
+<li><p>如果当前宏块是以4x4块为单位进行DCT变换的（transform_size_8x8_flag&#x3D;0），或者如果要求当前视频使用CAVLC进行熵编码（entropy_coding_mode_flag&#x3D;0），这意味着熵编码是以4x4块为单位进行的。一个子宏块内包含4个4x4个子块。</p>
+</li>
+<li><p>在当前4x4块内level不全为0的情况下（CBP相应位为1），才需要从residual_block中获取level。</p>
+</li>
+<li><p>如果当前的宏块为Intra_16x16的预测方式，需要从residual_block中获取15个AC level，存储到i16x16AClevel中</p>
+</li>
+<li><p>否则，则会从residual_block中获取16个level，存储到level4x4中</p>
+</li>
+<li><p>否则（CBP相应位为0），如果当前的宏块为Intra_16x16的预测方式，它的AC level全为0，为i16x16AClevel中的15个元素赋值0</p>
+</li>
+<li><p>否则（CBP相应位为0），意味着该4x4块内的level全为0，就为level4x4中的16个元素赋值0</p>
+</li>
+<li><p>如果当前视频使用CAVLC进行熵编码（entropy_coding_mode_flag&#x3D;0），但是当前宏块是以8x8块为单位进行DCT变换的（transform_size_8x8_flag&#x3D;1），我们则需要把这些CAVLC解码得到的4x4块组合成8x8块，以便后续使用</p>
+</li>
+<li><p>否则（要求当前视频使用CABAC进行熵编码（entropy_coding_mode_flag&#x3D;1）并且当前宏块是以8x8为单位进行DCT变换（transform_size_8x8_flag&#x3D;1），如果该8x8块内的level不全为0（CBP相应位为1），那么就从residual_block中获取64个level，并存储到level8x8中）</p>
+</li>
+<li><p>否则（要求当前视频使用CABAC进行熵编码（entropy_coding_mode_flag&#x3D;1）并且当前宏块是以8x8为单位进行DCT变换（transform_size_8x8_flag&#x3D;1），如果该8x8块内的level全为0（CBP相应位为0），就为level8x8中的64个元素赋值0.</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>如果没有宏块CBP上的bit全都不为0的话，它的residual就会是如下的样子<br><a target="_blank" rel="noopener" href="http://images2015.cnblogs.com/blog/421096/201602/421096-20160224230059990-1222814974.png"><img alt="" src="img/2016-02-24-h.264语法结构分析/421096-20160224230100396-1891099082.png"></a></p>
+
+  <div class="guide-links">
+    
+    
+  </div>
+
+    <div class="footer">
+        <p>
+          <a target="_blank" rel="noopener" href="https://changkun.de">欧长坤</a> &copy; 2016-2025 版权所有，
+          采用<a rel="license noopener" target="_blank" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议许可</a>，代码使用 <a href="https://opensource.org/licenses/MIT" target="_blank">MIT</a> 协议开源。</a>
+        </p>
+        <p>
+            如果你认为本书对你起到了帮助，可以<a href="/modern-cpp/about/donate.html">资助作者</a>。
+        </p>
+      </div>
+
+
+
+</div>
+
+	</div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/smooth-scroll/10.2.1/js/smooth-scroll.min.js"></script>
+
+    <!-- main custom script for sidebars, version selects etc. -->
+    <script src="https://cdn.jsdelivr.net/npm/css.escape@1.5.1/css.escape.min.js"></script>
+    <script src="/modern-cpp/js/common.js"></script>
+
+    <!-- fastclick -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      FastClick.attach(document.body)
+    }, false)
+    </script>
+  </body>
+</html>
